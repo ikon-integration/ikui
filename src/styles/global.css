@@ -1,0 +1,76 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --ikui-background: 0 0% 100%;
+    --ikui-foreground: 240 10% 3.9%;
+
+    --ikui-card: 0 0% 100%;
+    --ikui-card-foreground: 240 10% 3.9%;
+
+    --ikui-popover: 0 0% 100%;
+    --ikui-popover-foreground: 240 10% 3.9%;
+
+    --ikui-primary: 240 5.9% 10%;
+    --ikui-primary-foreground: 0 0% 98%;
+
+    --ikui-secondary: 240 4.8% 95.9%;
+    --ikui-secondary-foreground: 240 5.9% 10%;
+
+    --ikui-muted: 240 4.8% 95.9%;
+    --ikui-muted-foreground: 240 3.8% 46.1%;
+
+    --ikui-accent: 240 4.8% 95.9%;
+    --ikui-accent-foreground: 240 5.9% 10%;
+
+    --ikui-destructive: 0 84.2% 60.2%;
+    --ikui-destructive-foreground: 0 0% 98%;
+
+    --ikui-border: 240 5.9% 90%;
+    --ikui-input: 240 5.9% 90%;
+    --ikui-ring: 240 10% 3.9%;
+
+    --ikui-radius: 0.5rem;
+  }
+
+  .dark {
+    --ikui-background: 240 10% 3.9%;
+    --ikui-foreground: 0 0% 98%;
+
+    --ikui-card: 240 10% 3.9%;
+    --ikui-card-foreground: 0 0% 98%;
+
+    --ikui-popover: 240 10% 3.9%;
+    --ikui-popover-foreground: 0 0% 98%;
+
+    --ikui-primary: 0 0% 98%;
+    --ikui-primary-foreground: 240 5.9% 10%;
+
+    --ikui-secondary: 240 3.7% 15.9%;
+    --ikui-secondary-foreground: 0 0% 98%;
+
+    --ikui-muted: 240 3.7% 15.9%;
+    --ikui-muted-foreground: 240 5% 64.9%;
+
+    --ikui-accent: 240 3.7% 15.9%;
+    --ikui-accent-foreground: 0 0% 98%;
+
+    --ikui-destructive: 0 62.8% 30.6%;
+    --ikui-destructive-foreground: 0 0% 98%;
+
+    --ikui-border: 240 3.7% 15.9%;
+    --ikui-input: 240 3.7% 15.9%;
+    --ikui-ring: 240 4.9% 83.9%;
+  }
+}
+
+@layer base {
+  * {
+    @apply ikui-border-border;
+  }
+  body {
+    @apply ikui-bg-background ikui-text-foreground;
+  }
+}
