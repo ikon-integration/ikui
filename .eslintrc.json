@@ -7,7 +7,8 @@
     "plugin:react/recommended",
     "airbnb",
     "plugin:@typescript-eslint/recommended",
-    "prettier"
+    "prettier",
+    "plugin:storybook/recommended"
   ],
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -33,8 +34,20 @@
     "class-methods-use-this": "off",
     "react/jsx-props-no-spreading": "off",
     "no-useless-constructor": "off",
-    "no-empty": ["error", { "allowEmptyCatch": true }],
-    "react/jsx-filename-extension": [1, { "extensions": [".tsx"] }],
+    "no-empty": [
+      "error",
+      {
+        "allowEmptyCatch": true
+      }
+    ],
+    "react/jsx-filename-extension": [
+      1,
+      {
+        "extensions": [
+          ".tsx"
+        ]
+      }
+    ],
     "@typescript-eslint/no-explicit-any": "off",
     "@typescript-eslint/no-namespace": "off",
     "no-shadow": "off",
@@ -60,15 +73,27 @@
       "error",
       {
         "newlines-between": "always",
-        "alphabetize": { "order": "asc", "caseInsensitive": true },
-        "groups": ["builtin", "external", "internal", "parent", "sibling", "index"]
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        },
+        "groups": [
+          "builtin",
+          "external",
+          "internal",
+          "parent",
+          "sibling",
+          "index"
+        ]
       }
     ],
     "@typescript-eslint/naming-convention": [
       "error",
       {
         "selector": "interface",
-        "format": ["PascalCase"],
+        "format": [
+          "PascalCase"
+        ],
         "custom": {
           "regex": "^I[A-Z]",
           "match": true

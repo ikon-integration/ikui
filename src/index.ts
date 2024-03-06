@@ -2,6 +2,7 @@
 export * from '@/contexts/ThemeContext';
 
 // Components
+export * from '@/components/Avatar';
 export * from '@/components/Badge';
 export * from '@/components/Button';
 export * from '@/components/Calendar';

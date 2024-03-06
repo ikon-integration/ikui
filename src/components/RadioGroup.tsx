@@ -4,7 +4,7 @@ import * as React from 'react';
 
 import { cn } from '@/lib/utils';
 
-const RadioGroup = React.forwardRef<
+const Root = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> & {
     className?: string;
@@ -16,9 +16,9 @@ const RadioGroup = React.forwardRef<
     ref={ref}
   />
 ));
-RadioGroup.displayName = RadioGroupPrimitive.Root.displayName;
+Root.displayName = RadioGroupPrimitive.Root.displayName;
 
-const RadioGroupItem = React.forwardRef<
+const Item = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
   React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> & {
     className?: string;
@@ -27,7 +27,7 @@ const RadioGroupItem = React.forwardRef<
   <RadioGroupPrimitive.Item
     ref={ref}
     className={cn(
-      'ikui-aspect-square ikui-h-4 ikui-w-4 ikui-rounded-full ikui-border ikui-border-primary ikui-text-primary ikui-ring-offset-background focus:ikui-outline-none focus-visible:ikui-ring-2 focus-visible:ikui-ring-ring focus-visible:ikui-ring-offset-2 disabled:ikui-cursor-not-allowed disabled:ikui-opacity-50',
+      'ikui-aspect-square ikui-h-4 ikui-w-4 ikui-rounded-full ikui-border ikui-border-primary ikui-text-primary ikui-ring-offset-background ikui-transition-all focus:ikui-outline-none focus-visible:ikui-ring-2 focus-visible:ikui-ring-ring focus-visible:ikui-ring-offset-2 disabled:ikui-cursor-not-allowed disabled:ikui-opacity-50',
       className,
     )}
     {...props}
@@ -37,6 +37,9 @@ const RadioGroupItem = React.forwardRef<
     </RadioGroupPrimitive.Indicator>
   </RadioGroupPrimitive.Item>
 ));
-RadioGroupItem.displayName = RadioGroupPrimitive.Item.displayName;
+Item.displayName = RadioGroupPrimitive.Item.displayName;
 
-export { RadioGroup, RadioGroupItem };
+export const RadioGroup = {
+  Root,
+  Item,
+};

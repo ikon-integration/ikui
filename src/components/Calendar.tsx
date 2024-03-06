@@ -1,21 +1,16 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
-import {
-  DayPicker,
-  DayPickerDefaultProps,
-  DayPickerMultipleProps,
-  DayPickerRangeProps,
-  DayPickerSingleProps,
-} from 'react-day-picker';
+import * as React from 'react';
+import { ClassNames, DayPicker } from 'react-day-picker';
 
 import { cn } from '@/lib/utils';
 
-import { buttonVariants } from '..';
+import { buttonVariants } from './Button';
 
-export type CalendarProps =
-  | DayPickerDefaultProps
-  | DayPickerSingleProps
-  | DayPickerMultipleProps
-  | DayPickerRangeProps;
+export type CalendarProps = React.ComponentProps<typeof DayPicker> & {
+  className?: string;
+  classNames?: ClassNames;
+  showOutsideDays?: boolean;
+};
 
 function Calendar({
   className,
@@ -46,7 +41,7 @@ function Calendar({
         head_cell:
           'ikui-text-muted-foreground ikui-rounded-md ikui-w-9 ikui-font-normal ikui-text-[0.8rem]',
         row: 'ikui-flex ikui-w-full ikui-mt-2',
-        cell: 'ikui-h-9 ikui-w-9 ikui-text-center ikui-text-sm ikui-p-0 ikui-relative [&:has([aria-selected].ikui-day-range-end)]:ikui-rounded-r-md [&:has([aria-selected].day-outside)]:ikui-bg-accent/50 [&:has([aria-selected])]:ikui-bg-accent first:[&:has([aria-selected])]:ikui-rounded-l-md last:[&:has([aria-selected])]:ikui-rounded-r-md focus-within:ikui-relative focus-within:ikui-z-20',
+        cell: 'ikui-h-9 ikui-w-9 ikui-text-center ikui-text-sm ikui-p-0 ikui-relative [&:has([aria-selected].day-range-end)]:ikui-rounded-r-md [&:has([aria-selected].day-outside)]:ikui-bg-accent/50 [&:has([aria-selected])]:ikui-bg-accent first:[&:has([aria-selected])]:ikui-rounded-l-md last:[&:has([aria-selected])]:ikui-rounded-r-md focus-within:ikui-relative focus-within:ikui-z-20',
         day: cn(
           buttonVariants({ variant: 'ghost' }),
           'ikui-h-9 ikui-w-9 ikui-p-0 ikui-font-normal aria-selected:ikui-opacity-100',

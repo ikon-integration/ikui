@@ -5,7 +5,7 @@ import * as React from 'react';
 import { cn } from '@/lib/utils';
 
 export const buttonVariants = cva(
-  'ikui-inline-flex ikui-items-center ikui-justify-center ikui-whitespace-nowrap ikui-rounded-md ikui-text-sm ikui-font-medium ikui-ring-offset-background ikui-transition-colors focus-visible:ikui-outline-none focus-visible:ikui-ring-2 focus-visible:ikui-ring-ring focus-visible:ikui-ring-offset-2 disabled:ikui-pointer-events-none disabled:ikui-opacity-50',
+  'ikui-inline-flex ikui-items-center ikui-justify-center ikui-whitespace-nowrap ikui-rounded-md ikui-text-sm ikui-font-medium ikui-ring-offset-background ikui-transition-all focus-visible:ikui-outline-none focus-visible:ikui-ring-2 focus-visible:ikui-ring-ring focus-visible:ikui-ring-offset-2 disabled:ikui-pointer-events-none disabled:ikui-opacity-50',
   {
     variants: {
       variant: {

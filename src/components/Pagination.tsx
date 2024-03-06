@@ -75,6 +75,7 @@ function Previous({
       aria-label="Go to previous page"
       size="default"
       className={cn('ikui-gap-1 ikui-pl-2.5', className)}
+      variant="ghost"
       {...props}
     >
       <ChevronLeft className="ikui-h-4 ikui-w-4" />
@@ -97,6 +98,7 @@ function Next({
       aria-label="Go to next page"
       size="default"
       className={cn('ikui-gap-1 ikui-pr-2.5', className)}
+      variant="ghost"
       {...props}
     >
       {label}
