@@ -1,6 +1,6 @@
 {
   "name": "@ikonintegration/ui",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "type": "module",
   "license": "MIT",
   "files": [
@@ -23,7 +23,7 @@
     "typecheck": "tsc --noEmit",
     "prepare": "husky",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build:sb": "storybook build"
   },
   "dependencies": {
     "@radix-ui/react-avatar": "^1.0.4",
