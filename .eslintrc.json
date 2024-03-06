@@ -46,6 +46,8 @@
     "no-empty-function": "off",
     "@typescript-eslint/no-empty-function": "error",
     "jsx-a11y/control-has-associated-label": "off",
+    "react/no-unstable-nested-components": "off",
+    "jsx-a11y/heading-has-content": "off",
     "import/extensions": [
       "error",
       "ignorePackages",
