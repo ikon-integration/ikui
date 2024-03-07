@@ -11,13 +11,13 @@ import { useDataTable } from './DataTableContext';
 import { DataTableFilter, IOption } from './DataTableFilter';
 import { DataTableViewOptions } from './DataTableViewOptions';
 
-interface IUncontrolledTextSearch<TData> {
-  controlled: false;
+interface IAutomaticTextSearch<TData> {
+  manual: false;
   column: keyof TData;
 }
 
-interface IControlledTextSearch {
-  controlled: true;
+interface IManualTextSearch {
+  manual: true;
   value: string;
   onChange: (searchTerm: string) => void;
   onReset: () => void;
@@ -25,24 +25,27 @@ interface IControlledTextSearch {
 
 type TextSearch<TData> = {
   placeholder?: string;
-} & (IUncontrolledTextSearch<TData> | IControlledTextSearch);
+} & (IAutomaticTextSearch<TData> | IManualTextSearch);
 
-interface IUncontrolledFilter<TData> {
-  controlled: false;
+interface ICommonFilter {
+  onChange?: (selectedFilters: string[]) => void;
+}
+
+interface IAutomaticFilter<TData> extends ICommonFilter {
+  manual: false;
   column: keyof TData;
 }
 
-interface IControlledFilter {
-  controlled: true;
+interface IManualFilter extends ICommonFilter {
+  manual: true;
   value: string[];
-  onChange: (selectedFilters: string[]) => void;
   onReset: () => void;
 }
 
 type Filter<TData> = {
   title: string;
   options: IOption[];
-} & (IUncontrolledFilter<TData> | IControlledFilter);
+} & (IAutomaticFilter<TData> | IManualFilter);
 
 export interface IDataTableToolbarProps<TData> {
   hideableColumns?: boolean;
@@ -58,87 +61,94 @@ export function DataTableToolbar<TData>({
   extra,
 }: IDataTableToolbarProps<TData>) {
   const table = useDataTable();
+
   const isFiltered =
     table.getState().columnFilters.length > 0 ||
-    (textSearch?.controlled && !!textSearch.value);
+    (textSearch?.manual && !!textSearch.value);
+
+  function handleInputChange(event: React.ChangeEvent<HTMLInputElement>) {
+    if (!textSearch) {
+      return;
+    }
+
+    const { value } = event.target;
+
+    if (textSearch.manual) {
+      textSearch.onChange(value);
+      return;
+    }
+
+    table.getColumn(textSearch.column as string)?.setFilterValue(value);
+  }
+
+  function handleReset() {
+    table.resetColumnFilters();
+
+    if (textSearch?.manual) {
+      textSearch.onReset();
+    }
+
+    filters?.forEach(filter => {
+      if (filter.manual) {
+        filter.onReset();
+      }
+    });
+  }
+
+  const shouldRenderToolbar =
+    textSearch || (filters && filters.length > 0) || hideableColumns;
 
   return (
     <>
-      <div className="ikui-flex ikui-items-center ikui-justify-between">
-        <div className="ikui-flex ikui-flex-1 ikui-items-center ikui-space-x-2">
-          {textSearch && (
-            <Input
-              placeholder={textSearch.placeholder}
-              value={
-                textSearch.controlled
-                  ? textSearch.value
-                  : (table
-                      .getColumn(textSearch.column as string)
-                      ?.getFilterValue() as string) ?? ''
-              }
-              onChange={event => {
-                const { value } = event.target;
-
-                if (textSearch.controlled) {
-                  textSearch.onChange(value);
-                  return;
+      {shouldRenderToolbar && (
+        <div className="ikui-flex ikui-items-center ikui-justify-between">
+          <div className="ikui-flex ikui-flex-1 ikui-items-center ikui-space-x-2">
+            {textSearch && (
+              <Input
+                placeholder={textSearch.placeholder}
+                value={
+                  textSearch.manual
+                    ? textSearch.value
+                    : (table
+                        .getColumn(textSearch.column as string)
+                        ?.getFilterValue() as string) ?? ''
                 }
+                onChange={handleInputChange}
+                className="ikui-h-8 ikui-w-[150px] lg:ikui-w-[250px]"
+              />
+            )}
 
-                table
-                  .getColumn(textSearch.column as string)
-                  ?.setFilterValue(value);
-              }}
-              className="ikui-h-8 ikui-w-[150px] lg:ikui-w-[250px]"
-            />
-          )}
-
-          {filters?.map((filter, index) =>
-            !filter.controlled ? (
-              table.getColumn(filter.column as string) && (
-                <DataTableFilter
-                  key={index}
-                  column={table.getColumn(filter.column as string)}
-                  title={filter.title}
-                  options={filter.options}
-                />
-              )
-            ) : (
+            {filters?.map((filter, index) => (
               <DataTableFilter
                 key={index}
+                manual={filter.manual}
                 title={filter.title}
                 options={filter.options}
-                value={filter.value}
-                onChange={filter.onChange}
-              />
-            ),
-          )}
-
-          {isFiltered && (
-            <Button
-              variant="ghost"
-              onClick={() => {
-                table.resetColumnFilters();
-
-                if (textSearch?.controlled) {
-                  textSearch.onReset();
+                value={'value' in filter ? filter.value : undefined}
+                onChange={filter?.onChange}
+                column={
+                  'column' in filter
+                    ? table.getColumn(filter.column as string)
+                    : undefined
                 }
+              />
+            ))}
 
-                filters?.forEach(filter => {
-                  if (filter.controlled) {
-                    filter.onReset();
-                  }
-                });
-              }}
-              className="ikui-h-8 ikui-px-2 lg:ikui-px-3"
-            >
-              Reset
-              <XIcon className="ikui-ml-2 ikui-h-4 ikui-w-4" />
-            </Button>
-          )}
+            {isFiltered && (
+              <Button
+                variant="ghost"
+                onClick={handleReset}
+                className="ikui-h-8 ikui-px-2 lg:ikui-px-3"
+              >
+                Reset
+                <XIcon className="ikui-ml-2 ikui-h-4 ikui-w-4" />
+              </Button>
+            )}
+          </div>
+
+          {hideableColumns && <DataTableViewOptions />}
         </div>
-
-        {hideableColumns && <DataTableViewOptions />}
-      </div>
+      )}
 
       {extra}
     </>

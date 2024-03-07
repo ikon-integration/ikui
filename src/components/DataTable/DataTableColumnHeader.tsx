@@ -50,12 +50,22 @@ export function DataTableColumnHeader<TData, TValue>({
         </DropdownMenu.Trigger>
 
         <DropdownMenu.Content align="start">
-          <DropdownMenu.Item onClick={() => column.toggleSorting(false)}>
+          <DropdownMenu.Item
+            onClick={() => column.toggleSorting(false)}
+            className={cn(
+              column.getIsSorted() === 'asc' && 'ikui-font-semibold',
+            )}
+          >
             <ArrowUpIcon className="ikui-mr-2 ikui-h-3.5 ikui-w-3.5 ikui-text-muted-foreground/70" />
             Asc
           </DropdownMenu.Item>
 
-          <DropdownMenu.Item onClick={() => column.toggleSorting(true)}>
+          <DropdownMenu.Item
+            onClick={() => column.toggleSorting(true)}
+            className={cn(
+              column.getIsSorted() === 'desc' && 'ikui-font-semibold',
+            )}
+          >
             <ArrowDownIcon className="ikui-mr-2 ikui-h-3.5 ikui-w-3.5 ikui-text-muted-foreground/70" />
             Desc
           </DropdownMenu.Item>

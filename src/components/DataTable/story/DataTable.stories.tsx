@@ -35,17 +35,27 @@ function Template() {
       <DataTable
         data={filteredTasks}
         columns={columns}
-        onSortingChange={sortingState => console.log({ sortingState })}
-        onRowSelectionChange={selectedRows => console.log({ selectedRows })}
-        enableRowSelection
+        sorting={{
+          manual: false,
+          onSortingChange: sortingState => console.log({ sortingState }),
+        }}
         pagination={{
-          initialPage: 2,
+          manual: false,
+          initialPage: 1,
           pageSize: 10,
+          rowsPerPageOptions: [10, 20, 30, 40, 50],
+          onPageChange: page => console.log({ page }),
+          onPageSizeChange: pageSize => console.log({ pageSize }),
+        }}
+        rowSelection={{
+          disabled: false,
+          canSelectAll: true,
+          onRowSelectionChange: selectedRows => console.log({ selectedRows }),
         }}
         toolbar={{
           hideableColumns: true,
           textSearch: {
-            controlled: true,
+            manual: true,
             placeholder: 'Find a task...',
             value: searchTerm,
             onChange: setSearchTerm,
@@ -53,13 +63,14 @@ function Template() {
           },
           filters: [
             {
-              controlled: false,
-              column: 'status',
+              manual: false,
               title: 'Status',
               options: statuses,
+              column: 'status',
+              onChange: selectedFilters => console.log({ selectedFilters }),
             },
             {
-              controlled: true,
+              manual: true,
               title: 'Priority',
               options: priorities,
               value: prioritiesFilter,
@@ -69,7 +80,7 @@ function Template() {
           ],
           extra: (
             <div className="ikui-rounded-md ikui-bg-accent ikui-py-2 ikui-text-center ikui-text-accent-foreground">
-              <small>Any extra controlled filters can come here...</small>
+              <small>Any extra manual filter can come here!</small>
             </div>
           ),
         }}

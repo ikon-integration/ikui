@@ -16,6 +16,7 @@ export interface IOption {
 }
 
 interface IDataTableFilterProps<TData, TValue> {
+  manual?: boolean;
   column?: Column<TData, TValue>;
   title?: string;
   options: IOption[];
@@ -24,15 +25,14 @@ interface IDataTableFilterProps<TData, TValue> {
 }
 
 export function DataTableFilter<TData, TValue>({
+  manual,
   column,
   title,
   options,
   value,
   onChange,
 }: IDataTableFilterProps<TData, TValue>) {
-  const isControlled = !!onChange;
-
-  const selectedValues = isControlled
+  const selectedValues = manual
     ? new Set(value ?? [])
     : new Set(column?.getFilterValue() as string[]);
 
@@ -107,14 +107,13 @@ export function DataTableFilter<TData, TValue>({
 
                       const filterValues = Array.from(selectedValues);
 
-                      if (isControlled) {
-                        onChange(filterValues);
-                        return;
+                      if (!manual) {
+                        column?.setFilterValue(
+                          filterValues.length ? filterValues : undefined,
+                        );
                       }
 
-                      column?.setFilterValue(
-                        filterValues.length ? filterValues : undefined,
-                      );
+                      onChange?.(filterValues);
                     }}
                   >
                     <div
@@ -142,12 +141,11 @@ export function DataTableFilter<TData, TValue>({
                 <Command.Group>
                   <Command.Item
                     onSelect={() => {
-                      if (isControlled) {
-                        onChange([]);
-                        return;
+                      if (!manual) {
+                        column?.setFilterValue(undefined);
                       }
 
-                      column?.setFilterValue(undefined);
+                      onChange?.([]);
                     }}
                     className="ikui-justify-center ikui-text-center"
                   >
