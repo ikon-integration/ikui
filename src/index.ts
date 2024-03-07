@@ -9,6 +9,7 @@ export * from '@/components/Calendar';
 export * from '@/components/Card';
 export * from '@/components/Checkbox';
 export * from '@/components/Collapsible';
+export * from '@/components/DataTable';
 export * from '@/components/Dialog';
 export * from '@/components/Drawer';
 export * from '@/components/DropdownMenu';
