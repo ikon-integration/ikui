@@ -17,12 +17,11 @@
     "./styles.css": "./dist/styles.css"
   },
   "scripts": {
-    "dev": "vite",
+    "dev": "storybook dev -p 6006",
     "build:tw": "tailwindcss -i ./src/styles/global.css -o ./dist/styles.css --minify",
     "build": "tsc && vite build && npm run build:tw",
     "typecheck": "tsc --noEmit",
     "prepare": "husky",
-    "storybook": "storybook dev -p 6006",
     "build:sb": "storybook build"
   },
   "dependencies": {
