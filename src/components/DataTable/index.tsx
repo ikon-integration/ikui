@@ -24,6 +24,7 @@ interface IDataTableProps<TData, TValue> {
   columns: ColumnDef<TData, TValue>[];
   data: TData[];
   toolbar?: IDataTableToolbarProps<TData>;
+  emptyState?: React.ReactNode;
   sorting?: {
     manual: boolean;
     onSortingChange?: (sortingState: SortingState) => void;
@@ -47,6 +48,7 @@ export function DataTable<TData, TValue>({
   columns,
   data,
   toolbar,
+  emptyState,
   sorting: sortingConfig,
   pagination: paginationConfig,
   rowSelection: rowSelectionConfig,
@@ -123,10 +125,10 @@ export function DataTable<TData, TValue>({
       columnFilters,
       ...(paginationConfig && { pagination }),
     },
+    getCoreRowModel: getCoreRowModel(),
+    getFilteredRowModel: toolbar && getFilteredRowModel(),
     onColumnFiltersChange: setColumnFilters,
     onColumnVisibilityChange: setColumnVisibility,
-    getCoreRowModel: getCoreRowModel(),
-    getFilteredRowModel: getFilteredRowModel(),
     // Sorting
     manualSorting: sortingConfig?.manual,
     onSortingChange: setSorting,
@@ -186,17 +188,19 @@ export function DataTable<TData, TValue>({
                     colSpan={tableColumns.length}
                     className="ikui-h-24 ikui-text-center"
                   >
-                    {/* Receive emptyState prop */}
-                    No results.
+                    {emptyState ?? 'No results.'}
                   </Table.Cell>
                 </Table.Row>
               )}
             </Table.Body>
           </Table.Root>
         </div>
-        <DataTablePagination
-          rowsPerPage={paginationConfig?.rowsPerPageOptions}
-        />
+
+        {paginationConfig && (
+          <DataTablePagination
+            rowsPerPage={paginationConfig?.rowsPerPageOptions}
+          />
+        )}
       </div>
     </DataTableProvider>
   );

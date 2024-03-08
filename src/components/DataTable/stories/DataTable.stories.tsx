@@ -34,6 +34,7 @@ function Template() {
     <div className="ikui-max-w-[800px]">
       <DataTable
         data={filteredTasks}
+        emptyState={<div>No tasks to display here!</div>}
         columns={columns}
         sorting={{
           manual: false,
