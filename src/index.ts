@@ -22,6 +22,7 @@ export * from '@/components/Pagination';
 export * from '@/components/PhoneInput';
 export * from '@/components/Popover';
 export * from '@/components/RadioGroup';
+export * from '@/components/Resizable';
 export * from '@/components/Select';
 export * from '@/components/Separator';
 export * from '@/components/Sheet';
