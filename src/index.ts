@@ -17,6 +17,7 @@ export * from '@/components/DropdownMenu';
 export * from '@/components/HoverCard';
 export * from '@/components/Input';
 export * from '@/components/Label';
+export * from '@/components/Layout';
 export { MaskedInput } from '@/components/MaskedInput';
 export * from '@/components/Pagination';
 export * from '@/components/PhoneInput';

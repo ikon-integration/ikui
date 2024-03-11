@@ -5,7 +5,7 @@ import { cn } from '@/lib/utils';
 import { buttonVariants } from './Button';
 import { Tooltip } from './Tooltip';
 
-interface ISidebarProps {
+export interface ISidebarProps {
   isCollapsed?: boolean;
   links: {
     title: string;
