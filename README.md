@@ -22,6 +22,32 @@ In your app entrypoint (usually src/main.tsx), import the `@ikonintegration/ui` 
 import '@ikonintegration/ui/styles.css';
 ```
 
+## Integrate with Tailwind CSS
+If your app is using Tailwind CSS, you can integrate IKUI with your Tailwind configuration so your app will be able to use IKUI colors and other configurations:
+```ts
+import { ikuiTwPlugin } from '@ikonintegration/ui';
+import type { Config } from 'tailwindcss';
+
+export default {
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
+  corePlugins: {
+    // As IKUI already provides preflight styles,
+    // you should turn off your app's preflight to avoid conflicts
+    preflight: false,
+  },
+  plugins: [ikuiTwPlugin],
+} satisfies Config;
+
+```
+
+Now you should be able to use IKUI classes directly in your app:
+
+```tsx
+<div className="border">
+  <span className="text-foreground">Hey!</span>
+</div>
+```
+
 ## Usage
 
 With `@ikonintegration/ui` integrated into your project, you can start using the predefined React components right away.
