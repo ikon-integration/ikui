@@ -67,11 +67,7 @@
 }
 
 @layer base {
-  * {
-    @apply ikui-border-border;
-  }
-
-  body {
-    @apply ikui-bg-background ikui-text-foreground;
+  [class^="ikui-"] {
+    @apply ikui-border-border ikui-text-foreground;
   }
 }

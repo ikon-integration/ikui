@@ -1,6 +1,9 @@
 // Contexts
 export * from '@/contexts/ThemeContext';
 
+// Tailwind Plugin
+export * from './lib/ikuiTwPlugin';
+
 // Components
 export * from '@/components/Avatar';
 export * from '@/components/Badge';
