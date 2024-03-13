@@ -53,8 +53,6 @@ Now you should be able to use IKUI classes directly in your app:
 With `@ikonintegration/ui` integrated into your project, you can start using the predefined React components right away.
 
 ```tsx
-import React from 'react';
-
 import { Button } from '@ikonintegration/ui';
 
 export function MyComponent() {
