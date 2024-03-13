@@ -65,9 +65,3 @@
     --ikui-ring: 240 4.9% 83.9%;
   }
 }
-
-@layer base {
-  [class^="ikui-"] {
-    @apply ikui-border-border ikui-text-foreground;
-  }
-}

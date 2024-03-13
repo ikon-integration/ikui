@@ -2,8 +2,15 @@
 import plugin from 'tailwindcss/plugin';
 
 export const ikuiTwPlugin = plugin(
-  () => {
-    //
+  ({ addBase, theme }) => {
+    addBase({
+      '*': {
+        borderColor: theme('colors.border'),
+      },
+      body: {
+        color: theme('colors.foreground'),
+      },
+    });
   },
   {
     darkMode: ['class'],
