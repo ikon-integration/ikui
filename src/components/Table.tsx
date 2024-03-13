@@ -4,7 +4,7 @@ import { cn } from '@/lib/utils';
 
 const Root = React.forwardRef<
   HTMLTableElement,
-  React.HTMLAttributes<HTMLTableElement> & { className?: string }
+  React.HTMLAttributes<HTMLTableElement>
 >(({ className, ...props }, ref) => (
   <div className="ikui-relative ikui-w-full ikui-overflow-auto">
     <table
@@ -18,7 +18,7 @@ Root.displayName = 'TableRoot';
 
 const Header = React.forwardRef<
   HTMLTableSectionElement,
-  React.HTMLAttributes<HTMLTableSectionElement> & { className?: string }
+  React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
   <thead
     ref={ref}
@@ -30,7 +30,7 @@ Header.displayName = 'TableHeader';
 
 const Body = React.forwardRef<
   HTMLTableSectionElement,
-  React.HTMLAttributes<HTMLTableSectionElement> & { className?: string }
+  React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
   <tbody
     ref={ref}
@@ -42,7 +42,7 @@ Body.displayName = 'TableBody';
 
 const Footer = React.forwardRef<
   HTMLTableSectionElement,
-  React.HTMLAttributes<HTMLTableSectionElement> & { className?: string }
+  React.HTMLAttributes<HTMLTableSectionElement>
 >(({ className, ...props }, ref) => (
   <tfoot
     ref={ref}
@@ -57,7 +57,7 @@ Footer.displayName = 'TableFooter';
 
 const Row = React.forwardRef<
   HTMLTableRowElement,
-  React.HTMLAttributes<HTMLTableRowElement> & { className?: string }
+  React.HTMLAttributes<HTMLTableRowElement>
 >(({ className, ...props }, ref) => (
   <tr
     ref={ref}
@@ -72,7 +72,7 @@ Row.displayName = 'TableRow';
 
 const Head = React.forwardRef<
   HTMLTableCellElement,
-  React.ThHTMLAttributes<HTMLTableCellElement> & { className?: string }
+  React.ThHTMLAttributes<HTMLTableCellElement>
 >(({ className, ...props }, ref) => (
   <th
     ref={ref}
@@ -87,7 +87,7 @@ Head.displayName = 'TableHead';
 
 const Cell = React.forwardRef<
   HTMLTableCellElement,
-  React.TdHTMLAttributes<HTMLTableCellElement> & { className?: string }
+  React.TdHTMLAttributes<HTMLTableCellElement>
 >(({ className, ...props }, ref) => (
   <td
     ref={ref}
@@ -102,7 +102,7 @@ Cell.displayName = 'TableCell';
 
 const Caption = React.forwardRef<
   HTMLTableCaptionElement,
-  React.HTMLAttributes<HTMLTableCaptionElement> & { className?: string }
+  React.HTMLAttributes<HTMLTableCaptionElement>
 >(({ className, ...props }, ref) => (
   <caption
     ref={ref}

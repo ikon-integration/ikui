@@ -22,9 +22,7 @@ Root.displayName = 'Drawer';
 
 const Overlay = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Overlay>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay> & {
-    className?: string;
-  }
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
   <DrawerPrimitive.Overlay
     ref={ref}
@@ -39,9 +37,7 @@ Overlay.displayName = DrawerPrimitive.Overlay.displayName;
 
 const Content = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content> & {
-    className?: string;
-  }
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
 >(({ className, children, ...props }, ref) => (
   <Portal>
     <Overlay />
@@ -60,10 +56,7 @@ const Content = React.forwardRef<
 ));
 Content.displayName = 'DrawerContent';
 
-function Header({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement> & { className?: string }) {
+function Header({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cn(
@@ -76,10 +69,7 @@ function Header({
 }
 Header.displayName = 'DrawerHeader';
 
-function Footer({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement> & { className?: string }) {
+function Footer({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cn(
@@ -94,9 +84,7 @@ Footer.displayName = 'DrawerFooter';
 
 const Title = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Title>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Title> & {
-    className?: string;
-  }
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Title>
 >(({ className, ...props }, ref) => (
   <DrawerPrimitive.Title
     ref={ref}
@@ -111,9 +99,7 @@ Title.displayName = DrawerPrimitive.Title.displayName;
 
 const Description = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Description>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description> & {
-    className?: string;
-  }
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Description>
 >(({ className, ...props }, ref) => (
   <DrawerPrimitive.Description
     ref={ref}

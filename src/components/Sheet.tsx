@@ -9,9 +9,7 @@ const { Root, Trigger, Close, Portal } = SheetPrimitive;
 
 const Overlay = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Overlay>,
-  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay> & {
-    className?: string;
-  }
+  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Overlay>
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Overlay
     className={cn(
@@ -68,10 +66,7 @@ const Content = React.forwardRef<
 ));
 Content.displayName = SheetPrimitive.Content.displayName;
 
-function Header({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement> & { className?: string }) {
+function Header({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cn(
@@ -84,10 +79,7 @@ function Header({
 }
 Header.displayName = 'SheetHeader';
 
-function Footer({
-  className,
-  ...props
-}: React.HTMLAttributes<HTMLDivElement> & { className?: string }) {
+function Footer({ className, ...props }: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       className={cn(
@@ -102,9 +94,7 @@ Footer.displayName = 'SheetFooter';
 
 const Title = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Title>,
-  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Title> & {
-    className?: string;
-  }
+  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Title>
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Title
     ref={ref}
@@ -119,9 +109,7 @@ Title.displayName = SheetPrimitive.Title.displayName;
 
 const Description = React.forwardRef<
   React.ElementRef<typeof SheetPrimitive.Description>,
-  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Description> & {
-    className?: string;
-  }
+  React.ComponentPropsWithoutRef<typeof SheetPrimitive.Description>
 >(({ className, ...props }, ref) => (
   <SheetPrimitive.Description
     ref={ref}

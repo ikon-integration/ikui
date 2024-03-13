@@ -9,9 +9,7 @@ import { Dialog } from './Dialog';
 
 const Root = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive> & {
-    className?: string;
-  }
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive>
 >(({ className, ...props }, ref) => (
   <CommandPrimitive
     ref={ref}
@@ -40,9 +38,7 @@ function CommandDialog({ children, ...props }: ICommandDialogProps) {
 
 const Input = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Input>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input> & {
-    className?: string;
-  }
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Input>
 >(({ className, ...props }, ref) => (
   <div
     className="ikui-flex ikui-items-center ikui-border-b ikui-px-3"
@@ -65,9 +61,7 @@ Input.displayName = CommandPrimitive.Input.displayName;
 
 const List = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.List>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive.List> & {
-    className?: string;
-  }
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive.List>
 >(({ className, ...props }, ref) => (
   <CommandPrimitive.List
     ref={ref}
@@ -96,9 +90,7 @@ Empty.displayName = CommandPrimitive.Empty.displayName;
 
 const Group = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Group>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Group> & {
-    className?: string;
-  }
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Group>
 >(({ className, ...props }, ref) => (
   <CommandPrimitive.Group
     ref={ref}
@@ -114,9 +106,7 @@ Group.displayName = CommandPrimitive.Group.displayName;
 
 const Separator = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Separator>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Separator> & {
-    className?: string;
-  }
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Separator>
 >(({ className, ...props }, ref) => (
   <CommandPrimitive.Separator
     ref={ref}
@@ -128,9 +118,7 @@ Separator.displayName = CommandPrimitive.Separator.displayName;
 
 const Item = React.forwardRef<
   React.ElementRef<typeof CommandPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item> & {
-    className?: string;
-  }
+  React.ComponentPropsWithoutRef<typeof CommandPrimitive.Item>
 >(({ className, ...props }, ref) => (
   <CommandPrimitive.Item
     ref={ref}
@@ -147,7 +135,7 @@ Item.displayName = CommandPrimitive.Item.displayName;
 function Shortcut({
   className,
   ...props
-}: React.HTMLAttributes<HTMLSpanElement> & { className?: string }) {
+}: React.HTMLAttributes<HTMLSpanElement>) {
   return (
     <span
       className={cn(

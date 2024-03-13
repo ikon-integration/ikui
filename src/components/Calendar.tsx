@@ -1,16 +1,12 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import * as React from 'react';
-import { ClassNames, DayPicker } from 'react-day-picker';
+import { DayPicker } from 'react-day-picker';
 
 import { cn } from '@/lib/utils';
 
 import { buttonVariants } from './Button';
 
-export type CalendarProps = React.ComponentProps<typeof DayPicker> & {
-  className?: string;
-  classNames?: ClassNames;
-  showOutsideDays?: boolean;
-};
+export type CalendarProps = React.ComponentProps<typeof DayPicker>;
 
 function Calendar({
   className,
