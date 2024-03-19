@@ -6,9 +6,7 @@ import { cn } from '@/lib/utils';
 
 const Root = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Root>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root> & {
-    className?: string;
-  }
+  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Root>
 >(({ className, ...props }, ref) => (
   <RadioGroupPrimitive.Root
     className={cn('ikui-grid ikui-gap-2', className)}
@@ -20,9 +18,7 @@ Root.displayName = RadioGroupPrimitive.Root.displayName;
 
 const Item = React.forwardRef<
   React.ElementRef<typeof RadioGroupPrimitive.Item>,
-  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item> & {
-    className?: string;
-  }
+  React.ComponentPropsWithoutRef<typeof RadioGroupPrimitive.Item>
 >(({ className, ...props }, ref) => (
   <RadioGroupPrimitive.Item
     ref={ref}

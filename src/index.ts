@@ -1,6 +1,9 @@
 // Contexts
 export * from '@/contexts/ThemeContext';
 
+// Tailwind Plugin
+export * from './lib/ikuiTwPlugin';
+
 // Components
 export * from '@/components/Avatar';
 export * from '@/components/Badge';
@@ -17,11 +20,13 @@ export * from '@/components/DropdownMenu';
 export * from '@/components/HoverCard';
 export * from '@/components/Input';
 export * from '@/components/Label';
+export * from '@/components/Layout';
 export { MaskedInput } from '@/components/MaskedInput';
 export * from '@/components/Pagination';
 export * from '@/components/PhoneInput';
 export * from '@/components/Popover';
 export * from '@/components/RadioGroup';
+export * from '@/components/Resizable';
 export * from '@/components/Select';
 export * from '@/components/Separator';
 export * from '@/components/Sheet';

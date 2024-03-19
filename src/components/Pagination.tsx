@@ -5,10 +5,7 @@ import { cn } from '@/lib/utils';
 
 import { IButtonProps, Button as IKUIButton } from './Button';
 
-function Root({
-  className,
-  ...props
-}: React.ComponentProps<'nav'> & { className?: string }) {
+function Root({ className, ...props }: React.ComponentProps<'nav'>) {
   return (
     <nav
       role="navigation"
@@ -23,27 +20,25 @@ function Root({
 }
 Root.displayName = 'Pagination';
 
-const Content = React.forwardRef<
-  HTMLUListElement,
-  React.ComponentProps<'ul'> & { className?: string }
->(({ className, ...props }, ref) => (
-  <ul
-    ref={ref}
-    className={cn(
-      'ikui-flex ikui-flex-row ikui-items-center ikui-gap-1',
-      className,
-    )}
-    {...props}
-  />
-));
+const Content = React.forwardRef<HTMLUListElement, React.ComponentProps<'ul'>>(
+  ({ className, ...props }, ref) => (
+    <ul
+      ref={ref}
+      className={cn(
+        'ikui-flex ikui-flex-row ikui-items-center ikui-gap-1',
+        className,
+      )}
+      {...props}
+    />
+  ),
+);
 Content.displayName = 'PaginationContent';
 
-const Item = React.forwardRef<
-  HTMLLIElement,
-  React.ComponentProps<'li'> & { className?: string }
->(({ className, ...props }, ref) => (
-  <li ref={ref} className={cn('ikui-', className)} {...props} />
-));
+const Item = React.forwardRef<HTMLLIElement, React.ComponentProps<'li'>>(
+  ({ className, ...props }, ref) => (
+    <li ref={ref} className={cn('ikui-', className)} {...props} />
+  ),
+);
 Item.displayName = 'PaginationItem';
 
 type PaginationButtonProps = {
@@ -66,10 +61,7 @@ function Previous({
   className,
   label,
   ...props
-}: React.ComponentProps<typeof Button> & {
-  className?: string;
-  label?: React.ReactNode;
-}) {
+}: React.ComponentProps<typeof Button> & { label?: string }) {
   return (
     <IKUIButton
       aria-label="Go to previous page"
@@ -89,10 +81,7 @@ function Next({
   className,
   label,
   ...props
-}: React.ComponentProps<typeof Button> & {
-  className?: string;
-  label?: React.ReactNode;
-}) {
+}: React.ComponentProps<typeof Button> & { label?: string }) {
   return (
     <IKUIButton
       aria-label="Go to next page"
@@ -108,10 +97,7 @@ function Next({
 }
 Next.displayName = 'PaginationNext';
 
-function Ellipsis({
-  className,
-  ...props
-}: React.ComponentProps<'span'> & { className?: string }) {
+function Ellipsis({ className, ...props }: React.ComponentProps<'span'>) {
   return (
     <span
       aria-hidden

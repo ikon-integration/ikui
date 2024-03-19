@@ -7,10 +7,7 @@ const { Root, Provider, Trigger } = TooltipPrimitive;
 
 const Content = React.forwardRef<
   React.ElementRef<typeof TooltipPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content> & {
-    className?: string;
-    sideOffset?: number;
-  }
+  React.ComponentPropsWithoutRef<typeof TooltipPrimitive.Content>
 >(({ className, sideOffset = 4, ...props }, ref) => (
   <TooltipPrimitive.Content
     ref={ref}
