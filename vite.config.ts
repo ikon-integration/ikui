@@ -18,6 +18,7 @@ export default defineConfig({
     sourcemap: false,
     emptyOutDir: true,
     copyPublicDir: false,
+    minify: 'esbuild',
     lib: {
       entry: path.resolve(__dirname, 'src', 'index.ts'),
       name: 'ikui',

@@ -1,6 +1,6 @@
 {
   "name": "@ikonintegration/ui",
-  "version": "1.0.16",
+  "version": "1.0.21",
   "type": "module",
   "license": "MIT",
   "files": [
@@ -14,7 +14,10 @@
       "import": "./dist/ikui.js",
       "require": "./dist/ikui.umd.cjs"
     },
-    "./styles.css": "./dist/styles.css"
+    "./styles.css": {
+      "import": "./dist/styles.css",
+      "require": "./dist/styles.css"
+    }
   },
   "scripts": {
     "dev": "storybook dev -p 6006",
@@ -56,8 +59,8 @@
     "zod": "^3.22.4"
   },
   "peerDependencies": {
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^18.6.1",
