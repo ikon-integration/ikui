@@ -39,12 +39,21 @@ export function FormGroup({
   }
 
   const randomId = useId();
-
   const id = field.id ?? randomId;
 
-  const errorMessage =
-    error ??
-    (errors[field.name]?.message && String(errors[field.name]?.message));
+  const fieldErrors = errors[field.name];
+  let errorMessage = error ?? (fieldErrors?.message as string | undefined);
+
+  if (
+    !fieldErrors?.message &&
+    typeof fieldErrors === 'object' &&
+    Object.keys(fieldErrors).length > 0
+  ) {
+    errorMessage = Object.values(fieldErrors)
+      .map(error => error.message)
+      .join(', ');
+  }
+
   const hasError = !!errorMessage;
 
   return (

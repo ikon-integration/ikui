@@ -8,26 +8,33 @@ import { Button } from './Button';
 import { Calendar } from './Calendar';
 import { Popover } from './Popover';
 
-interface IDatePickerProps {
-  value?: Date;
+type DateRange = {
+  from: Date | undefined;
+  to: Date | undefined;
+};
+
+interface IDateRangePickerProps {
+  value?: DateRange;
   placeholder?: string;
   format?: string;
   className?: string;
-  onChange?: (date: Date | undefined) => void;
+  onChange?: (date: DateRange) => void;
   disabled?: boolean;
   id?: string;
 }
 
-export function DatePicker({
-  value,
+const initialValue = { from: undefined, to: undefined };
+
+export function DateRangePicker({
+  value = initialValue,
   placeholder,
-  format: formatStr = 'PPP',
+  format: formatStr = 'yyyy-MM-dd',
   className,
   onChange,
   disabled,
   id,
-}: IDatePickerProps) {
-  const [date, setDate] = useState<Date | undefined>(value);
+}: IDateRangePickerProps) {
+  const [dates, setDates] = useState(value);
 
   return (
     <Popover.Root>
@@ -37,19 +44,22 @@ export function DatePicker({
           id={id}
           className={cn(
             'ikui-group ikui-w-full ikui-justify-start ikui-text-left ikui-font-normal',
-            !date && 'ikui-text-muted-foreground',
+            !dates && 'ikui-text-muted-foreground',
             className,
           )}
         >
           <CalendarIcon className="ikui-mr-2 ikui-h-4 ikui-w-4" />
 
           <span>
-            {date
-              ? format(date, formatStr)
-              : placeholder && <span>{placeholder}</span>}
+            {!dates.from && !dates.to && placeholder && (
+              <span>{placeholder}</span>
+            )}
+
+            {dates.from && format(dates.from, formatStr)}
+            {dates.to && ` - ${format(dates.to, formatStr)}`}
           </span>
 
-          {date && (
+          {dates && (
             <span
               role="button"
               tabIndex={0}
@@ -57,8 +67,8 @@ export function DatePicker({
               onClick={event => {
                 event.stopPropagation();
 
-                setDate(undefined);
-                onChange?.(undefined);
+                setDates(initialValue);
+                onChange?.(initialValue);
               }}
             >
               <XIcon className="ikui-size-3 ikui-text-white" />
@@ -69,12 +79,17 @@ export function DatePicker({
 
       <Popover.Content className="ikui-w-auto ikui-p-0">
         <Calendar
-          mode="single"
-          selected={date}
-          defaultMonth={date}
+          mode="range"
+          defaultMonth={dates.from}
+          selected={dates}
           onSelect={selectedDate => {
-            setDate(selectedDate);
-            onChange?.(selectedDate);
+            const dateRange = {
+              from: selectedDate?.from,
+              to: selectedDate?.to,
+            };
+
+            setDates(dateRange);
+            onChange?.(dateRange);
           }}
           initialFocus
         />

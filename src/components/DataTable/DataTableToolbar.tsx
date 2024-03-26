@@ -1,7 +1,4 @@
 /* eslint-disable react/no-array-index-key */
-
-'use client';
-
 import { XIcon } from 'lucide-react';
 
 import { Button } from '../Button';

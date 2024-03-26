@@ -29,12 +29,20 @@ function Template() {
       bio: z.string().min(1),
       salary: z.any(),
       joiningDate: z.date(),
+      dateRange: z.object({
+        from: z.date({ required_error: 'Select a From date' }),
+        to: z.date({ required_error: 'Select a To date' }),
+      }),
     }),
     defaultValues: {
       active: true,
       unlimited: true,
       email: '',
       bio: '',
+      dateRange: {
+        from: new Date(2023, 10, 10),
+        to: new Date(2023, 10, 25),
+      },
     },
   });
 
@@ -80,6 +88,10 @@ function Template() {
 
       <Form.Group label="Joining Date">
         <Form.DatePicker name="joiningDate" placeholder="Pick a date" />
+      </Form.Group>
+
+      <Form.Group label="Range Picker">
+        <Form.DateRangePicker name="dateRange" placeholder="Pick a range" />
       </Form.Group>
 
       <Button>Submit</Button>
