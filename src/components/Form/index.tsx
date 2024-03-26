@@ -11,6 +11,7 @@ import { FormSwitch } from './FormSwitch';
 import { FormTextArea } from './FormTextArea';
 
 export { useFormContext } from 'react-hook-form';
+export { useForm } from './useForm';
 
 export const Form = {
   Root: FormRoot,
