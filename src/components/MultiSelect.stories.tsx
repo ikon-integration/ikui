@@ -2,8 +2,6 @@ import type { Meta } from '@storybook/react';
 
 import { MultiSelect } from '@/components/MultiSelect';
 
-import { Input } from '..';
-
 const meta = {
   title: 'Components/MultiSelect',
   component: MultiSelect,
@@ -17,10 +15,11 @@ export default meta;
 
 function Template() {
   return (
-    <div className="ikui-grid ikui-h-[300px] ikui-w-[700px] ikui-grid-cols-2 ikui-gap-4">
+    <div className="ikui-h-[300px] ikui-w-[700px]">
       <MultiSelect
         creatable
         onChange={selectedOptions => console.log(selectedOptions)}
+        disabled
         options={[
           { value: 'react', label: 'React' },
           { value: 'node', label: 'Node.js' },
@@ -28,7 +27,6 @@ function Template() {
           { value: 'nestjs', label: 'NestJS' },
         ]}
       />
-      <Input />
     </div>
   );
 }

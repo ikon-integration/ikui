@@ -107,18 +107,24 @@ export function MultiSelect({
       onKeyDown={handleKeyDown}
       className="ikui-h-auto ikui-overflow-visible"
     >
+      {/*
+       * This hidden input is a workaround to focus on CommandPrimitive.Input
+       * when an associated Label (by the "id" prop) is clicked
+       */}
       <input
         id={id}
         onFocus={() => inputRef.current?.focus()}
         className="ikui-sr-only ikui-pointer-events-none ikui-absolute"
         tabIndex={-1}
+        disabled={disabled}
       />
+
       <div
         role="button"
         tabIndex={0}
         className={cn(
           'ikui-flex ikui-min-h-10 ikui-w-full ikui-cursor-text ikui-flex-wrap ikui-gap-2 ikui-rounded-md ikui-border ikui-border-input ikui-bg-background ikui-px-3 ikui-py-2 ikui-text-sm ikui-ring-offset-background ikui-transition-all focus-within:ikui-outline-none focus-within:ikui-ring-2 focus-within:ikui-ring-ring focus-within:ikui-ring-offset-2',
-          disabled && 'ikui-cursor-not-allowed ikui-opacity-50',
+          disabled && 'ikui-pointer-events-none ikui-opacity-50',
           className,
         )}
         onClick={() => inputRef.current?.focus()}
