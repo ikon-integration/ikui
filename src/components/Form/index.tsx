@@ -6,7 +6,7 @@ import { FormInput } from './FormInput';
 import { FormInputCurrency } from './FormInputCurrency';
 import { FormMultiSelect } from './FormMultiSelect';
 import { FormRoot } from './FormRoot';
-import { FormSelect2 } from './FormSelect2';
+import { FormSelect } from './FormSelect';
 import { FormSwitch } from './FormSwitch';
 import { FormTextArea } from './FormTextArea';
 
@@ -19,7 +19,7 @@ export const Form = {
   Switch: FormSwitch,
   Input: FormInput,
   InputCurrency: FormInputCurrency,
-  Select2: FormSelect2,
+  Select: FormSelect,
   Checkbox: FormCheckbox,
   DatePicker: FormDatePicker,
   DateRangePicker: FormDateRangePicker,

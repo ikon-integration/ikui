@@ -69,7 +69,7 @@ function Template() {
       </div>
 
       <Form.Group label="Role">
-        <Form.Select2
+        <Form.Select
           name="role"
           placeholder="Select a role..."
           options={[

@@ -6,7 +6,7 @@ import {
 } from 'lucide-react';
 
 import { Button } from '../Button';
-import { Select } from '../Select';
+import { SelectPrimitive as Select } from '../SelectPrimitive';
 
 import { useDataTable } from './DataTableContext';
 

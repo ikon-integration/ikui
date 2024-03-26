@@ -4,7 +4,7 @@ import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { Input } from '@/components/Input';
 import { Label } from '@/components/Label';
-import { Select } from '@/components/Select';
+import { SelectPrimitive as Select } from '@/components/SelectPrimitive';
 
 const meta = {
   title: 'Components/Card',

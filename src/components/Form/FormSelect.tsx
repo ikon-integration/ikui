@@ -1,12 +1,12 @@
 import { Controller, useFormContext } from 'react-hook-form';
 
-import { Select2 } from '../Select2';
+import { Select } from '../Select';
 
-interface IFormSelect2 extends React.ComponentPropsWithoutRef<typeof Select2> {
+interface IFormSelect extends React.ComponentPropsWithoutRef<typeof Select> {
   name: string;
 }
 
-export function FormSelect2({ name, ...props }: IFormSelect2) {
+export function FormSelect({ name, ...props }: IFormSelect) {
   const { control } = useFormContext();
 
   return (
@@ -14,7 +14,7 @@ export function FormSelect2({ name, ...props }: IFormSelect2) {
       control={control}
       name={name}
       render={({ field: { onChange, value, disabled } }) => (
-        <Select2
+        <Select
           {...props}
           name={name}
           value={value}

@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { Select2 } from '@/components/Select2';
+import { Select } from '@/components/Select';
 
 const meta = {
-  title: 'Components/Select2',
-  component: Select2,
+  title: 'Components/Select',
+  component: Select,
   parameters: {
     layout: 'centered',
   },
@@ -28,7 +28,7 @@ const meta = {
       },
     ],
   },
-} satisfies Meta<typeof Select2>;
+} satisfies Meta<typeof Select>;
 
 export default meta;
 
