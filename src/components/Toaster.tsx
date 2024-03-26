@@ -13,7 +13,7 @@ function Toaster({ ...props }: ToasterProps) {
       toastOptions={{
         classNames: {
           toast:
-            'group ikui-toast group-[.ikui-toaster]:ikui-bg-background group-[.ikui-toaster]:ikui-text-foreground group-[.ikui-toaster]:ikui-border-border group-[.ikui-toaster]:ikui-shadow-lg',
+            'ikui-group ikui-toast group-[.ikui-toaster]:ikui-bg-background group-[.ikui-toaster]:ikui-text-foreground group-[.ikui-toaster]:ikui-border-border group-[.ikui-toaster]:ikui-shadow-lg',
           description: 'group-[.ikui-toast]:ikui-text-muted-foreground',
           actionButton:
             'group-[.ikui-toast]:ikui-bg-primary group-[.ikui-toast]:ikui-text-primary-foreground',

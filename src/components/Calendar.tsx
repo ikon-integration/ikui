@@ -24,14 +24,13 @@ function Calendar({
         month: 'ikui-space-y-4',
         caption:
           'ikui-flex ikui-justify-center ikui-pt-1 ikui-relative ikui-items-center',
-        caption_label: 'ikui-text-sm ikui-font-medium',
-        nav: 'ikui-space-x-1 ikui-flex ikui-items-center',
+        caption_label:
+          'ikui-text-sm ikui-font-medium ikui-relative ikui-z-[10]',
+        nav: 'ikui-space-x-1 ikui-flex ikui-items-center ikui-absolute ikui-inset-0 ikui-flex ikui-items-center ikui-justify-between',
         nav_button: cn(
           buttonVariants({ variant: 'outline' }),
           'ikui-h-7 ikui-w-7 ikui-bg-transparent ikui-p-0 ikui-opacity-50 hover:ikui-opacity-100',
         ),
-        nav_button_previous: 'ikui-absolute ikui-left-1',
-        nav_button_next: 'ikui-absolute ikui-right-1',
         table: 'ikui-w-full ikui-border-collapse ikui-space-y-1',
         head_row: 'ikui-flex',
         head_cell:
@@ -55,12 +54,8 @@ function Calendar({
         ...classNames,
       }}
       components={{
-        IconLeft: () => (
-          <ChevronLeft className="ikui-absolute ikui-h-4 ikui-w-4" />
-        ),
-        IconRight: () => (
-          <ChevronRight className="ikui-absolute ikui-h-4 ikui-w-4" />
-        ),
+        IconLeft: () => <ChevronLeft className="ikui-h-4 ikui-w-4" />,
+        IconRight: () => <ChevronRight className="ikui-h-4 ikui-w-4" />,
       }}
       {...props}
     />

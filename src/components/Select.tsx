@@ -20,7 +20,7 @@ const Trigger = React.forwardRef<
   >
     {children}
     <SelectPrimitive.Icon asChild>
-      <ChevronDown className="ikui-h-4 ikui-w-4 ikui-opacity-50" />
+      <ChevronDown className="ikui-ml-2 ikui-h-4 ikui-w-4 ikui-opacity-50" />
     </SelectPrimitive.Icon>
   </SelectPrimitive.Trigger>
 ));

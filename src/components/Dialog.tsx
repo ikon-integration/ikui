@@ -30,7 +30,7 @@ const Content = React.forwardRef<
     <DialogPrimitive.Content
       ref={ref}
       className={cn(
-        'ikui-fixed ikui-left-[50%] ikui-top-[50%] ikui-z-50 ikui-grid ikui-w-full ikui-max-w-lg ikui-translate-x-[-50%] ikui-translate-y-[-50%] ikui-gap-4 ikui-border ikui-bg-background ikui-p-6 ikui-shadow-lg ikui-duration-200 data-[state=open]:ikui-animate-in data-[state=closed]:ikui-animate-out data-[state=closed]:ikui-fade-out-0 data-[state=open]:ikui-fade-in-0 data-[state=closed]:ikui-zoom-out-95 data-[state=open]:ikui-zoom-in-95 data-[state=closed]:ikui-slide-out-to-left-1/2 data-[state=closed]:ikui-slide-out-to-top-[48%] data-[state=open]:ikui-slide-in-from-left-1/2 data-[state=open]:ikui-slide-in-from-top-[48%] sm:ikui-rounded-lg',
+        'ikui-fixed ikui-left-1/2 ikui-top-1/2 ikui-z-50 ikui-grid ikui-w-full ikui-max-w-lg ikui-translate-x-[-50%] ikui-translate-y-[-50%] ikui-gap-4 ikui-border ikui-bg-background ikui-p-6 ikui-shadow-lg ikui-duration-200 data-[state=open]:ikui-animate-in data-[state=closed]:ikui-animate-out data-[state=closed]:ikui-fade-out-0 data-[state=open]:ikui-fade-in-0 data-[state=closed]:ikui-zoom-out-95 data-[state=open]:ikui-zoom-in-95 data-[state=closed]:ikui-slide-out-to-left-1/2 data-[state=closed]:ikui-slide-out-to-top-[48%] data-[state=open]:ikui-slide-in-from-left-1/2 data-[state=open]:ikui-slide-in-from-top-[48%] sm:ikui-rounded-lg',
         className,
       )}
       {...props}

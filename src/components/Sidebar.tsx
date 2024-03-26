@@ -20,7 +20,7 @@ export function Sidebar({ links, isCollapsed = false }: ISidebarProps) {
     <Tooltip.Provider delayDuration={0}>
       <div
         data-collapsed={isCollapsed}
-        className="group ikui-flex ikui-flex-col ikui-gap-4 ikui-py-2 data-[collapsed=true]:ikui-py-2"
+        className="ikui-group ikui-flex ikui-flex-col ikui-gap-4 ikui-py-2 data-[collapsed=true]:ikui-py-2"
       >
         <nav className="ikui-grid ikui-gap-1 ikui-px-2 group-[[data-collapsed=true]]:ikui-justify-center group-[[data-collapsed=true]]:ikui-px-2">
           {links.map(link =>
