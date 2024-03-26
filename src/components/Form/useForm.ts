@@ -5,7 +5,7 @@ import { ZodType, z } from 'zod';
 type ExtractFieldValues<T> = T extends ZodType<any> ? z.infer<T> : never;
 
 export interface IUseFormOptions<TSchema extends ZodType<any>>
-  extends UseFormProps<ExtractFieldValues<TSchema>> {
+  extends Omit<UseFormProps<ExtractFieldValues<TSchema>>, 'resolver'> {
   schema?: TSchema;
 }
 
