@@ -110,7 +110,7 @@ const Separator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <CommandPrimitive.Separator
     ref={ref}
-    className={cn('ikui--mx-1 ikui-h-px ikui-bg-border', className)}
+    className={cn('ikui-mx-1 ikui-h-px ikui-bg-border', className)}
     {...props}
   />
 ));

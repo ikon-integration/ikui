@@ -33,6 +33,7 @@ function Template() {
         from: z.date({ required_error: 'Select a From date' }),
         to: z.date({ required_error: 'Select a To date' }),
       }),
+      tags: z.array(z.string()).min(1, 'At least 1 tag'),
     }),
     defaultValues: {
       active: true,
@@ -43,6 +44,7 @@ function Template() {
         from: new Date(2023, 10, 10),
         to: new Date(2023, 10, 25),
       },
+      tags: ['react', 'nestjs'],
     },
   });
 
@@ -92,6 +94,20 @@ function Template() {
 
       <Form.Group label="Range Picker">
         <Form.DateRangePicker name="dateRange" placeholder="Pick a range" />
+      </Form.Group>
+
+      <Form.Group label="Tags">
+        <Form.MultiSelect
+          name="tags"
+          placeholder="Select the tags..."
+          creatable
+          options={[
+            { value: 'react', label: 'React' },
+            { value: 'node', label: 'Node.js' },
+            { value: 'next', label: 'Nextjs' },
+            { value: 'nestjs', label: 'NestJS' },
+          ]}
+        />
       </Form.Group>
 
       <Button>Submit</Button>

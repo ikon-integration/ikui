@@ -63,7 +63,7 @@ export function DateRangePicker({
             <span
               role="button"
               tabIndex={0}
-              className="ikui-ml-auto ikui-flex ikui-size-4 ikui-items-center ikui-justify-center ikui-rounded-full ikui-bg-zinc-300 ikui-opacity-0 ikui-transition-all ikui-duration-300 hover:ikui-bg-zinc-400 group-hover:ikui-opacity-100"
+              className="ikui-ml-auto ikui-flex ikui-size-4 ikui-items-center ikui-justify-center ikui-rounded-full ikui-bg-foreground ikui-text-background ikui-opacity-0 ikui-transition-all ikui-duration-300 hover:ikui-bg-foreground/80 group-hover:ikui-opacity-100"
               onClick={event => {
                 event.stopPropagation();
 
@@ -71,7 +71,7 @@ export function DateRangePicker({
                 onChange?.(initialValue);
               }}
             >
-              <XIcon className="ikui-size-3 ikui-text-white" />
+              <XIcon className="ikui-size-3" />
             </span>
           )}
         </Button>

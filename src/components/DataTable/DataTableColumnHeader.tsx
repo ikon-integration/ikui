@@ -36,7 +36,7 @@ export function DataTableColumnHeader<TData, TValue>({
           <Button
             variant="ghost"
             size="sm"
-            className="ikui--ml-3 ikui-h-8 data-[state=open]:ikui-bg-accent"
+            className="ikui-ml-3 ikui-h-8 data-[state=open]:ikui-bg-accent"
           >
             <span>{title}</span>
             {column.getIsSorted() === 'desc' ? (

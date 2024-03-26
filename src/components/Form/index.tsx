@@ -4,6 +4,7 @@ import { FormDateRangePicker } from './FormDateRangePicker';
 import { FormGroup } from './FormGroup';
 import { FormInput } from './FormInput';
 import { FormInputCurrency } from './FormInputCurrency';
+import { FormMultiSelect } from './FormMultiSelect';
 import { FormRoot } from './FormRoot';
 import { FormSelect2 } from './FormSelect2';
 import { FormSwitch } from './FormSwitch';
@@ -21,7 +22,6 @@ export const Form = {
   Checkbox: FormCheckbox,
   DatePicker: FormDatePicker,
   DateRangePicker: FormDateRangePicker,
-  // MultiSelect: FormMultiSelect,
+  MultiSelect: FormMultiSelect,
   TextArea: FormTextArea,
-  // Radio: FormRadio,
 };

@@ -30,7 +30,7 @@ function Handle({
   return (
     <ResizablePrimitive.PanelResizeHandle
       className={cn(
-        'ikui-relative ikui-flex ikui-w-px ikui-items-center ikui-justify-center ikui-bg-border after:ikui-absolute after:ikui-inset-y-0 after:ikui-left-1/2 after:ikui-w-1 after:ikui--translate-x-1/2 focus-visible:ikui-outline-none focus-visible:ikui-ring-1 focus-visible:ikui-ring-ring focus-visible:ikui-ring-offset-1 data-[panel-group-direction=vertical]:ikui-h-px data-[panel-group-direction=vertical]:ikui-w-full data-[panel-group-direction=vertical]:after:ikui-left-0 data-[panel-group-direction=vertical]:after:ikui-h-1 data-[panel-group-direction=vertical]:after:ikui-w-full data-[panel-group-direction=vertical]:after:ikui--translate-y-1/2 data-[panel-group-direction=vertical]:after:ikui-translate-x-0 [&[data-panel-group-direction=vertical]>div]:ikui-rotate-90',
+        'ikui-relative ikui-flex ikui-w-px ikui-items-center ikui-justify-center ikui-bg-border after:ikui-absolute after:ikui-inset-y-0 after:ikui-left-1/2 after:ikui-w-1 after:ikui-translate-x-1/2 focus-visible:ikui-outline-none focus-visible:ikui-ring-1 focus-visible:ikui-ring-ring focus-visible:ikui-ring-offset-1 data-[panel-group-direction=vertical]:ikui-h-px data-[panel-group-direction=vertical]:ikui-w-full data-[panel-group-direction=vertical]:after:ikui-left-0 data-[panel-group-direction=vertical]:after:ikui-h-1 data-[panel-group-direction=vertical]:after:ikui-w-full data-[panel-group-direction=vertical]:after:ikui-translate-x-0 data-[panel-group-direction=vertical]:after:ikui-translate-y-1/2 [&[data-panel-group-direction=vertical]>div]:ikui-rotate-90',
         className,
       )}
       {...props}

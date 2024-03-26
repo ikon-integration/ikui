@@ -147,7 +147,7 @@ const Separator = React.forwardRef<
 >(({ className, ...props }, ref) => (
   <DropdownMenuPrimitive.Separator
     ref={ref}
-    className={cn('ikui--mx-1 ikui-my-1 ikui-h-px ikui-bg-muted', className)}
+    className={cn('ikui-mx-1 ikui-my-1 ikui-h-px ikui-bg-muted', className)}
     {...props}
   />
 ));
