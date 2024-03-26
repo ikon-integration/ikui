@@ -19,7 +19,6 @@ function Template() {
       <MultiSelect
         creatable
         onChange={selectedOptions => console.log(selectedOptions)}
-        disabled
         options={[
           { value: 'react', label: 'React' },
           { value: 'node', label: 'Node.js' },

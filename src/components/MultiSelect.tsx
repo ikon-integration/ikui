@@ -1,6 +1,6 @@
 import { Command as CommandPrimitive } from 'cmdk';
 import { XIcon } from 'lucide-react';
-import { useEffect, useMemo, useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
 
 import { cn } from '@/lib/utils';
 
@@ -48,10 +48,6 @@ export function MultiSelect({
     !disabled &&
     (unselectedOptions.length > 0 || (creatable && inputValue.length > 0));
 
-  useEffect(() => {
-    onChange?.(selectedOptions);
-  }, [selectedOptions, onChange]);
-
   function handleKeyDown(event: React.KeyboardEvent<HTMLDivElement>) {
     if (
       (event.key === 'Delete' || event.key === 'Backspace') &&
@@ -61,6 +57,7 @@ export function MultiSelect({
         const newState = [...prevState];
         newState.pop();
 
+        onChange?.(newState);
         return newState;
       });
     }
@@ -77,7 +74,12 @@ export function MultiSelect({
 
   function handleSelectOption(value: string) {
     setInputValue('');
-    setSelectedOptions(prevState => prevState.concat(value));
+    setSelectedOptions(prevState => {
+      const newState = prevState.concat(value);
+
+      onChange?.(newState);
+      return newState;
+    });
   }
 
   function handleCreateOption(value: string) {
@@ -86,7 +88,12 @@ export function MultiSelect({
     const trimmedValue = value.trim();
 
     if (!selectedOptions.includes(trimmedValue)) {
-      setSelectedOptions(prevState => prevState.concat(trimmedValue));
+      setSelectedOptions(prevState => {
+        const newState = prevState.concat(trimmedValue);
+
+        onChange?.(newState);
+        return newState;
+      });
     }
   }
 
@@ -97,11 +104,15 @@ export function MultiSelect({
     event.preventDefault();
     event.stopPropagation();
 
-    setSelectedOptions(prevState =>
-      prevState.filter(option => option !== removingOption),
-    );
+    setSelectedOptions(prevState => {
+      const newState = prevState.filter(option => option !== removingOption);
+
+      onChange?.(newState);
+      return newState;
+    });
     inputRef.current?.focus();
   }
+
   return (
     <CommandPrimitive
       onKeyDown={handleKeyDown}
