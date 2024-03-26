@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 
 import { Badge } from './Badge';
 
-export type Option = {
+type Option = {
   value: string;
   label: string;
   disabled?: boolean;
