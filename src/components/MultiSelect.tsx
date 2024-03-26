@@ -125,7 +125,7 @@ export function MultiSelect({
       <input
         id={id}
         onFocus={() => inputRef.current?.focus()}
-        className="ikui-sr-only ikui-pointer-events-none ikui-absolute"
+        className="ikui-sr-only ikui-pointer-events-none"
         tabIndex={-1}
         disabled={disabled}
       />
