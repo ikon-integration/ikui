@@ -31,8 +31,8 @@ interface IDataTableProps<TData, TValue> {
   };
   pagination?: {
     manual: boolean;
-    initialPage: number;
-    pageSize: number;
+    initialPage?: number;
+    pageSize?: number;
     rowsPerPageOptions?: number[];
     onPageChange?: (page: number) => void;
     onPageSizeChange?: (pageSize: number) => void;
@@ -55,8 +55,10 @@ export function DataTable<TData, TValue>({
 }: IDataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [pagination, setPagination] = useState<PaginationState>({
-    pageIndex: paginationConfig ? paginationConfig.initialPage - 1 : 0,
-    pageSize: paginationConfig?.pageSize ?? 10,
+    pageIndex: paginationConfig?.initialPage
+      ? paginationConfig.initialPage - 1
+      : 0,
+    pageSize: paginationConfig?.pageSize ?? 25,
   });
   const [rowSelection, setRowSelection] = useState({});
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
