@@ -22,7 +22,7 @@ export default defineConfig({
     lib: {
       entry: path.resolve(__dirname, 'src', 'index.ts'),
       name: 'ikui',
-      formats: ['es', 'umd'],
+      formats: ['es'],
       fileName: 'ikui',
     },
     rollupOptions: {
@@ -31,6 +31,9 @@ export default defineConfig({
         ...Object.keys(pkgJSON.devDependencies),
       ],
       output: {
+        preserveModules: true,
+        inlineDynamicImports: false,
+        format: 'esm',
         globals: {
           react: 'React',
           'react-dom': 'ReactDOM',
