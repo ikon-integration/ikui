@@ -10,7 +10,7 @@ import {
 import { cn } from '@/lib/utils';
 
 import { Button } from '../Button';
-import { DropdownMenu } from '../DropdownMenu';
+import { DropdownMenuPrimitive } from '../DropdownMenuPrimitive';
 
 interface IDataTableColumnHeaderProps<TData, TValue>
   extends React.HTMLAttributes<HTMLDivElement> {
@@ -31,8 +31,8 @@ export function DataTableColumnHeader<TData, TValue>({
     <div
       className={cn('ikui-flex ikui-items-center ikui-space-x-2', className)}
     >
-      <DropdownMenu.Root>
-        <DropdownMenu.Trigger asChild>
+      <DropdownMenuPrimitive.Root>
+        <DropdownMenuPrimitive.Trigger asChild>
           <Button
             variant="ghost"
             size="sm"
@@ -47,10 +47,10 @@ export function DataTableColumnHeader<TData, TValue>({
               <ChevronsUpDownIcon className="ikui-ml-2 ikui-h-4 ikui-w-4" />
             )}
           </Button>
-        </DropdownMenu.Trigger>
+        </DropdownMenuPrimitive.Trigger>
 
-        <DropdownMenu.Content align="start">
-          <DropdownMenu.Item
+        <DropdownMenuPrimitive.Content align="start">
+          <DropdownMenuPrimitive.Item
             onClick={() => column.toggleSorting(false)}
             className={cn(
               column.getIsSorted() === 'asc' && 'ikui-font-semibold',
@@ -58,9 +58,9 @@ export function DataTableColumnHeader<TData, TValue>({
           >
             <ArrowUpIcon className="ikui-mr-2 ikui-h-3.5 ikui-w-3.5 ikui-text-muted-foreground/70" />
             Asc
-          </DropdownMenu.Item>
+          </DropdownMenuPrimitive.Item>
 
-          <DropdownMenu.Item
+          <DropdownMenuPrimitive.Item
             onClick={() => column.toggleSorting(true)}
             className={cn(
               column.getIsSorted() === 'desc' && 'ikui-font-semibold',
@@ -68,19 +68,21 @@ export function DataTableColumnHeader<TData, TValue>({
           >
             <ArrowDownIcon className="ikui-mr-2 ikui-h-3.5 ikui-w-3.5 ikui-text-muted-foreground/70" />
             Desc
-          </DropdownMenu.Item>
+          </DropdownMenuPrimitive.Item>
 
           {column.getCanHide() && (
             <>
-              <DropdownMenu.Separator />
-              <DropdownMenu.Item onClick={() => column.toggleVisibility(false)}>
+              <DropdownMenuPrimitive.Separator />
+              <DropdownMenuPrimitive.Item
+                onClick={() => column.toggleVisibility(false)}
+              >
                 <EyeOffIcon className="ikui-mr-2 ikui-h-3.5 ikui-w-3.5 ikui-text-muted-foreground/70" />
                 Hide
-              </DropdownMenu.Item>
+              </DropdownMenuPrimitive.Item>
             </>
           )}
-        </DropdownMenu.Content>
-      </DropdownMenu.Root>
+        </DropdownMenuPrimitive.Content>
+      </DropdownMenuPrimitive.Root>
     </div>
   );
 }

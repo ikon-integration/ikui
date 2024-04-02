@@ -1,13 +1,9 @@
 import type { Meta } from '@storybook/react';
 import { z } from 'zod';
 
+import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
-
-import { Button } from '../Button';
-
-import { useForm } from './useForm';
-
-import { Form } from '.';
+import { Form, useForm } from '@/components/Form';
 
 const meta = {
   title: 'Components/Form',

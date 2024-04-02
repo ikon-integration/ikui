@@ -8,7 +8,7 @@ import {
   UserIcon,
 } from 'lucide-react';
 
-import { Command } from './Command';
+import { Command } from '@/components/Command';
 
 const meta = {
   title: 'Components/Command',

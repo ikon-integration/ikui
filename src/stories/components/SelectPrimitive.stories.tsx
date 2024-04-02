@@ -1,6 +1,6 @@
 import type { Meta } from '@storybook/react';
 
-import { SelectPrimitive } from './SelectPrimitive';
+import { SelectPrimitive } from '@/components/SelectPrimitive';
 
 const meta = {
   title: 'Components/SelectPrimitive',

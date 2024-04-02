@@ -1,8 +1,7 @@
 import { ColumnDef } from '@tanstack/react-table';
 
 import { Badge } from '@/components/Badge';
-
-import { DataTableColumnHeader } from '../../DataTableColumnHeader';
+import { DataTableColumnHeader } from '@/components/DataTable/DataTableColumnHeader';
 
 import { labels, priorities, statuses } from './data';
 import { tasks } from './tasks';

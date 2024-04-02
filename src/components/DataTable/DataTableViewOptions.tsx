@@ -1,7 +1,7 @@
 import { Settings2Icon } from 'lucide-react';
 
 import { Button } from '../Button';
-import { DropdownMenu } from '../DropdownMenu';
+import { DropdownMenuPrimitive } from '../DropdownMenuPrimitive';
 
 import { useDataTable } from './DataTableContext';
 
@@ -9,8 +9,8 @@ export function DataTableViewOptions() {
   const table = useDataTable();
 
   return (
-    <DropdownMenu.Root>
-      <DropdownMenu.Trigger asChild>
+    <DropdownMenuPrimitive.Root>
+      <DropdownMenuPrimitive.Trigger asChild>
         <Button
           variant="outline"
           size="sm"
@@ -19,10 +19,12 @@ export function DataTableViewOptions() {
           <Settings2Icon className="ikui-mr-2 ikui-h-4 ikui-w-4" />
           View
         </Button>
-      </DropdownMenu.Trigger>
-      <DropdownMenu.Content align="end" className="ikui-w-[150px]">
-        <DropdownMenu.Label>Toggle columns</DropdownMenu.Label>
-        <DropdownMenu.Separator />
+      </DropdownMenuPrimitive.Trigger>
+      <DropdownMenuPrimitive.Content align="end" className="ikui-w-[150px]">
+        <DropdownMenuPrimitive.Label>
+          Toggle columns
+        </DropdownMenuPrimitive.Label>
+        <DropdownMenuPrimitive.Separator />
         {table
           .getAllColumns()
           .filter(
@@ -30,16 +32,16 @@ export function DataTableViewOptions() {
               typeof column.accessorFn !== 'undefined' && column.getCanHide(),
           )
           .map(column => (
-            <DropdownMenu.CheckboxItem
+            <DropdownMenuPrimitive.CheckboxItem
               key={column.id}
               className="ikui-capitalize"
               checked={column.getIsVisible()}
               onCheckedChange={value => column.toggleVisibility(!!value)}
             >
               {column.id}
-            </DropdownMenu.CheckboxItem>
+            </DropdownMenuPrimitive.CheckboxItem>
           ))}
-      </DropdownMenu.Content>
-    </DropdownMenu.Root>
+      </DropdownMenuPrimitive.Content>
+    </DropdownMenuPrimitive.Root>
   );
 }

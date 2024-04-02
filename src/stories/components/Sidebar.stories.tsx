@@ -13,11 +13,10 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 
+import { Button } from '@/components/Button';
+import { Separator } from '@/components/Separator';
+import { Sidebar } from '@/components/Sidebar';
 import { cn } from '@/lib/utils';
-
-import { Button } from './Button';
-import { Separator } from './Separator';
-import { Sidebar } from './Sidebar';
 
 const meta = {
   title: 'Components/Sidebar',

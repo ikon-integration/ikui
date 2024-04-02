@@ -21,6 +21,7 @@ interface IDateRangePickerProps {
   onChange?: (date: DateRange) => void;
   disabled?: boolean;
   id?: string;
+  numberOfMonths?: number;
 }
 
 const initialValue = { from: undefined, to: undefined };
@@ -33,6 +34,7 @@ export function DateRangePicker({
   onChange,
   disabled,
   id,
+  numberOfMonths = 2,
 }: IDateRangePickerProps) {
   const [dates, setDates] = useState(value);
 
@@ -63,7 +65,7 @@ export function DateRangePicker({
             <span
               role="button"
               tabIndex={0}
-              className="ikui-ml-auto ikui-flex ikui-size-4 ikui-items-center ikui-justify-center ikui-rounded-full ikui-bg-foreground ikui-text-background ikui-opacity-0 ikui-transition-all ikui-duration-300 hover:ikui-bg-foreground/80 group-hover:ikui-opacity-100"
+              className="ikui-ml-auto ikui-flex ikui-size-4 ikui-items-center ikui-justify-center ikui-rounded-full ikui-bg-foreground ikui-text-background ikui-opacity-0 ikui-transition-all ikui-duration-300 hover:ikui-bg-foreground/80 group-hover:ikui-opacity-100 group-data-[state=open]:ikui-opacity-100"
               onClick={event => {
                 event.stopPropagation();
 
@@ -81,6 +83,7 @@ export function DateRangePicker({
         <Calendar
           mode="range"
           defaultMonth={dates.from}
+          numberOfMonths={numberOfMonths}
           selected={dates}
           onSelect={selectedDate => {
             const dateRange = {
