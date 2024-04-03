@@ -19,7 +19,7 @@ export function FormSwitch({ name, ...props }: IFormSwitch) {
           name={name}
           onCheckedChange={onChange}
           checked={value}
-          disabled={disabled}
+          disabled={props.disabled || disabled}
           onBlur={onBlur}
         />
       )}

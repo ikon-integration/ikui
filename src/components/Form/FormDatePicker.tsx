@@ -19,7 +19,7 @@ export function FormDatePicker({ name, ...props }: IFormDatePicker) {
           {...props}
           onChange={onChange}
           value={value}
-          disabled={disabled}
+          disabled={props.disabled || disabled}
         />
       )}
     />

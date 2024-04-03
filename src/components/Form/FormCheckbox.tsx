@@ -20,7 +20,7 @@ export function FormCheckbox({ name, ...props }: IFormCheckbox) {
           onCheckedChange={onChange}
           checked={value}
           onBlur={onBlur}
-          disabled={disabled}
+          disabled={props.disabled || disabled}
         />
       )}
     />

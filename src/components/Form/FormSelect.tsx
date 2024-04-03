@@ -18,7 +18,7 @@ export function FormSelect({ name, ...props }: IFormSelect) {
           {...props}
           name={name}
           value={value}
-          disabled={disabled}
+          disabled={props.disabled || disabled}
           onValueChange={onChange}
         />
       )}

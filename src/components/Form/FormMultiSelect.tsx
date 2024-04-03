@@ -19,7 +19,7 @@ export function FormMultiSelect({ name, ...props }: IFormMultiSelect) {
           {...props}
           onChange={onChange}
           value={value}
-          disabled={disabled}
+          disabled={props.disabled || disabled}
         />
       )}
     />
