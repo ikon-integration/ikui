@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 
 import { buttonVariants } from './Button';
-import { Tooltip } from './Tooltip';
+import { TooltipPrimitive } from './Tooltip';
 
 export interface ISidebarProps {
   isCollapsed?: boolean;
@@ -15,7 +15,7 @@ export interface ISidebarProps {
 
 export function Sidebar({ links, isCollapsed = false }: ISidebarProps) {
   return (
-    <Tooltip.Provider delayDuration={0}>
+    <TooltipPrimitive.Provider delayDuration={0}>
       <div
         data-collapsed={isCollapsed}
         className="ikui-group ikui-flex ikui-flex-col ikui-gap-4 ikui-py-2 data-[collapsed=true]:ikui-py-2"
@@ -23,8 +23,8 @@ export function Sidebar({ links, isCollapsed = false }: ISidebarProps) {
         <nav className="ikui-grid ikui-gap-1 ikui-px-2 group-[[data-collapsed=true]]:ikui-justify-center group-[[data-collapsed=true]]:ikui-px-2">
           {links.map(link =>
             isCollapsed ? (
-              <Tooltip.Root key={link.title} delayDuration={0}>
-                <Tooltip.Trigger asChild>
+              <TooltipPrimitive.Root key={link.title} delayDuration={0}>
+                <TooltipPrimitive.Trigger asChild>
                   <a
                     href="/"
                     className={cn(
@@ -37,8 +37,8 @@ export function Sidebar({ links, isCollapsed = false }: ISidebarProps) {
                     <link.icon className="ikui-h-4 ikui-w-4" />
                     <span className="ikui-sr-only">{link.title}</span>
                   </a>
-                </Tooltip.Trigger>
-                <Tooltip.Content
+                </TooltipPrimitive.Trigger>
+                <TooltipPrimitive.Content
                   side="right"
                   className="ikui-flex ikui-items-center ikui-gap-4"
                 >
@@ -48,8 +48,8 @@ export function Sidebar({ links, isCollapsed = false }: ISidebarProps) {
                       {link.label}
                     </span>
                   )}
-                </Tooltip.Content>
-              </Tooltip.Root>
+                </TooltipPrimitive.Content>
+              </TooltipPrimitive.Root>
             ) : (
               <a
                 key={link.title}
@@ -79,6 +79,6 @@ export function Sidebar({ links, isCollapsed = false }: ISidebarProps) {
           )}
         </nav>
       </div>
-    </Tooltip.Provider>
+    </TooltipPrimitive.Provider>
   );
 }
