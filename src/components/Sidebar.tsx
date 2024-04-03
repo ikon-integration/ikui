@@ -1,7 +1,7 @@
 import { cn } from '@/lib/utils';
 
 import { buttonVariants } from './Button';
-import { TooltipPrimitive } from './Tooltip';
+import { TooltipPrimitive } from './TooltipPrimitive';
 
 export interface ISidebarProps {
   isCollapsed?: boolean;
