@@ -6,7 +6,10 @@ import { useForm } from './useForm';
 interface IFormRootProps<TFielValues extends FieldValues> {
   children: React.ReactNode;
   form: ReturnType<typeof useForm<z.ZodType<TFielValues>>>;
-  onSubmit: (data: TFielValues) => void;
+  onSubmit: (
+    data: TFielValues,
+    event: React.FormEvent<HTMLFormElement>,
+  ) => void;
   onBeforeSubmit?: (
     event: React.FormEvent<HTMLFormElement>,
   ) => void | Promise<void>;
@@ -26,7 +29,7 @@ export function FormRoot<TFielValues extends FieldValues>({
         className={className}
         onSubmit={async event => {
           await onBeforeSubmit?.(event);
-          form.handleSubmit(data => onSubmit(data))(event);
+          form.handleSubmit(data => onSubmit(data, event))(event);
         }}
       >
         {children}
