@@ -28,6 +28,7 @@ export function FormRoot<TFielValues extends FieldValues>({
       <form
         className={className}
         onSubmit={async event => {
+          event.stopPropagation();
           await onBeforeSubmit?.(event);
           form.handleSubmit(data => onSubmit(data, event))(event);
         }}
