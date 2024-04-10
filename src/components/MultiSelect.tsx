@@ -185,7 +185,7 @@ export function MultiSelect({
               <CommandPrimitive.Item
                 key={option.value}
                 value={option.value}
-                onSelect={handleSelectOption}
+                onSelect={() => handleSelectOption(option.value)}
                 disabled={option.disabled}
                 className="ikui-w-full ikui-cursor-default ikui-select-none ikui-items-center ikui-rounded-sm ikui-px-2 ikui-py-1.5 ikui-text-sm ikui-outline-none aria-selected:ikui-bg-accent aria-selected:ikui-text-accent-foreground data-[disabled]:ikui-pointer-events-none data-[disabled]:ikui-opacity-50"
                 onMouseDown={e => {
