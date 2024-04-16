@@ -4,6 +4,8 @@ import { z } from 'zod';
 import { Button } from '@/components/Button';
 import { Card } from '@/components/Card';
 import { Form, useForm } from '@/components/Form';
+import { Label } from '@/components/Label';
+import { RadioGroup } from '@/components/RadioGroup';
 
 const meta = {
   title: 'Components/Form',
@@ -30,17 +32,21 @@ function Template() {
         to: z.date({ required_error: 'Select a To date' }),
       }),
       tags: z.array(z.string()).min(1, 'At least 1 tag'),
+      phone: z.string(),
+      radioValue: z.string(),
     }),
     defaultValues: {
       active: true,
       unlimited: true,
       email: '',
       bio: '',
+      phone: '',
       dateRange: {
         from: new Date(2023, 10, 10),
         to: new Date(2023, 10, 25),
       },
       tags: ['react', 'nestjs'],
+      radioValue: '',
     },
   });
 
@@ -52,6 +58,27 @@ function Template() {
     >
       <Form.Group label="Email" description="Your best email">
         <Form.Input name="email" />
+      </Form.Group>
+
+      <Form.Group label="Phone">
+        <Form.PhoneInput name="phone" />
+      </Form.Group>
+
+      <Form.Group label="Radio value">
+        <Form.RadioGroup name="radioValue">
+          <div className="ikui-flex ikui-items-center ikui-space-x-2">
+            <RadioGroup.Item value="default" id="r1" />
+            <Label htmlFor="r1">Default</Label>
+          </div>
+          <div className="ikui-flex ikui-items-center ikui-space-x-2">
+            <RadioGroup.Item value="comfortable" id="r2" />
+            <Label htmlFor="r2">Comfortable</Label>
+          </div>
+          <div className="ikui-flex ikui-items-center ikui-space-x-2">
+            <RadioGroup.Item value="compact" id="r3" />
+            <Label htmlFor="r3">Compact</Label>
+          </div>
+        </Form.RadioGroup>
       </Form.Group>
 
       <div className="ikui-flex ikui-gap-4">
