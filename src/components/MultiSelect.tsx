@@ -13,13 +13,13 @@ type Option = {
 };
 
 interface IMultiSelectProps {
+  onChange: (selectedOptions: string[]) => void;
+  value: string[];
   disabled?: boolean;
   placeholder?: string;
   options?: Option[];
   creatable?: boolean;
   className?: string;
-  onChange?: (selectedOptions: string[]) => void;
-  value?: string[];
   id?: string;
 }
 
@@ -33,14 +33,13 @@ export function MultiSelect({
   value = [],
   id,
 }: IMultiSelectProps) {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>(value);
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
   const unselectedOptions = useMemo(
-    () => options.filter(item => !selectedOptions.includes(item.value)),
-    [options, selectedOptions],
+    () => options.filter(item => !value.includes(item.value)),
+    [options, value],
   );
 
   const isDropdownVisible =
@@ -53,13 +52,10 @@ export function MultiSelect({
       (event.key === 'Delete' || event.key === 'Backspace') &&
       inputValue === ''
     ) {
-      setSelectedOptions(prevState => {
-        const newState = [...prevState];
-        newState.pop();
+      const newState = [...value];
+      newState.pop();
 
-        onChange?.(newState);
-        return newState;
-      });
+      onChange(newState);
     }
 
     if (event.key === 'Escape') {
@@ -72,28 +68,21 @@ export function MultiSelect({
     setInputValue('');
   }
 
-  function handleSelectOption(value: string) {
+  function handleSelectOption(selectedOptions: string) {
     setInputValue('');
-    setSelectedOptions(prevState => {
-      const newState = prevState.concat(value);
+    const newState = value.concat(selectedOptions);
 
-      onChange?.(newState);
-      return newState;
-    });
+    onChange(newState);
   }
 
-  function handleCreateOption(value: string) {
+  function handleCreateOption(creatingOption: string) {
     setInputValue('');
 
-    const trimmedValue = value.trim();
+    const trimmedValue = creatingOption.trim();
 
-    if (!selectedOptions.includes(trimmedValue)) {
-      setSelectedOptions(prevState => {
-        const newState = prevState.concat(trimmedValue);
-
-        onChange?.(newState);
-        return newState;
-      });
+    if (!value.includes(trimmedValue)) {
+      const newState = value.concat(trimmedValue);
+      onChange(newState);
     }
   }
 
@@ -104,12 +93,9 @@ export function MultiSelect({
     event.preventDefault();
     event.stopPropagation();
 
-    setSelectedOptions(prevState => {
-      const newState = prevState.filter(option => option !== removingOption);
+    const newState = value.filter(option => option !== removingOption);
+    onChange(newState);
 
-      onChange?.(newState);
-      return newState;
-    });
     inputRef.current?.focus();
   }
 
@@ -140,7 +126,7 @@ export function MultiSelect({
         )}
         onClick={() => inputRef.current?.focus()}
       >
-        {selectedOptions.map(selectedOption => (
+        {value.map(selectedOption => (
           <Badge
             key={selectedOption}
             variant="secondary"

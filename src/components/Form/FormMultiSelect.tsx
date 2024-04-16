@@ -3,7 +3,10 @@ import { Controller, useFormContext } from 'react-hook-form';
 import { MultiSelect } from '../MultiSelect';
 
 interface IFormMultiSelect
-  extends React.ComponentPropsWithoutRef<typeof MultiSelect> {
+  extends Omit<
+    React.ComponentPropsWithoutRef<typeof MultiSelect>,
+    'value' | 'onChange'
+  > {
   name: string;
 }
 
