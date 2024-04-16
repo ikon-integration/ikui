@@ -30,7 +30,7 @@ export function DatePicker({
   const [date, setDate] = useState<Date | undefined>(value);
 
   return (
-    <Popover.Root>
+    <Popover.Root modal>
       <Popover.Trigger disabled={disabled} asChild>
         <Button
           variant="outline"

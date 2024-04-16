@@ -39,7 +39,7 @@ export function DateRangePicker({
   const [dates, setDates] = useState(value);
 
   return (
-    <Popover.Root>
+    <Popover.Root modal>
       <Popover.Trigger disabled={disabled} asChild>
         <Button
           variant="outline"
