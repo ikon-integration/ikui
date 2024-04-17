@@ -13,8 +13,8 @@ type Option = {
 };
 
 interface IMultiSelectProps {
-  onChange: (selectedOptions: string[]) => void;
-  value: string[];
+  onChange?: (selectedOptions: string[]) => void;
+  value?: string[];
   disabled?: boolean;
   placeholder?: string;
   options?: Option[];
@@ -55,7 +55,7 @@ export function MultiSelect({
       const newState = [...value];
       newState.pop();
 
-      onChange(newState);
+      onChange?.(newState);
     }
 
     if (event.key === 'Escape') {
@@ -72,7 +72,7 @@ export function MultiSelect({
     setInputValue('');
     const newState = value.concat(selectedOptions);
 
-    onChange(newState);
+    onChange?.(newState);
   }
 
   function handleCreateOption(creatingOption: string) {
@@ -82,7 +82,7 @@ export function MultiSelect({
 
     if (!value.includes(trimmedValue)) {
       const newState = value.concat(trimmedValue);
-      onChange(newState);
+      onChange?.(newState);
     }
   }
 
@@ -94,7 +94,7 @@ export function MultiSelect({
     event.stopPropagation();
 
     const newState = value.filter(option => option !== removingOption);
-    onChange(newState);
+    onChange?.(newState);
 
     inputRef.current?.focus();
   }
