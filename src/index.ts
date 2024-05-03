@@ -21,7 +21,6 @@ export * from '@/components/Input';
 export * from '@/components/InputCurrency';
 export * from '@/components/Label';
 export * from '@/components/Layout';
-export * from '@/components/MaskedInput';
 export * from '@/components/MultiSelect';
 export * from '@/components/Pagination';
 export * from '@/components/PhoneInput';

@@ -133,7 +133,7 @@ function Template() {
         />
       </Form.Group>
 
-      <Button>Submit</Button>
+      <Button type="submit">Submit</Button>
     </Form.Root>
   );
 }

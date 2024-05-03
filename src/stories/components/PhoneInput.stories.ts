@@ -11,7 +11,7 @@ const meta = {
   tags: ['autodocs'],
   args: {
     value: '(999)99999999 ext. 1234',
-    onChange: (value, maskedValue) => console.log({ value, maskedValue }),
+    onChange: event => console.log({ value: event.target.value }),
   },
 } satisfies Meta<typeof PhoneInput>;
 
