@@ -10,7 +10,7 @@ const meta = {
   },
   tags: ['autodocs'],
   args: {
-    value: '(999)99999999 ext. 1234',
+    value: '(999)99999999',
     onChange: event => console.log({ value: event.target.value }),
   },
 } satisfies Meta<typeof PhoneInput>;
