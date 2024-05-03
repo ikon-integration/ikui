@@ -52,12 +52,13 @@ export const Button = React.forwardRef<HTMLButtonElement, IButtonProps>(
       loading,
       children,
       disabled,
+      type = 'button',
       ...props
     },
     ref,
   ) => {
     const Comp = asChild ? Slot : 'button';
-    const type = props.type || 'button';
+
     return (
       <Comp
         className={cn(buttonVariants({ variant, size, className }))}
