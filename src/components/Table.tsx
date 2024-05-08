@@ -92,7 +92,7 @@ const Cell = React.forwardRef<
   <td
     ref={ref}
     className={cn(
-      'ikui-p-4 ikui-align-middle [&:has([role=checkbox])]:ikui-pr-0',
+      'ikui-p-3 ikui-pl-6 ikui-align-middle [&:has([role=checkbox])]:ikui-pr-0',
       className,
     )}
     {...props}
