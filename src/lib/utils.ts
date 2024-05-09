@@ -1,4 +1,5 @@
 import { clsx, type ClassValue } from 'clsx';
+import { FieldErrors } from 'react-hook-form';
 import { extendTailwindMerge } from 'tailwind-merge';
 
 import { IThemeColor } from '@/types/IThemeColor';
@@ -25,4 +26,19 @@ export function themeColorsToCssVariables(colors: IThemeColor) {
     },
     {} as Record<string, string>,
   );
+}
+export function getNestedAttributeInFieldName(
+  errors: FieldErrors<any>,
+  fieldName: string,
+) {
+  if (!fieldName.includes('.')) {
+    return errors[fieldName];
+  }
+  const keys = fieldName.split('.');
+
+  let value: any = errors;
+  for (const key of keys) {
+    value = value[key];
+  }
+  return value as FieldErrors<any>;
 }
