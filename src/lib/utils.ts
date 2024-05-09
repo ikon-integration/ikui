@@ -31,14 +31,14 @@ export function getNestedAttributeInFieldName(
   errors: FieldErrors<any>,
   fieldName: string,
 ) {
-  if (!fieldName.includes('.')) {
+  if (!fieldName?.includes('.')) {
     return errors[fieldName];
   }
   const keys = fieldName.split('.');
 
   let value: any = errors;
   for (const key of keys) {
-    value = value[key];
+    if (typeof value[key] === 'object') value = value[key];
   }
   return value as FieldErrors<any>;
 }
