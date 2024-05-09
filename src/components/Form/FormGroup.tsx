@@ -1,7 +1,7 @@
 import React, { Children, useId } from 'react';
 import { useFormContext } from 'react-hook-form';
 
-import { cn } from '@/lib/utils';
+import { cn, getNestedAttributeInFieldName } from '@/lib/utils';
 
 import { Label } from '../Label';
 
@@ -41,7 +41,8 @@ export function FormGroup({
   const randomId = useId();
   const id = field.id ?? randomId;
 
-  const fieldErrors = errors[field.name];
+  const fieldErrors = getNestedAttributeInFieldName(errors, field.name);
+
   let errorMessage = error ?? (fieldErrors?.message as string | undefined);
 
   if (
