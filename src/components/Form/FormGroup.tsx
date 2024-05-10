@@ -45,18 +45,6 @@ export function FormGroup({
 
   const errorMessage = error ?? (fieldErrors?.message as string | undefined);
 
-  // let errorMessage = error ?? (fieldErrors?.message as string | undefined);
-
-  // if (
-  //   !fieldErrors?.message &&
-  //   typeof fieldErrors === 'object' &&
-  //   Object.keys(fieldErrors).length > 0
-  // ) {
-  //   errorMessage = Object.values(fieldErrors)
-  //     .map(error => error.message)
-  //     .join(', ');
-  // }
-
   const hasError = !!errorMessage;
 
   return (
