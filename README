@@ -1,0 +1,13 @@
+to up a new version...
+
+UPDATE version in package json
+
+npm install
+
+git push
+
+In github, go to the repo, into "releases"
+
+"draft a new release"
+
+put the new version tag and title, being the same as the new version put in package.json
