@@ -44,6 +44,8 @@ export function FormGroup({
   console.log('error', error);
   console.log('errors', errors);
 
+  console.log('field', field);
+  console.log('field.name', field.name);
   const fieldErrors = getNestedAttributeInFieldName(errors, field.name);
   console.log('fieldErrors', fieldErrors);
 
