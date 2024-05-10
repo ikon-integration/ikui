@@ -43,17 +43,19 @@ export function FormGroup({
 
   const fieldErrors = getNestedAttributeInFieldName(errors, field.name);
 
-  let errorMessage = error ?? (fieldErrors?.message as string | undefined);
+  const errorMessage = error ?? (fieldErrors?.message as string | undefined);
 
-  if (
-    !fieldErrors?.message &&
-    typeof fieldErrors === 'object' &&
-    Object.keys(fieldErrors).length > 0
-  ) {
-    errorMessage = Object.values(fieldErrors)
-      .map(error => error.message)
-      .join(', ');
-  }
+  // let errorMessage = error ?? (fieldErrors?.message as string | undefined);
+
+  // if (
+  //   !fieldErrors?.message &&
+  //   typeof fieldErrors === 'object' &&
+  //   Object.keys(fieldErrors).length > 0
+  // ) {
+  //   errorMessage = Object.values(fieldErrors)
+  //     .map(error => error.message)
+  //     .join(', ');
+  // }
 
   const hasError = !!errorMessage;
 
