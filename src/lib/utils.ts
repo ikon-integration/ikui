@@ -37,8 +37,12 @@ export function getNestedAttributeInFieldName(
   const keys = fieldName.split('.');
 
   let value: any = errors;
+  let finalKey = '';
   for (const key of keys) {
-    if (typeof value[key] === 'object') value = value[key];
+    if (typeof value[key] === 'object') {
+      value = value[key];
+      finalKey = key;
+    }
   }
-  return value[fieldName] as FieldErrors<any>;
+  return value[finalKey] as FieldErrors<any>;
 }
