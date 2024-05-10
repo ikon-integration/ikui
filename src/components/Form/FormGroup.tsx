@@ -41,9 +41,15 @@ export function FormGroup({
   const randomId = useId();
   const id = field.id ?? randomId;
 
+  console.log('error', error);
+  console.log('errors', errors);
+
   const fieldErrors = getNestedAttributeInFieldName(errors, field.name);
+  console.log('fieldErrors', fieldErrors);
 
   const errorMessage = error ?? (fieldErrors?.message as string | undefined);
+
+  console.log('errorMessage', errorMessage);
 
   // let errorMessage = error ?? (fieldErrors?.message as string | undefined);
 
@@ -58,6 +64,7 @@ export function FormGroup({
   // }
 
   const hasError = !!errorMessage;
+  console.log('hasError', hasError);
 
   return (
     <div className={cn('ikui-space-y-2', className)}>
