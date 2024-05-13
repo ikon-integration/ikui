@@ -17,8 +17,10 @@ export function Tooltip({
   position,
   arrow = false,
 }: ITooltipProps) {
+  const delayTime = delay || 400;
+
   return (
-    <TooltipPrimitive.Provider delayDuration={delay}>
+    <TooltipPrimitive.Provider delayDuration={delayTime}>
       <TooltipPrimitive.Root>
         <TooltipPrimitive.Trigger asChild={asChild}>
           {children}
