@@ -143,6 +143,7 @@ export function DataTable<TData, TValue>({
     enableRowSelection: !rowSelectionConfig?.disabled,
     onRowSelectionChange: setRowSelection,
   });
+  console.log('chegou table');
 
   return (
     <DataTableProvider table={table}>

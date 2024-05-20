@@ -51,7 +51,7 @@ export const columns: ColumnDef<Task>[] = [
       if (!status) {
         return null;
       }
-
+      console.log('chegou columns');
       return (
         <div className="ikui-flex ikui-w-[160px] ikui-items-center">
           {status.icon && (
