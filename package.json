@@ -1,6 +1,6 @@
 {
   "name": "@ikonintegration/ui",
-  "version": "1.0.73",
+  "version": "1.0.74-alpha",
   "type": "module",
   "license": "MIT",
   "publishConfig": {
@@ -62,7 +62,8 @@
     "react-resizable-panels": "^2.0.12",
     "sonner": "^1.4.3",
     "tailwind-merge": "^2.2.1",
-    "vaul": "^0.9.0"
+    "vaul": "^0.9.0",
+    "zod": "^3.23.8"
   },
   "peerDependencies": {
     "react": ">=18.0.0",
@@ -102,6 +103,8 @@
     "postcss": "^8.4.35",
     "prettier": "^3.2.5",
     "prettier-plugin-tailwindcss": "^0.5.11",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
     "storybook": "^7.6.17",
     "tailwindcss": "^3.4.1",
     "tailwindcss-animate": "^1.0.7",

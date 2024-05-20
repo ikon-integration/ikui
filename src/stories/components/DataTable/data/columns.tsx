@@ -53,9 +53,9 @@ export const columns: ColumnDef<Task>[] = [
       }
 
       return (
-        <div className="ikui-flex ikui-w-[100px] ikui-items-center">
+        <div className="ikui-flex ikui-w-[160px] ikui-items-center">
           {status.icon && (
-            <status.icon className="ikui-mr-2 ikui-h-4 ikui-w-4 ikui-text-muted-foreground" />
+            <status.icon className="ikui-ml-4 ikui-mr-2 ikui-h-4 ikui-w-4 ikui-text-muted-foreground" />
           )}
           <span>{status.label}</span>
         </div>
@@ -80,7 +80,7 @@ export const columns: ColumnDef<Task>[] = [
       return (
         <div className="ikui-flex ikui-items-center">
           {priority.icon && (
-            <priority.icon className="ikui-mr-2 ikui-h-4 ikui-w-4 ikui-text-muted-foreground" />
+            <priority.icon className="ikui-ml-4 ikui-mr-2 ikui-h-4 ikui-w-4 ikui-text-muted-foreground" />
           )}
           <span>{priority.label}</span>
         </div>
