@@ -77,7 +77,7 @@ const Head = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      'ikui-h-12 ikui-px-4 ikui-text-left ikui-align-middle ikui-font-medium ikui-text-muted-foreground [&:has([role=checkbox])]:ikui-pr-0',
+      'ikui-h-12 ikui-text-center ikui-align-middle ikui-font-medium ikui-text-muted-foreground [&:has([role=checkbox])]:ikui-pl-6 [&:has([role=checkbox])]:ikui-pr-2',
       className,
     )}
     {...props}
@@ -92,7 +92,7 @@ const Cell = React.forwardRef<
   <td
     ref={ref}
     className={cn(
-      'ikui-p-3 ikui-pl-6 ikui-align-middle [&:has([role=checkbox])]:ikui-pr-0',
+      'ikui-p-2 ikui-px-7 ikui-pl-6 ikui-align-middle [&:has([role=checkbox])]:ikui-pl-6 [&:has([role=checkbox])]:ikui-pr-2',
       className,
     )}
     {...props}
@@ -107,7 +107,7 @@ const Caption = React.forwardRef<
   <caption
     ref={ref}
     className={cn(
-      'ikui-mt-4 ikui-text-sm ikui-text-muted-foreground',
+      'ikui-mt-4 ikui-align-middle ikui-text-sm ikui-text-muted-foreground [&:has([role=checkbox])]:ikui-pr-2',
       className,
     )}
     {...props}
