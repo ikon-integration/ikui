@@ -59,7 +59,7 @@ export function DateRangePicker({
 
             {dates.from && format(dates.from, formatStr)}
             {(dates.to && ` - ${format(dates.to, formatStr)}`) ||
-              (dates.from && format(dates.from, formatStr))}
+              (dates.from && ` - ${format(dates.from, formatStr)}`)}
           </span>
 
           {dates && (
