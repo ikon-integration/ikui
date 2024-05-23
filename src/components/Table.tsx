@@ -77,7 +77,7 @@ const Head = React.forwardRef<
   <th
     ref={ref}
     className={cn(
-      'ikui-h-12 ikui-text-left ikui-align-middle ikui-font-medium ikui-text-muted-foreground [&:has([role=checkbox])]:ikui-pl-6 [&:has([role=checkbox])]:ikui-pr-2',
+      'ikui-h-12 ikui-text-center ikui-align-middle ikui-font-medium ikui-text-muted-foreground [&:has([role=checkbox])]:ikui-pl-6 [&:has([role=checkbox])]:ikui-pr-2',
       className,
     )}
     {...props}
