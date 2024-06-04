@@ -25,7 +25,7 @@ export const PhoneInput = forwardRef<
         a: '[A-Za-z]',
         '*': '[A-Za-z0-9 .]',
       }}
-      mask="+1 (999) 999-9999"
+      mask="+1 (999) 999-9999 ??????"
       maskChar=""
       alwaysShowMask={false}
       className={inputVariants({ className })}
