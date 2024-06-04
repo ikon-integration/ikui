@@ -1,6 +1,6 @@
 {
   "name": "@ikonintegration/ui",
-  "version": "1.0.80-alpha-2",
+  "version": "1.0.80",
   "type": "module",
   "license": "MIT",
   "publishConfig": {
