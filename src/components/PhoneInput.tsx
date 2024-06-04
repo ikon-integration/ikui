@@ -3,7 +3,7 @@ import InputMask, { Props } from 'react-input-mask';
 
 import { inputVariants } from './Input';
 
-const cleanValue = (value: string) => value.replace(/[^\d]/g, '');
+const cleanValue = (value: string) => value.replace(/_/g, '');
 
 export const PhoneInput = forwardRef<
   HTMLInputElement,
