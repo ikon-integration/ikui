@@ -42,6 +42,7 @@ interface IDataTableProps<TData, TValue> {
     canSelectAll?: boolean;
     onRowSelectionChange?: (selectedRows: TData[]) => void;
   };
+  initialRowSelection?: Record<string, boolean>;
 }
 
 export function DataTable<TData, TValue>({
@@ -52,6 +53,7 @@ export function DataTable<TData, TValue>({
   sorting: sortingConfig,
   pagination: paginationConfig,
   rowSelection: rowSelectionConfig,
+  initialRowSelection = {},
 }: IDataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>([]);
   const [pagination, setPagination] = useState<PaginationState>({
@@ -60,7 +62,7 @@ export function DataTable<TData, TValue>({
       : 0,
     pageSize: paginationConfig?.pageSize ?? 25,
   });
-  const [rowSelection, setRowSelection] = useState({});
+  const [rowSelection, setRowSelection] = useState(initialRowSelection);
   const [columnVisibility, setColumnVisibility] = useState<VisibilityState>({});
   const [columnFilters, setColumnFilters] = useState<ColumnFiltersState>([]);
 
