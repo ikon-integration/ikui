@@ -7,7 +7,6 @@ import {
 } from 'lucide-react';
 import { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
-import { toast } from 'sonner';
 
 import { cn } from '@/lib/utils';
 
@@ -31,7 +30,6 @@ export function Upload({
 
   const handleUpload = async (file: File) => {
     setUploadedFiles([...uploadedFiles, file]);
-    toast.success('File uploaded with success!');
     if (onUpload) {
       onUpload(file);
     }
