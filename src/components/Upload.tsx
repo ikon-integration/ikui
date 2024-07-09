@@ -19,6 +19,7 @@ interface IUploadProps {
   onDownload: (file: File) => void;
   onDelete: (file: File) => void;
   uploadText?: string;
+  icon?: React.ReactNode;
 }
 
 export function Upload({
@@ -27,6 +28,7 @@ export function Upload({
   onDownload,
   onDelete,
   uploadText,
+  icon,
 }: IUploadProps) {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
 
@@ -81,11 +83,11 @@ export function Upload({
         )}
       >
         <Input {...getInputProps()} />
-        <FolderUpIcon className="ml-2 h-6 w-4" />
-        <h1 className="flex h-20 items-center text-gray-700">
+        {icon || <FolderUpIcon className="mb-2 h-12 w-12" />}
+        <p className="text-2xl font-semibold">
           Click or drag file to this area to upload
-        </h1>
-        <p>
+        </p>
+        <p className="text-slate-300">
           {uploadText ||
             'Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files.'}
         </p>
