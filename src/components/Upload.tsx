@@ -13,12 +13,19 @@ import { cn } from '@/lib/utils';
 import { Button } from './Button';
 import { Input } from './Input';
 
+type TFilePartial = Partial<File>;
+
+type TFile = {
+  name?: string;
+  id?: string;
+} & TFilePartial;
+
 interface IUploadProps {
-  onUpload: (file: File) => void;
-  onPreview: (file: File) => void;
-  onDownload: (file: File) => void;
-  onDelete: (file: File) => void;
-  files?: File[];
+  onUpload: (file: TFile) => void;
+  onPreview: (file: TFile) => void;
+  onDownload: (file: TFile) => void;
+  onDelete: (file: TFile) => void;
+  files?: TFile[];
   uploadTitle?: string;
   uploadText?: string;
   icon?: React.ReactNode;
@@ -36,28 +43,28 @@ export function Upload({
   icon,
   maxFiles = 10,
 }: IUploadProps) {
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>(files || []);
+  const [uploadedFiles, setUploadedFiles] = useState<TFile[]>(files || []);
 
-  const handleUpload = async (file: File) => {
+  const handleUpload = async (file: TFile) => {
     setUploadedFiles([...uploadedFiles, file]);
     if (onUpload) {
       onUpload(file);
     }
   };
 
-  const handlePreview = async (file: File) => {
+  const handlePreview = async (file: TFile) => {
     if (onPreview) {
       onPreview(file);
     }
   };
 
-  const handleDownload = async (file: File) => {
+  const handleDownload = async (file: TFile) => {
     if (onDownload) {
       onDownload(file);
     }
   };
 
-  const handleDelete = async (file: File) => {
+  const handleDelete = async (file: TFile) => {
     setUploadedFiles(prevFiles =>
       prevFiles.filter(uploadedFile => uploadedFile !== file),
     );
@@ -68,8 +75,8 @@ export function Upload({
   };
 
   const { getRootProps, getInputProps } = useDropzone({
-    onDrop: (acceptedFiles: File[]) => {
-      const newFiles = acceptedFiles.map((file: File) => {
+    onDrop: (acceptedFiles: TFile[]) => {
+      const newFiles = acceptedFiles.map((file: TFile) => {
         handleUpload(file);
         return file;
       });
