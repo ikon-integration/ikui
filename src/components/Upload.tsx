@@ -18,6 +18,7 @@ interface IUploadProps {
   onPreview: (file: File) => void;
   onDownload: (file: File) => void;
   onDelete: (file: File) => void;
+  files?: File[];
   uploadTitle?: string;
   uploadText?: string;
   icon?: React.ReactNode;
@@ -29,12 +30,13 @@ export function Upload({
   onPreview,
   onDownload,
   onDelete,
+  files,
   uploadTitle,
   uploadText,
   icon,
   maxFiles = 10,
 }: IUploadProps) {
-  const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
+  const [uploadedFiles, setUploadedFiles] = useState<File[]>(files || []);
 
   const handleUpload = async (file: File) => {
     setUploadedFiles([...uploadedFiles, file]);
