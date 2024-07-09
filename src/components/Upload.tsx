@@ -20,6 +20,7 @@ interface IUploadProps {
   onDelete: (file: File) => void;
   uploadText?: string;
   icon?: React.ReactNode;
+  maxFiles?: number;
 }
 
 export function Upload({
@@ -29,6 +30,7 @@ export function Upload({
   onDelete,
   uploadText,
   icon,
+  maxFiles = 10,
 }: IUploadProps) {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
 
@@ -69,30 +71,32 @@ export function Upload({
       });
       setUploadedFiles([...uploadedFiles, ...newFiles]);
     },
-    maxFiles: 10,
+    maxFiles,
   });
 
   return (
     <div className="flex flex-col">
-      <div
-        {...getRootProps()}
-        className={cn(
-          'mb-4 flex flex-col items-center justify-center rounded-lg border border-dashed border-gray-300 p-4',
-          'hover:bg-gray-100',
-          'w-60',
-        )}
-      >
-        <Input {...getInputProps()} />
-        {icon || <FolderUpIcon className="mb-2 h-12 w-12" />}
-        <p className="mb-4 mt-4 text-2xl font-semibold text-center">
-          Click or drag file to this area to upload
-        </p>
-        <p className="text-slate-300 text-center">
-          {uploadText && uploadText}
-          {!uploadText &&
-            'Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files.'}
-        </p>
-      </div>
+      {uploadedFiles.length < maxFiles && (
+        <div
+          {...getRootProps()}
+          className={cn(
+            'mb-4 flex flex-col items-center justify-center rounded-lg border border-dashed border-gray-300 p-4',
+            'hover:bg-gray-100',
+            'w-60',
+          )}
+        >
+          <Input {...getInputProps()} />
+          {icon || <FolderUpIcon className="mb-2 h-12 w-12" />}
+          <p className="mb-4 mt-4 text-xl font-semibold text-center">
+            Click or drag file to this area to upload
+          </p>
+          <p className="text-slate-300 text-center">
+            {uploadText && uploadText}
+            {!uploadText &&
+              'Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files.'}
+          </p>
+        </div>
+      )}
       <div className="flex w-full flex-wrap space-x-2">
         {uploadedFiles.map(file => (
           <div
