@@ -13,6 +13,10 @@ import { cn } from '@/lib/utils';
 import { Button } from './Button';
 import { Input } from './Input';
 
+type TFileExt = {
+  id?: string;
+} & File;
+
 type TFilePartial = Partial<File>;
 
 type TFile = {
@@ -21,11 +25,11 @@ type TFile = {
 } & TFilePartial;
 
 interface IUploadProps {
-  onUpload: (file: TFile) => void;
-  onPreview: (file: TFile) => void;
-  onDownload: (file: TFile) => void;
-  onDelete: (file: TFile) => void;
-  files?: TFile[];
+  onUpload: (file: TFile | TFileExt) => void;
+  onPreview: (file: TFile | TFileExt) => void;
+  onDownload: (file: TFile | TFileExt) => void;
+  onDelete: (file: TFile | TFileExt) => void;
+  files?: (TFile | TFileExt)[];
   uploadTitle?: string;
   uploadText?: string;
   icon?: React.ReactNode;
@@ -43,28 +47,30 @@ export function Upload({
   icon,
   maxFiles = 10,
 }: IUploadProps) {
-  const [uploadedFiles, setUploadedFiles] = useState<TFile[]>(files || []);
+  const [uploadedFiles, setUploadedFiles] = useState<(TFile | TFileExt)[]>(
+    files || [],
+  );
 
-  const handleUpload = async (file: TFile) => {
+  const handleUpload = async (file: TFile | TFileExt) => {
     setUploadedFiles([...uploadedFiles, file]);
     if (onUpload) {
       onUpload(file);
     }
   };
 
-  const handlePreview = async (file: TFile) => {
+  const handlePreview = async (file: TFile | TFileExt) => {
     if (onPreview) {
       onPreview(file);
     }
   };
 
-  const handleDownload = async (file: TFile) => {
+  const handleDownload = async (file: TFile | TFileExt) => {
     if (onDownload) {
       onDownload(file);
     }
   };
 
-  const handleDelete = async (file: TFile) => {
+  const handleDelete = async (file: TFile | TFileExt) => {
     setUploadedFiles(prevFiles =>
       prevFiles.filter(uploadedFile => uploadedFile !== file),
     );
@@ -75,8 +81,8 @@ export function Upload({
   };
 
   const { getRootProps, getInputProps } = useDropzone({
-    onDrop: (acceptedFiles: TFile[]) => {
-      const newFiles = acceptedFiles.map((file: TFile) => {
+    onDrop: (acceptedFiles: (TFile | TFileExt)[]) => {
+      const newFiles = acceptedFiles.map((file: TFile | TFileExt) => {
         handleUpload(file);
         return file;
       });
@@ -112,7 +118,7 @@ export function Upload({
       <div className="flex w-full flex-wrap space-x-2">
         {uploadedFiles.map(file => (
           <div
-            key={file.name}
+            key={file.name || file?.id}
             className="mb-4 flex flex-col items-center justify-center rounded-lg border border-gray-300 p-4"
           >
             <DocumentIcon className="mx-auto h-10 w-10" />
