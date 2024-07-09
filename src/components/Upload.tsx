@@ -18,6 +18,7 @@ interface IUploadProps {
   onPreview: (file: File) => void;
   onDownload: (file: File) => void;
   onDelete: (file: File) => void;
+  uploadText?: string;
 }
 
 export function Upload({
@@ -25,6 +26,7 @@ export function Upload({
   onPreview,
   onDownload,
   onDelete,
+  uploadText,
 }: IUploadProps) {
   const [uploadedFiles, setUploadedFiles] = useState<File[]>([]);
 
@@ -79,10 +81,14 @@ export function Upload({
         )}
       >
         <Input {...getInputProps()} />
-        <span className="flex h-20 items-center text-gray-700">
-          New Document
-          <FolderUpIcon className="ml-2 h-6 w-4" />
-        </span>
+        <FolderUpIcon className="ml-2 h-6 w-4" />
+        <h1 className="flex h-20 items-center text-gray-700">
+          Click or drag file to this area to upload
+        </h1>
+        <p>
+          {uploadText ||
+            'Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files.'}
+        </p>
       </div>
       <div className="flex w-full flex-wrap space-x-2">
         {uploadedFiles.map(file => (
