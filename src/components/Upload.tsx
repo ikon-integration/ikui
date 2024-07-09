@@ -20,7 +20,8 @@ type TFileExt = {
 type TFilePartial = Partial<File>;
 
 type TFile = {
-  name?: string;
+  name: string;
+  type: string;
   id?: string;
 } & TFilePartial;
 
