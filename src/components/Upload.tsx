@@ -84,7 +84,7 @@ export function Upload({
       >
         <Input {...getInputProps()} />
         {icon || <FolderUpIcon className="mb-2 h-12 w-12" />}
-        <p className="text-2xl font-semibold">
+        <p className="mb-4 mt-4 text-2xl font-semibold">
           Click or drag file to this area to upload
         </p>
         <p className="text-slate-300">
