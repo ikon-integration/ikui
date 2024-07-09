@@ -96,7 +96,7 @@ export function Upload({
           <p className="text-slate-300 text-center">
             {uploadText}
             {!uploadText &&
-              'Support for a single or bulk upload. Strictly prohibit from uploading company data or other band files.'}
+              `Support for a single or bulk upload with a max of ${maxFiles} files.`}
           </p>
         </div>
       )}
