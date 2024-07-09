@@ -8,7 +8,7 @@ import {
 import { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 
-import { cn } from '@/lib/utils';
+import { cn, truncateString } from '@/lib/utils';
 
 import { Button } from './Button';
 import { Input } from './Input';
@@ -124,7 +124,7 @@ export function Upload({
           >
             <DocumentIcon className="mx-auto h-10 w-10" />
             <span className="break-all text-center text-sm text-gray-700">
-              {file.name}
+              {truncateString(file.name || file?.id || '', 32)}
             </span>
             <div className="mt-2 flex items-center justify-center">
               <Button variant="link" onClick={() => handlePreview(file)}>
