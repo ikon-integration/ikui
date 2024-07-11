@@ -35,6 +35,9 @@ interface IUploadProps {
   uploadText?: string;
   icon?: React.ReactNode;
   maxFiles?: number;
+  showDownload?: boolean;
+  showPreview?: boolean;
+  showDelete?: boolean;
 }
 
 export function Upload({
@@ -47,6 +50,9 @@ export function Upload({
   uploadText,
   icon,
   maxFiles = 10,
+  showDownload = true,
+  showPreview = true,
+  showDelete = true,
 }: IUploadProps) {
   const [uploadedFiles, setUploadedFiles] = useState<(TFile | TFileExt)[]>(
     files || [],
@@ -127,15 +133,21 @@ export function Upload({
               {truncateString(file.name || file?.id || '', 32)}
             </span>
             <div className="mt-2 flex items-center justify-center">
-              <Button variant="link" onClick={() => handlePreview(file)}>
-                <EyeIcon className="h-6 w-4" />
-              </Button>
-              <Button variant="link" onClick={() => handleDownload(file)}>
-                <ArrowDownToLine className="h-6 w-4" />
-              </Button>
-              <Button variant="link" onClick={() => handleDelete(file)}>
-                <Trash2Icon className="h-6 w-4" />
-              </Button>
+              {showPreview && (
+                <Button variant="link" onClick={() => handlePreview(file)}>
+                  <EyeIcon className="h-6 w-4" />
+                </Button>
+              )}
+              {showDownload && (
+                <Button variant="link" onClick={() => handleDownload(file)}>
+                  <ArrowDownToLine className="h-6 w-4" />
+                </Button>
+              )}
+              {showDelete && (
+                <Button variant="link" onClick={() => handleDelete(file)}>
+                  <Trash2Icon className="h-6 w-4" />
+                </Button>
+              )}
             </div>
           </div>
         ))}
