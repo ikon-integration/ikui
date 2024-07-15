@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta } from '@storybook/react';
 
 import { InputCurrency } from '@/components/InputCurrency';
 
@@ -13,6 +13,14 @@ const meta = {
 
 export default meta;
 
-type Story = StoryObj<typeof meta>;
+function Template() {
+  return <InputCurrency />;
+}
 
-export const Default: Story = {};
+function Percentage() {
+  return <InputCurrency prefix="" suffix="%" />;
+}
+
+export const Default = Template;
+
+export const Percent = Percentage;

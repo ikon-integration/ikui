@@ -1,29 +1,34 @@
 import { forwardRef } from 'react';
-import { NumericFormat, NumericFormatProps } from 'react-number-format';
+import CurrencyInput, { CurrencyInputProps } from 'react-currency-input-field';
 
 import { cn } from '@/lib/utils';
 
 import { inputVariants } from '..';
 
-export const InputCurrency = forwardRef<any, NumericFormatProps>(
+export const InputCurrency = forwardRef<any, CurrencyInputProps>(
   (
     {
       className,
-      thousandSeparator = ',',
+      groupSeparator = ',',
       decimalSeparator = '.',
-      decimalScale = 2,
+      decimalsLimit = 2,
+      prefix = '$',
+      suffix,
       ...props
     },
     ref,
   ) => (
-    <NumericFormat
+    <CurrencyInput
       {...props}
-      getInputRef={ref}
-      thousandSeparator={thousandSeparator}
+      ref={ref}
+      groupSeparator={groupSeparator}
       decimalSeparator={decimalSeparator}
-      decimalScale={decimalScale}
+      decimalsLimit={decimalsLimit}
+      prefix={prefix}
+      suffix={suffix}
       className={cn(inputVariants({ className }))}
     />
   ),
 );
+
 InputCurrency.displayName = 'InputCurrency';
