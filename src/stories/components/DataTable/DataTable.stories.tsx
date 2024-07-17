@@ -38,6 +38,7 @@ function Template() {
         columns={columns}
         sorting={{
           manual: false,
+          initialSortBy: [{ id: 'title', desc: true }],
           onSortingChange: sortingState => console.log({ sortingState }),
         }}
         pagination={{
