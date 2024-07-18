@@ -28,6 +28,7 @@ interface IDataTableProps<TData, TValue> {
   sorting?: {
     manual: boolean;
     onSortingChange?: (sortingState: SortingState) => void;
+    initialSortBy?: { id: string; desc: boolean }[];
   };
   pagination?: {
     manual: boolean;
@@ -55,7 +56,9 @@ export function DataTable<TData, TValue>({
   rowSelection: rowSelectionConfig,
   initialRowSelection = {},
 }: IDataTableProps<TData, TValue>) {
-  const [sorting, setSorting] = useState<SortingState>([]);
+  const [sorting, setSorting] = useState<SortingState>(
+    sortingConfig?.initialSortBy || [],
+  );
   const [pagination, setPagination] = useState<PaginationState>({
     pageIndex: paginationConfig?.initialPage
       ? paginationConfig.initialPage - 1
