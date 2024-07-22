@@ -36,6 +36,7 @@ function Template() {
         data={filteredTasks}
         emptyState={<div>No tasks to display here!</div>}
         columns={columns}
+        defaultColumnSize={150}
         sorting={{
           manual: false,
           initialSortBy: [{ id: 'title', desc: true }],
