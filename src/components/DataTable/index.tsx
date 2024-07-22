@@ -47,6 +47,14 @@ interface IDataTableProps<TData, TValue> {
   defaultColumnSize?: number;
   maxColumnSize?: number;
   minColumnSize?: number;
+  footer?: {
+    id: string;
+    cells: {
+      id: string;
+      colSpan?: number;
+      content: React.ReactNode;
+    }[];
+  }[];
 }
 
 export function DataTable<TData, TValue>({
@@ -61,6 +69,7 @@ export function DataTable<TData, TValue>({
   defaultColumnSize,
   maxColumnSize,
   minColumnSize,
+  footer,
 }: IDataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>(
     sortingConfig?.initialSortBy || [],
@@ -211,6 +220,19 @@ export function DataTable<TData, TValue>({
                 </Table.Row>
               )}
             </Table.Body>
+            {footer && footer.length > 0 && (
+              <Table.Footer>
+                {footer.map(row => (
+                  <Table.Row key={row.id}>
+                    {row.cells.map(cell => (
+                      <Table.Cell key={cell.id} colSpan={cell.colSpan}>
+                        {cell.content}
+                      </Table.Cell>
+                    ))}
+                  </Table.Row>
+                ))}
+              </Table.Footer>
+            )}
           </Table.Root>
         </div>
 

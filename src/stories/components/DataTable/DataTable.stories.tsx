@@ -55,6 +55,28 @@ function Template() {
           canSelectAll: true,
           onRowSelectionChange: selectedRows => console.log({ selectedRows }),
         }}
+        footer={[
+          {
+            id: 'total',
+            cells: [
+              {
+                id: 'label',
+                colSpan: 1,
+                content: <strong>Total:</strong>,
+              },
+              {
+                id: 'priority',
+                colSpan: 1,
+
+                content: <span className="block text-right">2</span>,
+              },
+              {
+                id: 'priority',
+                content: <span className="block text-right">55</span>,
+              },
+            ],
+          },
+        ]}
         toolbar={{
           hideableColumns: true,
           textSearch: {
