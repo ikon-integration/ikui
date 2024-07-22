@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils';
 
 import { SelectPrimitive } from './SelectPrimitive';
 
-interface ISelectProps
+export interface ISelectProps
   extends React.ComponentPropsWithoutRef<typeof SelectPrimitive.Root> {
   placeholder?: string;
   options?: {

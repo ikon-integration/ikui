@@ -29,6 +29,7 @@ export * from '@/components/Popover';
 export * from '@/components/RadioGroup';
 export * from '@/components/Resizable';
 export * from '@/components/Select';
+export * from '@/components/SelectWithSearch';
 export * from '@/components/SelectPrimitive';
 export * from '@/components/Separator';
 export * from '@/components/Sheet';

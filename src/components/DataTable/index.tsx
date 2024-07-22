@@ -44,6 +44,9 @@ interface IDataTableProps<TData, TValue> {
     onRowSelectionChange?: (selectedRows: TData[]) => void;
   };
   initialRowSelection?: Record<string, boolean>;
+  defaultColumnSize?: number;
+  maxColumnSize?: number;
+  minColumnSize?: number;
 }
 
 export function DataTable<TData, TValue>({
@@ -55,6 +58,9 @@ export function DataTable<TData, TValue>({
   pagination: paginationConfig,
   rowSelection: rowSelectionConfig,
   initialRowSelection = {},
+  defaultColumnSize,
+  maxColumnSize,
+  minColumnSize,
 }: IDataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>(
     sortingConfig?.initialSortBy || [],
@@ -131,6 +137,11 @@ export function DataTable<TData, TValue>({
       rowSelection,
       columnFilters,
       ...(paginationConfig && { pagination }),
+    },
+    defaultColumn: {
+      size: defaultColumnSize || 200,
+      minSize: minColumnSize || 50,
+      maxSize: maxColumnSize || 500,
     },
     getCoreRowModel: getCoreRowModel(),
     getFilteredRowModel: toolbar && getFilteredRowModel(),
