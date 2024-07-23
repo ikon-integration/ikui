@@ -12,6 +12,8 @@ export interface ISelectProps
   }[];
   className?: string;
   id?: string;
+  ariaLabel?: string;
+  onSelect?: (value: string) => void;
 }
 
 export function Select({

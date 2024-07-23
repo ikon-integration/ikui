@@ -34,6 +34,7 @@ export * from '@/components/SelectPrimitive';
 export * from '@/components/Separator';
 export * from '@/components/Sheet';
 export * from '@/components/Sidebar';
+export * from '@/components/SingleSelect';
 export * from '@/components/Skeleton';
 export * from '@/components/Switch';
 export * from '@/components/Table';
