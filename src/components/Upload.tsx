@@ -38,6 +38,7 @@ interface IUploadProps {
   showDownload?: boolean;
   showPreview?: boolean;
   showDelete?: boolean;
+  disabledActions?: boolean;
 }
 
 export function Upload({
@@ -53,6 +54,7 @@ export function Upload({
   showDownload = true,
   showPreview = true,
   showDelete = true,
+  disabledActions = false,
 }: IUploadProps) {
   const [uploadedFiles, setUploadedFiles] = useState<(TFile | TFileExt)[]>(
     files || [],
@@ -134,17 +136,29 @@ export function Upload({
             </span>
             <div className="mt-2 flex items-center justify-center">
               {showPreview && (
-                <Button variant="link" onClick={() => handlePreview(file)}>
+                <Button
+                  disabled={disabledActions}
+                  variant="link"
+                  onClick={() => handlePreview(file)}
+                >
                   <EyeIcon className="h-6 w-4" />
                 </Button>
               )}
               {showDownload && (
-                <Button variant="link" onClick={() => handleDownload(file)}>
+                <Button
+                  disabled={disabledActions}
+                  variant="link"
+                  onClick={() => handleDownload(file)}
+                >
                   <ArrowDownToLine className="h-6 w-4" />
                 </Button>
               )}
               {showDelete && (
-                <Button variant="link" onClick={() => handleDelete(file)}>
+                <Button
+                  disabled={disabledActions}
+                  variant="link"
+                  onClick={() => handleDelete(file)}
+                >
                   <Trash2Icon className="h-6 w-4" />
                 </Button>
               )}
