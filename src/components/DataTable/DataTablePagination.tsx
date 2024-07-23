@@ -12,19 +12,23 @@ import { useDataTable } from './DataTableContext';
 
 interface IDataTablePaginationProps {
   rowsPerPage?: number[];
+  showSelectedCount?: boolean;
 }
 
 export function DataTablePagination({
   rowsPerPage,
+  showSelectedCount = true,
 }: IDataTablePaginationProps) {
   const table = useDataTable();
 
   return (
     <div className="ikui-flex ikui-items-center ikui-justify-between ikui-px-2">
-      <div className="ikui-flex-1 ikui-text-sm ikui-text-muted-foreground">
-        {table.getFilteredSelectedRowModel().rows.length} of{' '}
-        {table.getFilteredRowModel().rows.length} row(s) selected.
-      </div>
+      {showSelectedCount && (
+        <div className="ikui-flex-1 ikui-text-sm ikui-text-muted-foreground">
+          {table.getFilteredSelectedRowModel().rows.length} of{' '}
+          {table.getFilteredRowModel().rows.length} row(s) selected.
+        </div>
+      )}
       <div className="ikui-flex ikui-items-center ikui-space-x-6 lg:ikui-space-x-8">
         {rowsPerPage && rowsPerPage.length > 0 && (
           <div className="ikui-flex ikui-items-center ikui-space-x-2">

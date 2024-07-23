@@ -35,6 +35,7 @@ interface IDataTableProps<TData, TValue> {
     initialPage?: number;
     pageSize?: number;
     rowsPerPageOptions?: number[];
+    showSelectedCount?: boolean;
     onPageChange?: (page: number) => void;
     onPageSizeChange?: (pageSize: number) => void;
   };
@@ -239,6 +240,7 @@ export function DataTable<TData, TValue>({
         {paginationConfig && (
           <DataTablePagination
             rowsPerPage={paginationConfig?.rowsPerPageOptions}
+            showSelectedCount={paginationConfig?.showSelectedCount}
           />
         )}
       </div>

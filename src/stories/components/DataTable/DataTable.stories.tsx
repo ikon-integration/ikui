@@ -47,6 +47,7 @@ function Template() {
           initialPage: 1,
           pageSize: 10,
           rowsPerPageOptions: [10, 20, 30, 40, 50],
+          showSelectedCount: true,
           onPageChange: page => console.log({ page }),
           onPageSizeChange: pageSize => console.log({ pageSize }),
         }}
