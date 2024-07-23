@@ -23,6 +23,7 @@ function Template() {
         creatable={false}
         value={value}
         onChange={setValue}
+        placeholder="Select a technology"
         options={[
           { value: 'react', label: 'React' },
           { value: 'node', label: 'Node.js' },

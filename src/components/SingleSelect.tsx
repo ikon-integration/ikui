@@ -1,5 +1,5 @@
 import { Command as CommandPrimitive } from 'cmdk';
-import { XIcon } from 'lucide-react';
+import { XIcon, SearchIcon } from 'lucide-react';
 import { useMemo, useRef, useState } from 'react';
 
 import { cn } from '@/lib/utils';
@@ -35,6 +35,7 @@ export function SingleSelect({
 }: ISingleSelectProps) {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState('');
+  const [isDropdownVisible, setIsDropdownVisible] = useState(false);
   const inputRef = useRef<HTMLInputElement>(null);
 
   const unselectedOptions = useMemo(
@@ -42,7 +43,7 @@ export function SingleSelect({
     [options, value],
   );
 
-  const isDropdownVisible =
+  const shouldShowDropdown =
     isInputFocused &&
     !disabled &&
     (unselectedOptions.length > 0 || (creatable && inputValue.length > 0));
@@ -68,6 +69,7 @@ export function SingleSelect({
   function handleSelectOption(selectedOption: string) {
     setInputValue('');
     onChange?.(selectedOption);
+    setIsDropdownVisible(false);
   }
 
   function handleCreateOption(creatingOption: string) {
@@ -78,6 +80,8 @@ export function SingleSelect({
     if (trimmedValue !== value) {
       onChange?.(trimmedValue);
     }
+
+    setIsDropdownVisible(false);
   }
 
   function handleUnselectOption(event: React.MouseEvent) {
@@ -112,11 +116,18 @@ export function SingleSelect({
           disabled && 'ikui-pointer-events-none ikui-opacity-50',
           className,
         )}
-        onClick={() => inputRef.current?.focus()}
+        onClick={() => {
+          setIsDropdownVisible(true);
+          inputRef.current?.focus();
+        }}
       >
         {value && (
-          <Badge key={value} variant="secondary" className="ikui-gap-1.5">
-            <span>
+          <Badge
+            key={value}
+            variant="secondary"
+            className="max-w-full ikui-gap-1.5 ikui-truncate"
+          >
+            <span className="ikui-max-w-full ikui-truncate">
               {options.find(opt => opt.value === value)?.label ?? value}
             </span>
 
@@ -131,21 +142,29 @@ export function SingleSelect({
           </Badge>
         )}
 
-        <CommandPrimitive.Input
-          ref={inputRef}
-          disabled={disabled}
-          className="ikui-flex-1 ikui-bg-transparent ikui-outline-none ikui-ring-0 placeholder:ikui-text-muted-foreground disabled:ikui-pointer-events-none"
-          placeholder={placeholder}
-          value={inputValue}
-          onValueChange={setInputValue}
-          onFocus={() => setIsInputFocused(true)}
-          onBlur={handleInputBlur}
-        />
+        <div className="ikui-flex ikui-flex-1 ikui-items-center">
+          {inputValue === '' && !value && (
+            <SearchIcon className="ikui-mr-2 ikui-size-4 ikui-text-muted-foreground" />
+          )}
+          <CommandPrimitive.Input
+            ref={inputRef}
+            disabled={disabled}
+            className="ikui-flex-1 ikui-bg-transparent ikui-outline-none ikui-ring-0 placeholder:ikui-text-muted-foreground disabled:ikui-pointer-events-none"
+            placeholder={inputValue === '' && !value ? placeholder : ''}
+            value={inputValue}
+            onValueChange={setInputValue}
+            onFocus={() => setIsInputFocused(true)}
+            onBlur={handleInputBlur}
+          />
+        </div>
       </div>
 
-      {isDropdownVisible && (
+      {shouldShowDropdown && isDropdownVisible && (
         <div className="ikui-relative">
-          <CommandPrimitive.List className="ikui-absolute ikui-z-50 ikui-mt-2 ikui-w-full ikui-overflow-y-auto ikui-overflow-x-hidden ikui-rounded-md ikui-border ikui-bg-popover ikui-p-1 ikui-text-popover-foreground ikui-shadow-md ikui-animate-in ikui-fade-in-0 ikui-zoom-in-95 ikui-slide-in-from-top-2">
+          <CommandPrimitive.List
+            className="ikui-absolute ikui-z-50 ikui-mt-2 ikui-w-full ikui-overflow-y-auto ikui-overflow-x-hidden ikui-rounded-md ikui-border ikui-bg-popover ikui-p-1 ikui-text-popover-foreground ikui-shadow-md ikui-animate-in ikui-fade-in-0 ikui-zoom-in-95 ikui-slide-in-from-top-2"
+            style={{ maxHeight: '200px' }}
+          >
             <CommandPrimitive.Empty className="ikui-w-full ikui-cursor-default ikui-select-none ikui-py-1.5 ikui-text-center ikui-text-sm ikui-outline-none">
               No results found.
             </CommandPrimitive.Empty>
