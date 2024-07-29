@@ -61,9 +61,11 @@ export function Upload({
   );
 
   const handleUpload = async (file: TFile | TFileExt) => {
-    setUploadedFiles([...uploadedFiles, file]);
-    if (onUpload) {
-      onUpload(file);
+    if (!disabledActions) {
+      setUploadedFiles([...uploadedFiles, file]);
+      if (onUpload) {
+        onUpload(file);
+      }
     }
   };
 
