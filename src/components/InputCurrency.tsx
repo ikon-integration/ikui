@@ -32,7 +32,11 @@ export const InputCurrency = forwardRef<any, CurrencyInputProps>(
         decimalsLimit={decimalsLimit}
         prefix=""
         suffix=""
-        className={cn(inputVariants({ className }))}
+        className={cn(
+          inputVariants({ className }),
+          prefix && prefix !== '' && 'rounded-l-none',
+          suffix && suffix !== '' && 'rounded-r-none',
+        )}
       />
       {suffix && suffix !== '' && (
         <div
