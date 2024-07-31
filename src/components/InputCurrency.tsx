@@ -20,7 +20,7 @@ export const InputCurrency = forwardRef<any, CurrencyInputProps>(
   ) => (
     <div className="flex items-center space-x-1">
       {prefix && prefix !== '' && (
-        <div className="text-gray-700 p-2 mr-1 rounded-md bg-gray-200">
+        <div className="text-gray-700 p-2 mr-1 rounded-l-md bg-gray-200">
           {prefix}
         </div>
       )}
@@ -36,7 +36,7 @@ export const InputCurrency = forwardRef<any, CurrencyInputProps>(
       />
       {suffix && suffix !== '' && (
         <div
-          className={`text-gray-700 ${suffix ? 'block' : 'hidden'} ml-1 p-2 rounded-md bg-gray-200`}
+          className={`text-gray-700 ${suffix ? 'block' : 'hidden'} ml-1 p-2 rounded-r-md bg-gray-200`}
         >
           {suffix}
         </div>
