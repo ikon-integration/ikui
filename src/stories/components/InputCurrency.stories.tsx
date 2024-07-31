@@ -21,6 +21,12 @@ function Percentage() {
   return <InputCurrency prefix="" suffix="%" />;
 }
 
+function Full() {
+  return <InputCurrency prefix="$" suffix="%" />;
+}
+
 export const Default = Template;
 
 export const Percent = Percentage;
+
+export const FullTest = Full;
