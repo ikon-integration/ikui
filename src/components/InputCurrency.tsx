@@ -18,12 +18,12 @@ export const InputCurrency = forwardRef<any, CurrencyInputProps>(
     },
     ref,
   ) => (
-    <div className="flex items-center space-x-1 bg-gray-100 p-1 rounded-md border border-gray-300">
-      <div
-        className={`text-gray-700 ${prefix ? 'block' : 'hidden'} p-2 rounded-md bg-gray-200`}
-      >
-        {prefix}
-      </div>
+    <div className="flex items-center space-x-1">
+      {prefix && prefix !== '' && (
+        <div className="text-gray-700 p-2 mr-1 rounded-md bg-gray-200">
+          {prefix}
+        </div>
+      )}
       <CurrencyInput
         {...props}
         ref={ref}
@@ -34,11 +34,13 @@ export const InputCurrency = forwardRef<any, CurrencyInputProps>(
         suffix=""
         className={cn(inputVariants({ className }))}
       />
-      <div
-        className={`text-gray-700 ${suffix ? 'block' : 'hidden'} p-2 rounded-md bg-gray-200`}
-      >
-        {suffix}
-      </div>
+      {suffix && suffix !== '' && (
+        <div
+          className={`text-gray-700 ${suffix ? 'block' : 'hidden'} ml-1 p-2 rounded-md bg-gray-200`}
+        >
+          {suffix}
+        </div>
+      )}
     </div>
   ),
 );
