@@ -30,8 +30,6 @@ export const InputCurrency = forwardRef<any, CurrencyInputProps>(
         groupSeparator={groupSeparator}
         decimalSeparator={decimalSeparator}
         decimalsLimit={decimalsLimit}
-        prefix=""
-        suffix=""
         className={cn(
           inputVariants({ className }),
           prefix && prefix !== '' && 'rounded-l-none',
