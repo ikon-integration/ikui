@@ -18,7 +18,7 @@ export const InputCurrency = forwardRef<any, CurrencyInputProps>(
     },
     ref,
   ) => (
-    <div className="flex items-center space-x-1">
+    <div className={cn(inputVariants({ className }))}>
       {prefix && prefix !== '' && (
         <div className="text-gray-700 p-2 mr-1 rounded-l-md bg-gray-200">
           {prefix}
