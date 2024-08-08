@@ -115,7 +115,7 @@ export function Upload({
             'w-60',
           )}
         >
-          <Input {...getInputProps()} />
+          <Input {...getInputProps()} disabled={disabledActions} />
           {icon || <FolderUpIcon className="mb-2 h-12 w-12" />}
           <p className="mb-4 mt-4 text-xl font-semibold text-center">
             {uploadTitle}
