@@ -5,20 +5,22 @@ import { cn } from '@/lib/utils';
 
 const { Trigger, Portal, Close } = DrawerPrimitive;
 
-function Root({
-  shouldScaleBackground = true,
-  ...props
-}: React.ComponentProps<typeof DrawerPrimitive.Root> & {
+type DrawerRootProps = React.ComponentProps<typeof DrawerPrimitive.Root> & {
   shouldScaleBackground?: boolean;
-}) {
-  return (
-    <DrawerPrimitive.Root
-      shouldScaleBackground={shouldScaleBackground}
-      {...props}
-    />
-  );
-}
-Root.displayName = 'Drawer';
+  direction?: 'bottom' | 'right';
+};
+
+const Root = React.forwardRef<
+  React.ElementRef<typeof DrawerPrimitive.Root>,
+  DrawerRootProps
+>(({ shouldScaleBackground = true, direction = 'bottom', ...props }) => (
+  <DrawerPrimitive.Root
+    shouldScaleBackground={shouldScaleBackground}
+    {...props}
+    data-direction={direction}
+  />
+));
+Root.displayName = 'DrawerRoot';
 
 const Overlay = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Overlay>,
@@ -37,19 +39,26 @@ Overlay.displayName = DrawerPrimitive.Overlay.displayName;
 
 const Content = React.forwardRef<
   React.ElementRef<typeof DrawerPrimitive.Content>,
-  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content>
->(({ className, children, ...props }, ref) => (
+  React.ComponentPropsWithoutRef<typeof DrawerPrimitive.Content> & {
+    direction?: 'bottom' | 'right';
+  }
+>(({ className, children, direction = 'bottom', ...props }, ref) => (
   <Portal>
     <Overlay />
     <DrawerPrimitive.Content
       ref={ref}
       className={cn(
-        'ikui-fixed ikui-inset-x-0 ikui-bottom-0 ikui-z-50 ikui-mt-24 ikui-flex ikui-h-auto ikui-flex-col ikui-rounded-t-[10px] ikui-border ikui-bg-background',
+        'ikui-fixed ikui-z-50 ikui-mt-24 ikui-flex ikui-h-auto ikui-flex-col ikui-rounded-t-[10px] ikui-border ikui-bg-background',
+        direction === 'right'
+          ? 'ikui-bottom-0 ikui-right-0 ikui-h-full ikui-w-[400px]'
+          : 'ikui-inset-x-0 ikui-bottom-0',
         className,
       )}
       {...props}
     >
-      <div className="ikui-mx-auto ikui-mt-4 ikui-h-2 ikui-w-[100px] ikui-rounded-full ikui-bg-muted" />
+      {direction === 'bottom' && (
+        <div className="ikui-mx-auto ikui-mt-4 ikui-h-2 ikui-w-[100px] ikui-rounded-full ikui-bg-muted" />
+      )}
       {children}
     </DrawerPrimitive.Content>
   </Portal>
