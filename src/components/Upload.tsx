@@ -93,11 +93,13 @@ export function Upload({
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: (acceptedFiles: (TFile | TFileExt)[]) => {
-      const newFiles = acceptedFiles.map((file: TFile | TFileExt) => {
-        handleUpload(file);
-        return file;
-      });
-      setUploadedFiles([...uploadedFiles, ...newFiles]);
+      if (!disabledActions) {
+        const newFiles = acceptedFiles.map((file: TFile | TFileExt) => {
+          handleUpload(file);
+          return file;
+        });
+        setUploadedFiles([...uploadedFiles, ...newFiles]);
+      }
     },
     maxFiles,
   });
