@@ -102,6 +102,8 @@ export function Upload({
       }
     },
     maxFiles,
+    noClick: disabledActions,
+    noKeyboard: disabledActions,
   });
 
   return (
