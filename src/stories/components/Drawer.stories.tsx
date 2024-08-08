@@ -23,11 +23,11 @@ function Template() {
   }
 
   return (
-    <Drawer.Root>
+    <Drawer.Root direction="right">
       <Drawer.Trigger asChild>
         <Button variant="outline">Open Drawer</Button>
       </Drawer.Trigger>
-      <Drawer.Content>
+      <Drawer.Content direction="right">
         <div className="ikui-mx-auto ikui-w-full ikui-max-w-sm">
           <Drawer.Header>
             <Drawer.Title>Move Goal</Drawer.Title>
