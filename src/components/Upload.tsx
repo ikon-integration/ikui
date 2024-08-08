@@ -93,13 +93,17 @@ export function Upload({
 
   const { getRootProps, getInputProps } = useDropzone({
     onDrop: (acceptedFiles: (TFile | TFileExt)[]) => {
-      const newFiles = acceptedFiles.map((file: TFile | TFileExt) => {
-        handleUpload(file);
-        return file;
-      });
-      setUploadedFiles([...uploadedFiles, ...newFiles]);
+      if (!disabledActions) {
+        const newFiles = acceptedFiles.map((file: TFile | TFileExt) => {
+          handleUpload(file);
+          return file;
+        });
+        setUploadedFiles([...uploadedFiles, ...newFiles]);
+      }
     },
     maxFiles,
+    noClick: disabledActions,
+    noKeyboard: disabledActions,
   });
 
   return (
@@ -113,7 +117,7 @@ export function Upload({
             'w-60',
           )}
         >
-          <Input {...getInputProps()} />
+          <Input {...getInputProps()} disabled={disabledActions} />
           {icon || <FolderUpIcon className="mb-2 h-12 w-12" />}
           <p className="mb-4 mt-4 text-xl font-semibold text-center">
             {uploadTitle}
