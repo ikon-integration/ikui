@@ -27,8 +27,8 @@ type TFile = {
 
 interface IUploadProps {
   onUpload: (file: TFile | TFileExt) => void;
-  onPreview: (file: TFile | TFileExt) => void;
-  onDownload: (file: TFile | TFileExt) => void;
+  onPreview?: (file: TFile | TFileExt) => void;
+  onDownload?: (file: TFile | TFileExt) => void;
   onDelete: (file: TFile | TFileExt) => void;
   files?: (TFile | TFileExt)[];
   uploadTitle?: string;
