@@ -8,6 +8,8 @@ import { useDataTable } from './DataTableContext';
 export function DataTableViewOptions() {
   const table = useDataTable();
 
+  console.log(table);
+
   return (
     <DropdownMenuPrimitive.Root>
       <DropdownMenuPrimitive.Trigger asChild>
