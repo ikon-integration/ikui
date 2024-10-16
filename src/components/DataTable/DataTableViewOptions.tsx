@@ -8,7 +8,7 @@ import { useDataTable } from './DataTableContext';
 export function DataTableViewOptions() {
   const table = useDataTable();
 
-  console.log(table.getHeaderGroups());
+  console.log(table.getAllColumns());
 
   return (
     <DropdownMenuPrimitive.Root>
