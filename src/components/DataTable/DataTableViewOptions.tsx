@@ -33,19 +33,19 @@ export function DataTableViewOptions() {
             column =>
               typeof column.accessorFn !== 'undefined' && column.getCanHide(),
           )
-          .map(column => (
-            <DropdownMenuPrimitive.CheckboxItem
-              key={column.id}
-              className="ikui-capitalize"
-              checked={column.getIsVisible()}
-              onCheckedChange={value => column.toggleVisibility(!!value)}
-            >
-              {() => {
-                console.log(column.columnDef.header);
-                return column.columnDef?.header || null;
-              }}
-            </DropdownMenuPrimitive.CheckboxItem>
-          ))}
+          .map(column => {
+            console.log(column.columnDef?.header);
+            return (
+              <DropdownMenuPrimitive.CheckboxItem
+                key={column.id}
+                className="ikui-capitalize"
+                checked={column.getIsVisible()}
+                onCheckedChange={value => column.toggleVisibility(!!value)}
+              >
+                {column.id}
+              </DropdownMenuPrimitive.CheckboxItem>
+            );
+          })}
       </DropdownMenuPrimitive.Content>
     </DropdownMenuPrimitive.Root>
   );
