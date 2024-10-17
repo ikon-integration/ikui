@@ -1,3 +1,4 @@
+import { Header } from '@tanstack/react-table';
 import { Settings2Icon } from 'lucide-react';
 
 import { Button } from '../Button';
@@ -31,16 +32,36 @@ export function DataTableViewOptions() {
             column =>
               typeof column.accessorFn !== 'undefined' && column.getCanHide(),
           )
-          .map(column => (
-            <DropdownMenuPrimitive.CheckboxItem
-              key={column.id}
-              className="ikui-capitalize"
-              checked={column.getIsVisible()}
-              onCheckedChange={value => column.toggleVisibility(!!value)}
-            >
-              {column.id}
-            </DropdownMenuPrimitive.CheckboxItem>
-          ))}
+          .map(column => {
+            let headerTitle = '';
+
+            if (typeof column.columnDef?.header === 'function') {
+              const headerResult = column.columnDef.header({
+                column,
+                header: column.columnDef.header as unknown as Header<
+                  unknown,
+                  unknown
+                >,
+                table,
+              });
+              if (headerResult?.props?.title) {
+                headerTitle = headerResult.props.title;
+              }
+            } else if (typeof column.columnDef?.header === 'string') {
+              headerTitle = column.columnDef.header;
+            }
+
+            return (
+              <DropdownMenuPrimitive.CheckboxItem
+                key={column.id}
+                className="ikui-capitalize"
+                checked={column.getIsVisible()}
+                onCheckedChange={value => column.toggleVisibility(!!value)}
+              >
+                {headerTitle || column.id}{' '}
+              </DropdownMenuPrimitive.CheckboxItem>
+            );
+          })}
       </DropdownMenuPrimitive.Content>
     </DropdownMenuPrimitive.Root>
   );
