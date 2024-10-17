@@ -8,8 +8,6 @@ import { useDataTable } from './DataTableContext';
 export function DataTableViewOptions() {
   const table = useDataTable();
 
-  console.log(table.getAllColumns());
-
   return (
     <DropdownMenuPrimitive.Root>
       <DropdownMenuPrimitive.Trigger asChild>
@@ -33,19 +31,16 @@ export function DataTableViewOptions() {
             column =>
               typeof column.accessorFn !== 'undefined' && column.getCanHide(),
           )
-          .map(column => {
-            console.log(column.columnDef?.header);
-            return (
-              <DropdownMenuPrimitive.CheckboxItem
-                key={column.id}
-                className="ikui-capitalize"
-                checked={column.getIsVisible()}
-                onCheckedChange={value => column.toggleVisibility(!!value)}
-              >
-                {column.id}
-              </DropdownMenuPrimitive.CheckboxItem>
-            );
-          })}
+          .map(column => (
+            <DropdownMenuPrimitive.CheckboxItem
+              key={column.id}
+              className="ikui-capitalize"
+              checked={column.getIsVisible()}
+              onCheckedChange={value => column.toggleVisibility(!!value)}
+            >
+              {column.id}
+            </DropdownMenuPrimitive.CheckboxItem>
+          ))}
       </DropdownMenuPrimitive.Content>
     </DropdownMenuPrimitive.Root>
   );
