@@ -62,7 +62,7 @@ const Row = React.forwardRef<
   <tr
     ref={ref}
     className={cn(
-      'ikui-border-b ikui-transition-colors hover:ikui-bg-muted/50 data-[state=selected]:ikui-bg-muted',
+      'ikui-border-b ikui-transition-colors hover:ikui-bg-gray-200 data-[state=selected]:ikui-bg-muted',
       className,
     )}
     {...props}

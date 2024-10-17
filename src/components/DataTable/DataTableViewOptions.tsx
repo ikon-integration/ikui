@@ -1,3 +1,4 @@
+import { Header } from '@tanstack/react-table';
 import { Settings2Icon } from 'lucide-react';
 
 import { Button } from '../Button';
@@ -7,8 +8,6 @@ import { useDataTable } from './DataTableContext';
 
 export function DataTableViewOptions() {
   const table = useDataTable();
-
-  console.log(table.getAllColumns());
 
   return (
     <DropdownMenuPrimitive.Root>
@@ -34,7 +33,24 @@ export function DataTableViewOptions() {
               typeof column.accessorFn !== 'undefined' && column.getCanHide(),
           )
           .map(column => {
-            console.log(column.columnDef?.header);
+            let headerTitle = '';
+
+            if (typeof column.columnDef?.header === 'function') {
+              const headerResult = column.columnDef.header({
+                column,
+                header: column.columnDef.header as unknown as Header<
+                  unknown,
+                  unknown
+                >,
+                table,
+              });
+              if (headerResult?.props?.title) {
+                headerTitle = headerResult.props.title;
+              }
+            } else if (typeof column.columnDef?.header === 'string') {
+              headerTitle = column.columnDef.header;
+            }
+
             return (
               <DropdownMenuPrimitive.CheckboxItem
                 key={column.id}
@@ -42,7 +58,7 @@ export function DataTableViewOptions() {
                 checked={column.getIsVisible()}
                 onCheckedChange={value => column.toggleVisibility(!!value)}
               >
-                {column.id}
+                {headerTitle || column.id}{' '}
               </DropdownMenuPrimitive.CheckboxItem>
             );
           })}
