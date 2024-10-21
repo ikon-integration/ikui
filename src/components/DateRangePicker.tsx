@@ -1,11 +1,12 @@
-import { format } from 'date-fns';
+import { format, isValid, parse } from 'date-fns';
 import { CalendarIcon, XIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { cn } from '@/lib/utils';
 
 import { Button } from './Button';
 import { Calendar } from './Calendar';
+import { Input } from './Input';
 import { Popover } from './Popover';
 
 type DateRange = {
@@ -36,10 +37,55 @@ export function DateRangePicker({
   id,
   numberOfMonths = 2,
 }: IDateRangePickerProps) {
-  const [dates, setDates] = useState(value);
+  const [dates, setDates] = useState<DateRange>(value);
+  const [inputValue, setInputValue] = useState<string>(() =>
+    dates.from && dates.to
+      ? `${format(dates.from, formatStr)} - ${format(dates.to, formatStr)}`
+      : '',
+  );
+  const [currentMonth, setCurrentMonth] = useState<Date | undefined>(
+    value.from,
+  );
+
+  useEffect(() => {
+    if (value && value.from && value.to) {
+      setDates(value);
+      setInputValue(
+        `${format(value.from, formatStr)} - ${format(value.to, formatStr)}`,
+      );
+      setCurrentMonth(value.from);
+    }
+  }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value;
+    setInputValue(input);
+
+    const [fromInput, toInput] = input.split(' - ');
+
+    const parsedFrom = parse(fromInput, formatStr, new Date());
+    const parsedTo = parse(toInput, formatStr, new Date());
+
+    if (isValid(parsedFrom) && isValid(parsedTo)) {
+      const newDates = { from: parsedFrom, to: parsedTo };
+      setDates(newDates);
+      setCurrentMonth(parsedFrom);
+      onChange?.(newDates);
+    } else {
+      setDates(initialValue);
+      onChange?.(initialValue);
+    }
+  };
 
   return (
-    <Popover.Root modal>
+    <Popover.Root
+      modal
+      onOpenChange={open => {
+        if (open && dates.from) {
+          setCurrentMonth(dates.from);
+        }
+      }}
+    >
       <Popover.Trigger disabled={disabled} asChild>
         <Button
           variant="outline"
@@ -56,10 +102,12 @@ export function DateRangePicker({
             {!dates.from && !dates.to && placeholder && (
               <span>{placeholder}</span>
             )}
-
-            {dates.from && format(dates.from, formatStr)}
-            {(dates.to && ` - ${format(dates.to, formatStr)}`) ||
-              (dates.from && ` - ${format(dates.from, formatStr)}`)}
+            {dates.from &&
+              `${format(dates.from, formatStr)} - ${
+                dates.to
+                  ? format(dates.to, formatStr)
+                  : format(dates.from, formatStr)
+              }`}
           </span>
 
           {dates && (
@@ -71,6 +119,7 @@ export function DateRangePicker({
                 event.stopPropagation();
 
                 setDates(initialValue);
+                setInputValue('');
                 onChange?.(initialValue);
               }}
             >
@@ -81,20 +130,38 @@ export function DateRangePicker({
       </Popover.Trigger>
 
       <Popover.Content className="ikui-w-auto ikui-p-0">
+        <Input
+          type="text"
+          value={inputValue}
+          placeholder={placeholder}
+          onChange={handleInputChange}
+          variant="centered"
+        />
+
         <Calendar
           mode="range"
-          defaultMonth={dates.from}
-          numberOfMonths={numberOfMonths}
           selected={dates}
+          month={currentMonth}
+          numberOfMonths={numberOfMonths}
           onSelect={selectedDate => {
-            const dateRange = {
+            const newDates = {
               from: selectedDate?.from,
               to: selectedDate?.to,
             };
 
-            setDates(dateRange);
-            onChange?.(dateRange);
+            setDates(newDates);
+            setInputValue(
+              selectedDate?.from && selectedDate?.to
+                ? `${format(selectedDate.from, formatStr)} - ${format(
+                    selectedDate.to,
+                    formatStr,
+                  )}`
+                : '',
+            );
+            setCurrentMonth(selectedDate?.from || currentMonth);
+            onChange?.(newDates);
           }}
+          onMonthChange={setCurrentMonth}
           initialFocus
         />
       </Popover.Content>

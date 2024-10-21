@@ -1,11 +1,12 @@
-import { format } from 'date-fns';
+import { format, isValid, parse } from 'date-fns';
 import { CalendarIcon, XIcon } from 'lucide-react';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import { cn } from '@/lib/utils';
 
 import { Button } from './Button';
 import { Calendar } from './Calendar';
+import { Input } from './Input';
 import { Popover } from './Popover';
 
 interface IDatePickerProps {
@@ -28,9 +29,44 @@ export function DatePicker({
   id,
 }: IDatePickerProps) {
   const [date, setDate] = useState<Date | undefined>(value);
+  const [inputValue, setInputValue] = useState<string>(
+    value ? format(value, formatStr) : '',
+  );
+
+  const [currentMonth, setCurrentMonth] = useState<Date | undefined>(value);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const input = e.target.value;
+    setInputValue(input);
+
+    const parsedDate = parse(input, formatStr, new Date());
+    if (isValid(parsedDate)) {
+      setDate(parsedDate);
+      onChange?.(parsedDate);
+      setCurrentMonth(parsedDate);
+    } else {
+      setDate(undefined);
+      onChange?.(undefined);
+    }
+  };
+
+  useEffect(() => {
+    if (value && !date) {
+      setDate(value);
+      setInputValue(format(value, formatStr));
+      setCurrentMonth(value);
+    }
+  }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
 
   return (
-    <Popover.Root modal>
+    <Popover.Root
+      modal
+      onOpenChange={open => {
+        if (open && date) {
+          setCurrentMonth(date);
+        }
+      }}
+    >
       <Popover.Trigger disabled={disabled} asChild>
         <Button
           variant="outline"
@@ -56,9 +92,10 @@ export function DatePicker({
               className="ikui-ml-auto ikui-flex ikui-size-4 ikui-items-center ikui-justify-center ikui-rounded-full ikui-bg-foreground ikui-text-background ikui-opacity-0 ikui-transition-all ikui-duration-300 hover:ikui-bg-foreground/80 group-hover:ikui-opacity-100 group-data-[state=open]:ikui-opacity-100"
               onClick={event => {
                 event.stopPropagation();
-
                 setDate(undefined);
+                setInputValue('');
                 onChange?.(undefined);
+                setCurrentMonth(undefined);
               }}
             >
               <XIcon className="ikui-size-3" />
@@ -68,14 +105,25 @@ export function DatePicker({
       </Popover.Trigger>
 
       <Popover.Content className="ikui-w-auto ikui-p-0">
+        <Input
+          type="text"
+          value={inputValue}
+          placeholder={placeholder}
+          onChange={handleInputChange}
+          className="ikui-mb-2"
+          variant="centered"
+        />
+
         <Calendar
           mode="single"
           selected={date}
-          defaultMonth={date}
+          month={currentMonth}
           onSelect={selectedDate => {
             setDate(selectedDate);
+            setInputValue(selectedDate ? format(selectedDate, formatStr) : '');
             onChange?.(selectedDate);
           }}
+          onMonthChange={setCurrentMonth}
           initialFocus
         />
       </Popover.Content>
