@@ -46,6 +46,8 @@ export function DateRangePicker({
   const [currentMonth, setCurrentMonth] = useState<Date | undefined>(
     value.from,
   );
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  const [isParsing, setIsParsing] = useState(false);
 
   useEffect(() => {
     if (value && value.from && value.to) {
@@ -60,19 +62,26 @@ export function DateRangePicker({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
     setInputValue(input);
-    const [fromInput, toInput] = input.split(' - ');
 
-    const parsedFrom = parse(fromInput, formatStr, new Date());
-    const parsedTo = parse(toInput, formatStr, new Date());
+    const regex =
+      /^\w+ \d{1,2}[a-z]{2}, \d{4}( - \w+ \d{1,2}[a-z]{2}, \d{4})?$/;
 
-    if (isValid(parsedFrom) && isValid(parsedTo)) {
-      const newDates = { from: parsedFrom, to: parsedTo };
-      setDates(newDates);
-      setCurrentMonth(parsedFrom);
-      onChange?.(newDates);
-    } else {
-      setDates(initialValue);
-      onChange?.(initialValue);
+    if (regex.test(input)) {
+      const [fromInput, toInput] = input.split(' - ');
+
+      setIsParsing(true);
+      const parsedFrom = parse(fromInput, formatStr, new Date());
+      const parsedTo = toInput
+        ? parse(toInput, formatStr, new Date())
+        : undefined;
+
+      if (isValid(parsedFrom) && (!toInput || isValid(parsedTo!))) {
+        const newDates = { from: parsedFrom, to: parsedTo };
+        setDates(newDates);
+        setCurrentMonth(parsedFrom);
+        onChange?.(newDates);
+      }
+      setIsParsing(false);
     }
   };
 

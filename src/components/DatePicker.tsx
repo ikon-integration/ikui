@@ -46,14 +46,16 @@ export function DatePicker({
     const input = e.target.value;
     setInputValue(input);
 
-    const parsedDate = parse(input, formatStr, new Date());
-    if (isValid(parsedDate)) {
-      setDate(parsedDate);
-      onChange?.(parsedDate);
-      setCurrentMonth(parsedDate);
-    } else {
-      setDate(undefined);
-      onChange?.(undefined);
+    if (input.length === formatStr.length) {
+      const parsedDate = parse(input, formatStr, new Date());
+      if (isValid(parsedDate)) {
+        setDate(parsedDate);
+        onChange?.(parsedDate);
+        setCurrentMonth(parsedDate);
+      } else {
+        setDate(undefined);
+        onChange?.(undefined);
+      }
     }
   };
 
