@@ -26,6 +26,10 @@ function Template() {
         options={[
           { value: 'react', label: 'React' },
           { value: 'node', label: 'Node.js' },
+          { value: 'abb', label: 'Z.js' },
+          { value: 'abc', label: 'ABC.js' },
+          { value: 'bca', label: 'BCA.js' },
+          { value: 'ZZZ', label: 'A.js' },
           { value: 'next', label: 'Nextjs' },
           { value: 'nestjs', label: 'NestJS' },
         ]}

@@ -21,6 +21,7 @@ interface IMultiSelectProps {
   creatable?: boolean;
   className?: string;
   id?: string;
+  alphabeticalSort?: boolean;
 }
 
 export function MultiSelect({
@@ -32,15 +33,23 @@ export function MultiSelect({
   onChange,
   value = [],
   id,
+  alphabeticalSort = true,
 }: IMultiSelectProps) {
   const [isInputFocused, setIsInputFocused] = useState(false);
   const [inputValue, setInputValue] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const unselectedOptions = useMemo(
-    () => options.filter(item => !value.includes(item.value)),
-    [options, value],
-  );
+  const unselectedOptions = useMemo(() => {
+    let filteredOptions = options.filter(item => !value.includes(item.value));
+
+    if (alphabeticalSort) {
+      filteredOptions = filteredOptions.sort((a, b) =>
+        a.label.localeCompare(b.label),
+      );
+    }
+
+    return filteredOptions;
+  }, [options, value, alphabeticalSort]);
 
   const isDropdownVisible =
     isInputFocused &&
