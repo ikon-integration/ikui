@@ -32,8 +32,15 @@ export function DatePicker({
   const [inputValue, setInputValue] = useState<string>(
     value ? format(value, formatStr) : '',
   );
-
   const [currentMonth, setCurrentMonth] = useState<Date | undefined>(value);
+
+  useEffect(() => {
+    if (value) {
+      setDate(value);
+      setInputValue(format(value, formatStr));
+      setCurrentMonth(value);
+    }
+  }, [value, formatStr]);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
@@ -50,13 +57,13 @@ export function DatePicker({
     }
   };
 
-  useEffect(() => {
-    if (value && !date) {
-      setDate(value);
-      setInputValue(format(value, formatStr));
-      setCurrentMonth(value);
-    }
-  }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
+  const clearDate = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    setDate(undefined);
+    setInputValue('');
+    onChange?.(undefined);
+    setCurrentMonth(undefined);
+  };
 
   return (
     <Popover.Root
@@ -90,13 +97,7 @@ export function DatePicker({
               role="button"
               tabIndex={0}
               className="ikui-ml-auto ikui-flex ikui-size-4 ikui-items-center ikui-justify-center ikui-rounded-full ikui-bg-foreground ikui-text-background ikui-opacity-0 ikui-transition-all ikui-duration-300 hover:ikui-bg-foreground/80 group-hover:ikui-opacity-100 group-data-[state=open]:ikui-opacity-100"
-              onClick={event => {
-                event.stopPropagation();
-                setDate(undefined);
-                setInputValue('');
-                onChange?.(undefined);
-                setCurrentMonth(undefined);
-              }}
+              onClick={clearDate}
             >
               <XIcon className="ikui-size-3" />
             </span>

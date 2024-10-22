@@ -60,7 +60,6 @@ export function DateRangePicker({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
     setInputValue(input);
-
     const [fromInput, toInput] = input.split(' - ');
 
     const parsedFrom = parse(fromInput, formatStr, new Date());
