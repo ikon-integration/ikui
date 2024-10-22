@@ -46,6 +46,7 @@ export function DateRangePicker({
   const [currentMonth, setCurrentMonth] = useState<Date | undefined>(
     value.from,
   );
+  const [error, setError] = useState<boolean>(false);
 
   useEffect(() => {
     if (value && value.from && value.to) {
@@ -58,20 +59,20 @@ export function DateRangePicker({
   }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let input = e.target.value;
+    const input = e.target.value;
 
-    if (input.match(/^\d{4}-\d{2}-\d{2}$/)) {
-      input = `${input} - `;
-    } else if (input.match(/^\d{4}-\d{2}-\d{2}\d{4}-\d{2}-\d{2}$/)) {
-      input = `${input.slice(0, 10)} - ${input.slice(10)}`;
-    }
+    const formattedInput = input.replace(
+      /(\d{4}-\d{2}-\d{2})(\s*-\s*)(\d{4}-\d{2}-\d{2})?/,
+      '$1 - $3',
+    );
 
-    setInputValue(input);
+    setInputValue(formattedInput);
 
-    const [fromInput, toInput] = input.split(' - ');
+    const [fromInput, toInput] = formattedInput.split(' - ');
 
     if (fromInput.length < 3) {
       setDates(initialValue);
+      setError(false);
       return;
     }
 
@@ -85,9 +86,11 @@ export function DateRangePicker({
       setDates(newDates);
       setCurrentMonth(parsedFrom);
       onChange?.(newDates);
+      setError(false);
     } else {
       setDates(initialValue);
       onChange?.(initialValue);
+      setError(true);
     }
   };
 
@@ -148,6 +151,7 @@ export function DateRangePicker({
           placeholder={placeholder}
           onChange={handleInputChange}
           variant="centered"
+          error={error}
         />
 
         <Calendar

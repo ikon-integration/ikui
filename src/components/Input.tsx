@@ -10,22 +10,36 @@ export const inputVariants = cva(
       variant: {
         centered: 'ikui-text-center',
       },
+      error: {
+        true: 'ikui-border-red-500',
+      },
     },
   },
 );
 
 export interface IInputProps
   extends React.InputHTMLAttributes<HTMLInputElement>,
-    VariantProps<typeof inputVariants> {}
+    VariantProps<typeof inputVariants> {
+  error?: boolean;
+}
 
 export const Input = React.forwardRef<HTMLInputElement, IInputProps>(
-  ({ className, variant, type, ...props }, ref) => (
-    <input
-      type={type}
-      className={cn(inputVariants({ variant, className }))}
-      ref={ref}
-      {...props}
-    />
+  ({ className, variant, error, ...props }, ref) => (
+    <div>
+      <input
+        className={cn(
+          inputVariants({ variant, className }),
+          error && 'ikui-border-red-500',
+        )}
+        ref={ref}
+        {...props}
+      />
+      {error && (
+        <p className="ikui-text-center ikui-text-sm ikui-text-red-500">
+          Invalid Date
+        </p>
+      )}
+    </div>
   ),
 );
 Input.displayName = 'Input';

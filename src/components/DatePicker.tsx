@@ -32,35 +32,25 @@ export function DatePicker({
   const [inputValue, setInputValue] = useState<string>(
     value ? format(value, formatStr) : '',
   );
+  const [error, setError] = useState<boolean>(false);
 
   const [currentMonth, setCurrentMonth] = useState<Date | undefined>(value);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
-
-    if (input === '0') {
-      setInputValue('');
-      setDate(undefined);
-      onChange?.(undefined);
-      return;
-    }
-
-    if (input.length < 3) {
-      setInputValue(input);
-      setDate(undefined);
-      return;
-    }
-
     setInputValue(input);
 
     const parsedDate = parse(input, formatStr, new Date());
+
     if (isValid(parsedDate)) {
       setDate(parsedDate);
       onChange?.(parsedDate);
       setCurrentMonth(parsedDate);
+      setError(false);
     } else {
       setDate(undefined);
       onChange?.(undefined);
+      setError(true);
     }
   };
 
@@ -126,6 +116,7 @@ export function DatePicker({
           onChange={handleInputChange}
           className="ikui-mb-2"
           variant="centered"
+          error={error}
         />
 
         <Calendar
