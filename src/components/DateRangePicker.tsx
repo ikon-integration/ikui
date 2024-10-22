@@ -70,7 +70,7 @@ export function DateRangePicker({
 
     const [fromInput, toInput] = input.split(' - ');
 
-    if (fromInput.length === 0 || fromInput.length < 3) {
+    if (fromInput.length < 3) {
       setDates(initialValue);
       return;
     }

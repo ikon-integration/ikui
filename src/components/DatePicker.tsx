@@ -38,7 +38,7 @@ export function DatePicker({
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
 
-    if (input.trim() === '0') {
+    if (input === '0') {
       setInputValue('');
       setDate(undefined);
       onChange?.(undefined);
