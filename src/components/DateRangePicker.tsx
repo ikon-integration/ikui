@@ -46,7 +46,6 @@ export function DateRangePicker({
   const [currentMonth, setCurrentMonth] = useState<Date | undefined>(
     value.from,
   );
-  const [isParsing, setIsParsing] = useState(false);
 
   useEffect(() => {
     if (value && value.from && value.to) {
@@ -60,27 +59,34 @@ export function DateRangePicker({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
+
+    if (input.trim() === '0') {
+      setInputValue('');
+      setDates(initialValue);
+      onChange?.(initialValue);
+      return;
+    }
+
     setInputValue(input);
 
-    const regex =
-      /^\w+ \d{1,2}[a-z]{2}, \d{4}( - \w+ \d{1,2}[a-z]{2}, \d{4})?$/;
+    const [fromInput, toInput] = input.split(' - ');
 
-    if (regex.test(input)) {
-      const [fromInput, toInput] = input.split(' - ');
+    if (fromInput.length < 3 || (toInput && toInput.length < 3)) {
+      setDates(initialValue);
+      return;
+    }
 
-      setIsParsing(true);
-      const parsedFrom = parse(fromInput, formatStr, new Date());
-      const parsedTo = toInput
-        ? parse(toInput, formatStr, new Date())
-        : undefined;
+    const parsedFrom = parse(fromInput, formatStr, new Date());
+    const parsedTo = parse(toInput, formatStr, new Date());
 
-      if (isValid(parsedFrom) && (!toInput || isValid(parsedTo!))) {
-        const newDates = { from: parsedFrom, to: parsedTo };
-        setDates(newDates);
-        setCurrentMonth(parsedFrom);
-        onChange?.(newDates);
-      }
-      setIsParsing(false);
+    if (isValid(parsedFrom) && isValid(parsedTo)) {
+      const newDates = { from: parsedFrom, to: parsedTo };
+      setDates(newDates);
+      setCurrentMonth(parsedFrom);
+      onChange?.(newDates);
+    } else {
+      setDates(initialValue);
+      onChange?.(initialValue);
     }
   };
 
@@ -124,9 +130,7 @@ export function DateRangePicker({
               className="ikui-ml-auto ikui-flex ikui-size-4 ikui-items-center ikui-justify-center ikui-rounded-full ikui-bg-foreground ikui-text-background ikui-opacity-0 ikui-transition-all ikui-duration-300 hover:ikui-bg-foreground/80 group-hover:ikui-opacity-100 group-data-[state=open]:ikui-opacity-100"
               onClick={event => {
                 event.stopPropagation();
-
                 setDates(initialValue);
-                setInputValue('');
                 onChange?.(initialValue);
               }}
             >
@@ -143,7 +147,6 @@ export function DateRangePicker({
           placeholder={placeholder}
           onChange={handleInputChange}
           variant="centered"
-          disabled={isParsing}
         />
 
         <Calendar
