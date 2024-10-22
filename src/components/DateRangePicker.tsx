@@ -58,28 +58,29 @@ export function DateRangePicker({
   }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const input = e.target.value;
+    let input = e.target.value;
 
-    if (input.trim() === '0') {
-      setInputValue('');
-      setDates(initialValue);
-      onChange?.(initialValue);
-      return;
+    if (input.match(/^\d{4}-\d{2}-\d{2}$/)) {
+      input = `${input} - `;
+    } else if (input.match(/^\d{4}-\d{2}-\d{2}\d{4}-\d{2}-\d{2}$/)) {
+      input = `${input.slice(0, 10)} - ${input.slice(10)}`;
     }
 
     setInputValue(input);
 
     const [fromInput, toInput] = input.split(' - ');
 
-    if (fromInput.length < 3 || (toInput && toInput.length < 3)) {
+    if (fromInput.length === 0 || fromInput.length < 3) {
       setDates(initialValue);
       return;
     }
 
     const parsedFrom = parse(fromInput, formatStr, new Date());
-    const parsedTo = parse(toInput, formatStr, new Date());
+    const parsedTo = toInput
+      ? parse(toInput, formatStr, new Date())
+      : undefined;
 
-    if (isValid(parsedFrom) && isValid(parsedTo)) {
+    if (isValid(parsedFrom) && (toInput ? isValid(parsedTo) : true)) {
       const newDates = { from: parsedFrom, to: parsedTo };
       setDates(newDates);
       setCurrentMonth(parsedFrom);
