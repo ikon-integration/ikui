@@ -46,7 +46,6 @@ export function DateRangePicker({
   const [currentMonth, setCurrentMonth] = useState<Date | undefined>(
     value.from,
   );
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   const [isParsing, setIsParsing] = useState(false);
 
   useEffect(() => {
@@ -144,6 +143,7 @@ export function DateRangePicker({
           placeholder={placeholder}
           onChange={handleInputChange}
           variant="centered"
+          disabled={isParsing}
         />
 
         <Calendar
