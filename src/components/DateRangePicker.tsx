@@ -64,7 +64,7 @@ export function DateRangePicker({
     setInputValue(formattedInput);
   };
 
-  const handleInputBlur = () => {
+  const validateDates = () => {
     const [fromInput, toInput] = inputValue.split(' - ');
 
     const parsedFrom = parse(fromInput.trim(), formatStr, new Date());
@@ -80,12 +80,20 @@ export function DateRangePicker({
       setError(false);
 
       setInputValue(
-        `${format(parsedFrom, formatStr)} - ${parsedTo ? format(parsedTo, formatStr) : ''}`,
+        `${format(parsedFrom, formatStr)} - ${
+          parsedTo ? format(parsedTo, formatStr) : ''
+        }`,
       );
     } else {
       setDates(initialValue);
       onChange?.(initialValue);
       setError(true);
+    }
+  };
+
+  const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      validateDates();
     }
   };
 
@@ -145,7 +153,8 @@ export function DateRangePicker({
           value={inputValue}
           placeholder={placeholder}
           onChange={handleInputChange}
-          onBlur={handleInputBlur}
+          onBlur={validateDates}
+          onKeyDown={handleInputKeyDown}
           variant="centered"
           error={error}
         />
