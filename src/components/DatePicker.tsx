@@ -127,6 +127,7 @@ export function DatePicker({
             setDate(selectedDate);
             setInputValue(selectedDate ? format(selectedDate, formatStr) : '');
             onChange?.(selectedDate);
+            setError(false);
           }}
           onMonthChange={setCurrentMonth}
           initialFocus

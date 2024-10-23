@@ -38,11 +38,7 @@ export function DateRangePicker({
   numberOfMonths = 2,
 }: IDateRangePickerProps) {
   const [dates, setDates] = useState<DateRange>(value);
-  const [inputValue, setInputValue] = useState<string>(() =>
-    dates.from && dates.to
-      ? `${format(dates.from, formatStr)} - ${format(dates.to, formatStr)}`
-      : '',
-  );
+  const [inputValue, setInputValue] = useState<string>('');
   const [currentMonth, setCurrentMonth] = useState<Date | undefined>(
     value.from,
   );
@@ -60,25 +56,20 @@ export function DateRangePicker({
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const input = e.target.value;
-
     const formattedInput = input.replace(
       /(\d{4}-\d{2}-\d{2})(\s*-\s*)(\d{4}-\d{2}-\d{2})?/,
       '$1 - $3',
     );
 
     setInputValue(formattedInput);
+  };
 
-    const [fromInput, toInput] = formattedInput.split(' - ');
+  const handleInputBlur = () => {
+    const [fromInput, toInput] = inputValue.split(' - ');
 
-    if (fromInput.length < 3) {
-      setDates(initialValue);
-      setError(false);
-      return;
-    }
-
-    const parsedFrom = parse(fromInput, formatStr, new Date());
+    const parsedFrom = parse(fromInput.trim(), formatStr, new Date());
     const parsedTo = toInput
-      ? parse(toInput, formatStr, new Date())
+      ? parse(toInput.trim(), formatStr, new Date())
       : undefined;
 
     if (isValid(parsedFrom) && (toInput ? isValid(parsedTo) : true)) {
@@ -87,6 +78,10 @@ export function DateRangePicker({
       setCurrentMonth(parsedFrom);
       onChange?.(newDates);
       setError(false);
+
+      setInputValue(
+        `${format(parsedFrom, formatStr)} - ${parsedTo ? format(parsedTo, formatStr) : ''}`,
+      );
     } else {
       setDates(initialValue);
       onChange?.(initialValue);
@@ -150,6 +145,7 @@ export function DateRangePicker({
           value={inputValue}
           placeholder={placeholder}
           onChange={handleInputChange}
+          onBlur={handleInputBlur}
           variant="centered"
           error={error}
         />
@@ -176,6 +172,7 @@ export function DateRangePicker({
             );
             setCurrentMonth(selectedDate?.from || currentMonth);
             onChange?.(newDates);
+            setError(false);
           }}
           onMonthChange={setCurrentMonth}
           initialFocus
