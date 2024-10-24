@@ -51,6 +51,20 @@ export function MultiSelect({
     return filteredOptions;
   }, [options, value, alphabeticalSort]);
 
+  const sortedSelectedOptions = useMemo(
+    () =>
+      value
+        .map(selectedValue => options.find(opt => opt.value === selectedValue))
+        .filter(Boolean)
+        .sort((a, b) => {
+          if (a && b) {
+            return a.label.localeCompare(b.label);
+          }
+          return 0;
+        }),
+    [value, options],
+  );
+
   const isDropdownVisible =
     isInputFocused &&
     !disabled &&
@@ -135,27 +149,26 @@ export function MultiSelect({
         )}
         onClick={() => inputRef.current?.focus()}
       >
-        {value.map(selectedOption => (
-          <Badge
-            key={selectedOption}
-            variant="secondary"
-            className="ikui-gap-1.5"
-          >
-            <span>
-              {options.find(opt => opt.value === selectedOption)?.label ??
-                selectedOption}
-            </span>
-
-            <span
-              role="button"
-              tabIndex={0}
-              className="size-4 ikui-flex ikui-items-center ikui-justify-center ikui-rounded-full ikui-bg-foreground ikui-p-px ikui-transition-all hover:ikui-bg-foreground/80"
-              onClick={event => handleUnselectOption(event, selectedOption)}
+        {sortedSelectedOptions.length > 0 &&
+          sortedSelectedOptions.map(option => (
+            <Badge
+              key={`${option?.value}`}
+              variant="secondary"
+              className="ikui-gap-1.5"
             >
-              <XIcon className="ikui-size-3 ikui-text-background" />
-            </span>
-          </Badge>
-        ))}
+              <span>{option?.label}</span>
+              <span
+                role="button"
+                tabIndex={0}
+                className="size-4 ikui-flex ikui-items-center ikui-justify-center ikui-rounded-full ikui-bg-foreground ikui-p-px ikui-transition-all hover:ikui-bg-foreground/80"
+                onClick={event =>
+                  handleUnselectOption(event, option?.value || '')
+                }
+              >
+                <XIcon className="ikui-size-3 ikui-text-background" />
+              </span>
+            </Badge>
+          ))}
 
         <CommandPrimitive.Input
           ref={inputRef}
