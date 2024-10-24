@@ -19,8 +19,10 @@ interface IDatePickerProps {
   id?: string;
 }
 
+const initialValue: Date | undefined = undefined;
+
 export function DatePicker({
-  value,
+  value = initialValue,
   placeholder,
   format: formatStr = 'yyyy-MM-dd',
   className,
@@ -29,20 +31,20 @@ export function DatePicker({
   id,
 }: IDatePickerProps) {
   const [date, setDate] = useState<Date | undefined>(value);
-  const [inputValue, setInputValue] = useState<string>(
-    value ? format(value, formatStr) : '',
-  );
+  const [inputValue, setInputValue] = useState<string>('');
   const [error, setError] = useState<boolean>(false);
   const [currentMonth, setCurrentMonth] = useState<Date | undefined>(value);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const input = e.target.value;
-    setInputValue(input);
+    setInputValue(e.target.value);
+  };
 
-    const parsedDate = parse(input, formatStr, new Date());
+  const validateAndFormatDate = () => {
+    const parsedDate = parse(inputValue, formatStr, new Date());
 
     if (isValid(parsedDate)) {
       setDate(parsedDate);
+      setInputValue(format(parsedDate, formatStr));
       onChange?.(parsedDate);
       setCurrentMonth(parsedDate);
       setError(false);
@@ -53,13 +55,30 @@ export function DatePicker({
     }
   };
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    if (e.key === 'Enter') {
+      validateAndFormatDate();
+    }
+  };
+
   useEffect(() => {
-    if (value && !date) {
+    if (value) {
       setDate(value);
       setInputValue(format(value, formatStr));
       setCurrentMonth(value);
+    } else {
+      setDate(undefined);
+      setInputValue('');
+      setCurrentMonth(undefined);
     }
   }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  const handleClear = () => {
+    setDate(undefined);
+    setInputValue('');
+    onChange?.(undefined);
+    setCurrentMonth(undefined);
+  };
 
   return (
     <Popover.Root
@@ -91,13 +110,7 @@ export function DatePicker({
               role="button"
               tabIndex={0}
               className="ikui-ml-auto ikui-flex ikui-size-4 ikui-items-center ikui-justify-center ikui-rounded-full ikui-bg-foreground ikui-text-background ikui-opacity-0 ikui-transition-all ikui-duration-300 hover:ikui-bg-foreground/80 group-hover:ikui-opacity-100 group-data-[state=open]:ikui-opacity-100"
-              onClick={event => {
-                event.stopPropagation();
-                setDate(undefined);
-                setInputValue('');
-                onChange?.(undefined);
-                setCurrentMonth(undefined);
-              }}
+              onClick={handleClear}
             >
               <XIcon className="ikui-size-3" />
             </span>
@@ -111,6 +124,8 @@ export function DatePicker({
           value={inputValue}
           placeholder="YYYY-MM-DD"
           onChange={handleInputChange}
+          onBlur={validateAndFormatDate}
+          onKeyDown={handleKeyDown}
           className="ikui-mb-2"
           variant="centered"
           error={error}
