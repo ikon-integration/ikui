@@ -33,7 +33,6 @@ export function DatePicker({
     value ? format(value, formatStr) : '',
   );
   const [error, setError] = useState<boolean>(false);
-
   const [currentMonth, setCurrentMonth] = useState<Date | undefined>(value);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -82,13 +81,11 @@ export function DatePicker({
           )}
         >
           <CalendarIcon className="ikui-mr-2 ikui-h-4 ikui-w-4" />
-
           <span>
             {date
               ? format(date, formatStr)
               : placeholder && <span>{placeholder}</span>}
           </span>
-
           {date && (
             <span
               role="button"
@@ -96,8 +93,8 @@ export function DatePicker({
               className="ikui-ml-auto ikui-flex ikui-size-4 ikui-items-center ikui-justify-center ikui-rounded-full ikui-bg-foreground ikui-text-background ikui-opacity-0 ikui-transition-all ikui-duration-300 hover:ikui-bg-foreground/80 group-hover:ikui-opacity-100 group-data-[state=open]:ikui-opacity-100"
               onClick={event => {
                 event.stopPropagation();
-
                 setDate(undefined);
+                setInputValue('');
                 onChange?.(undefined);
                 setCurrentMonth(undefined);
               }}
@@ -112,7 +109,7 @@ export function DatePicker({
         <Input
           type="text"
           value={inputValue}
-          placeholder={placeholder}
+          placeholder="YYYY-MM-DD"
           onChange={handleInputChange}
           className="ikui-mb-2"
           variant="centered"
