@@ -40,18 +40,24 @@ export function DatePicker({
   };
 
   const validateAndFormatDate = () => {
-    const parsedDate = parse(inputValue, formatStr, new Date());
-
-    if (isValid(parsedDate)) {
-      setDate(parsedDate);
-      setInputValue(format(parsedDate, formatStr));
-      onChange?.(parsedDate);
-      setCurrentMonth(parsedDate);
-      setError(false);
-    } else {
+    if (inputValue === '') {
       setDate(undefined);
+      setError(false);
       onChange?.(undefined);
-      setError(true);
+    } else {
+      const parsedDate = parse(inputValue, formatStr, new Date());
+
+      if (isValid(parsedDate)) {
+        setDate(parsedDate);
+        setInputValue(format(parsedDate, formatStr));
+        onChange?.(parsedDate);
+        setCurrentMonth(parsedDate);
+        setError(false);
+      } else {
+        setDate(undefined);
+        onChange?.(undefined);
+        setError(true);
+      }
     }
   };
 
