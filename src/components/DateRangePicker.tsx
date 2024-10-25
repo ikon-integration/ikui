@@ -60,12 +60,18 @@ export function DateRangePicker({
       /(\d{4}-\d{2}-\d{2})(\s*-\s*)(\d{4}-\d{2}-\d{2})?/,
       '$1 - $3',
     );
-
     setInputValue(formattedInput);
   };
 
   const validateDates = () => {
     const [fromInput, toInput] = inputValue.split(' - ');
+
+    if (!fromInput.trim() && !toInput) {
+      setDates(initialValue);
+      onChange?.(initialValue);
+      setError(false);
+      return;
+    }
 
     const parsedFrom = parse(fromInput.trim(), formatStr, new Date());
     const parsedTo = toInput
@@ -138,6 +144,7 @@ export function DateRangePicker({
               onClick={event => {
                 event.stopPropagation();
                 setDates(initialValue);
+                setInputValue('');
                 onChange?.(initialValue);
               }}
             >
@@ -151,7 +158,7 @@ export function DateRangePicker({
         <Input
           type="text"
           value={inputValue}
-          placeholder={placeholder}
+          placeholder="YYYY-MM-DD - YYYY-MM-DD"
           onChange={handleInputChange}
           onBlur={validateDates}
           onKeyDown={handleInputKeyDown}
