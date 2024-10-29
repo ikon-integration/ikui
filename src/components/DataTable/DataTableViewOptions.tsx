@@ -21,7 +21,10 @@ export function DataTableViewOptions() {
           View
         </Button>
       </DropdownMenuPrimitive.Trigger>
-      <DropdownMenuPrimitive.Content align="end" className="ikui-w-[150px]">
+      <DropdownMenuPrimitive.Content
+        align="end"
+        className="overflow-y-auto ikui-max-h-[500px]  ikui-w-[150px]"
+      >
         <DropdownMenuPrimitive.Label>
           Toggle columns
         </DropdownMenuPrimitive.Label>
