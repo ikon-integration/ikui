@@ -1,6 +1,6 @@
 import { format, isValid, parse } from 'date-fns';
 import { CalendarIcon, XIcon } from 'lucide-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import { cn } from '@/lib/utils';
 
@@ -34,6 +34,7 @@ export function DatePicker({
   const [inputValue, setInputValue] = useState<string>('');
   const [error, setError] = useState<boolean>(false);
   const [currentMonth, setCurrentMonth] = useState<Date | undefined>(value);
+  const isExternalChange = useRef(true);
 
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setInputValue(e.target.value);
@@ -68,30 +69,35 @@ export function DatePicker({
   };
 
   useEffect(() => {
-    if (value) {
-      setDate(value);
-      setInputValue(format(value, formatStr));
-      setCurrentMonth(value);
-    } else {
-      setDate(undefined);
-      setInputValue('');
-      setCurrentMonth(undefined);
+    if (isExternalChange.current) {
+      if (value) {
+        setDate(value);
+        setInputValue(format(value, formatStr));
+        setCurrentMonth(value);
+      } else {
+        setDate(undefined);
+        setInputValue('');
+        setCurrentMonth(undefined);
+      }
     }
+    isExternalChange.current = true;
   }, [value]); // eslint-disable-line react-hooks/exhaustive-deps
 
-  const handleClear = () => {
-    setDate(undefined);
+  const handleClear = (event: React.MouseEvent) => {
+    event.stopPropagation();
+    setDate(initialValue);
     setInputValue('');
-    onChange?.(undefined);
-    setCurrentMonth(undefined);
+    onChange?.(initialValue);
+    isExternalChange.current = false;
   };
 
   return (
     <Popover.Root
       modal
       onOpenChange={open => {
-        if (open && date) {
-          setCurrentMonth(date);
+        if (open) {
+          setCurrentMonth(date ?? new Date());
+          setInputValue(date ? format(date, formatStr) : '');
         }
       }}
     >
@@ -146,6 +152,7 @@ export function DatePicker({
             setInputValue(selectedDate ? format(selectedDate, formatStr) : '');
             onChange?.(selectedDate);
             setError(false);
+            setCurrentMonth(selectedDate || currentMonth);
           }}
           onMonthChange={setCurrentMonth}
           initialFocus
