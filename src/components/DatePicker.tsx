@@ -136,7 +136,6 @@ export function DatePicker({
           value={inputValue}
           placeholder="YYYY-MM-DD"
           onChange={handleInputChange}
-          onBlur={validateAndFormatDate}
           onKeyDown={handleKeyDown}
           className="ikui-mb-2"
           variant="centered"
