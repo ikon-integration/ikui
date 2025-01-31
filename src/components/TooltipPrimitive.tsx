@@ -13,7 +13,7 @@ const Content = React.forwardRef<
     ref={ref}
     sideOffset={sideOffset}
     className={cn(
-      'ikui-text-bold ikui-z-50 ikui-overflow-hidden ikui-rounded-lg ikui-border ikui-bg-white ikui-px-4 ikui-py-2 ikui-text-red-700 ikui-shadow-md ikui-transition-opacity ikui-duration-200 ikui-ease-in-out data-[state=closed]:ikui-opacity-0 data-[state=open]:ikui-opacity-100',
+      'ikui-text-bold ikui-z-50 ikui-overflow-hidden ikui-rounded-lg ikui-border ikui-bg-white ikui-px-6 ikui-py-4 ikui-text-red-700 ikui-shadow-md ikui-backdrop-blur-md ikui-transition-opacity ikui-duration-200 ikui-ease-in-out data-[state=closed]:ikui-opacity-0 data-[state=open]:ikui-opacity-100',
       className,
     )}
     {...props}
