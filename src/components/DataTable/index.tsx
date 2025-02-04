@@ -56,6 +56,7 @@ interface IDataTableProps<TData, TValue> {
       content: React.ReactNode;
     }[];
   }[];
+  onRowClick?: (row: TData) => void;
 }
 
 export function DataTable<TData, TValue>({
@@ -71,6 +72,7 @@ export function DataTable<TData, TValue>({
   maxColumnSize,
   minColumnSize,
   footer,
+  onRowClick,
 }: IDataTableProps<TData, TValue>) {
   const [sorting, setSorting] = useState<SortingState>(
     sortingConfig?.initialSortBy || [],
@@ -199,6 +201,7 @@ export function DataTable<TData, TValue>({
                   <Table.Row
                     key={row.id}
                     data-state={row.getIsSelected() && 'selected'}
+                    onClick={() => onRowClick?.(row.original)}
                   >
                     {row.getVisibleCells().map(cell => (
                       <Table.Cell key={cell.id}>
