@@ -16,7 +16,7 @@ export default meta;
 
 function Template() {
   return (
-    <Tooltip title="This is a Tooltip">
+    <Tooltip position="top" title="This is a Tooltip">
       <Button>Tooltip</Button>
     </Tooltip>
   );
