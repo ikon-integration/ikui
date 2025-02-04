@@ -78,6 +78,7 @@ function Template() {
             ],
           },
         ]}
+        onRowClick={row => console.log({ row })}
         toolbar={{
           hideableColumns: true,
           textSearch: {
