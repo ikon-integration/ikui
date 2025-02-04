@@ -15,7 +15,7 @@ export function Tooltip({
   asChild = true,
   delay,
   position,
-  arrow = false,
+  arrow = true,
 }: ITooltipProps) {
   const delayTime = delay || 400;
 
@@ -29,7 +29,7 @@ export function Tooltip({
         <TooltipPrimitive.Content side={position}>
           {title}
           {arrow && (
-            <TooltipPrimitive.Arrow className="ikui-z-40 ikui-fill-popover" />
+            <TooltipPrimitive.Arrow className="w-3 h-3 fill-gray-600 ikui-z-40" />
           )}
         </TooltipPrimitive.Content>
       </TooltipPrimitive.Root>
