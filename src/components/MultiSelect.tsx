@@ -51,19 +51,22 @@ export function MultiSelect({
     return filteredOptions;
   }, [options, value, alphabeticalSort]);
 
-  const sortedSelectedOptions = useMemo(
-    () =>
-      value
-        .map(selectedValue => options.find(opt => opt.value === selectedValue))
-        .filter(Boolean)
-        .sort((a, b) => {
-          if (a && b) {
-            return a.label.localeCompare(b.label);
-          }
-          return 0;
-        }),
-    [value, options],
-  );
+  const sortedSelectedOptions = useMemo(() => {
+    let selected = value
+      .map(selectedValue => options.find(opt => opt.value === selectedValue))
+      .filter(Boolean);
+
+    if (alphabeticalSort) {
+      selected = selected.sort((a, b) => {
+        if (a && b) {
+          return a.label.localeCompare(b.label);
+        }
+        return 0;
+      });
+    }
+
+    return selected;
+  }, [value, options, alphabeticalSort]);
 
   const isDropdownVisible =
     isInputFocused &&
