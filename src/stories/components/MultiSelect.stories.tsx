@@ -22,6 +22,7 @@ function Template() {
       <MultiSelect
         creatable
         value={value}
+        alphabeticalSort={false}
         onChange={setValue}
         options={[
           { value: 'react', label: 'React' },
