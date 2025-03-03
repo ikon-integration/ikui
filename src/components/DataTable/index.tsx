@@ -203,7 +203,11 @@ export function DataTable<TData, TValue>({
                     data-state={row.getIsSelected() && 'selected'}
                     onClick={event => {
                       const target = event.target as HTMLElement;
-                      if (target.closest('button')) return;
+                      if (
+                        target.closest('button') ||
+                        target.closest('[data-dropdown]')
+                      )
+                        return;
                       onRowClick?.(row.original);
                     }}
                   >
