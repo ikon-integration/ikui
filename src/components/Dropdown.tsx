@@ -43,6 +43,7 @@ export function Dropdown({
           sideOffset={5}
           side={position}
           className={className}
+          data-dropdown
         >
           {items.map(item => {
             if (item.hidden) {
