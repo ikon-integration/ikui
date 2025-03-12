@@ -12,6 +12,7 @@ import { cn, truncateString } from '@/lib/utils';
 
 import { Button } from './Button';
 import { Input } from './Input';
+import { Popconfirm } from './Popconfirm';
 
 type TFileExt = {
   id?: string;
@@ -39,6 +40,7 @@ interface IUploadProps {
   showPreview?: boolean;
   showDelete?: boolean;
   disabledActions?: boolean;
+  confirmDelete?: boolean;
 }
 
 export function Upload({
@@ -55,6 +57,7 @@ export function Upload({
   showPreview = true,
   showDelete = true,
   disabledActions = false,
+  confirmDelete = false,
 }: IUploadProps) {
   const [uploadedFiles, setUploadedFiles] = useState<(TFile | TFileExt)[]>(
     files || [],
@@ -159,15 +162,27 @@ export function Upload({
                   <ArrowDownToLine className="h-6 w-4" />
                 </Button>
               )}
-              {showDelete && (
-                <Button
-                  disabled={disabledActions}
-                  variant="link"
-                  onClick={() => handleDelete(file)}
-                >
-                  <Trash2Icon className="h-6 w-4" />
-                </Button>
-              )}
+
+              {showDelete &&
+                (confirmDelete ? (
+                  <Popconfirm
+                    title="Confirm deletion?"
+                    content={`This operation will immediately remove the document. Confirm deletion of "${file.name}"?`}
+                    onConfirm={() => handleDelete(file)}
+                  >
+                    <Button disabled={disabledActions} variant="link">
+                      <Trash2Icon className="h-6 w-4" />
+                    </Button>
+                  </Popconfirm>
+                ) : (
+                  <Button
+                    disabled={disabledActions}
+                    variant="link"
+                    onClick={() => handleDelete(file)}
+                  >
+                    <Trash2Icon className="h-6 w-4" />
+                  </Button>
+                ))}
             </div>
           </div>
         ))}
