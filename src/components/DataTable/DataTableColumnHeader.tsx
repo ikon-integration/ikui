@@ -81,7 +81,9 @@ export function DataTableColumnHeader<TData, TValue>({
           </DropdownMenuPrimitive.Content>
         </DropdownMenuPrimitive.Root>
       ) : (
-        <div className="ikui-ml-3">{title}</div>
+        <div className="ikui-ml-6">
+          <span>{title}</span>
+        </div>
       )}
     </div>
   );
