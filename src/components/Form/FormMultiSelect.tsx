@@ -12,17 +12,16 @@ interface IFormMultiSelect
 
 export function FormMultiSelect({ name, ...props }: IFormMultiSelect) {
   const { control } = useFormContext();
-
   return (
     <Controller
       control={control}
       name={name}
-      render={({ field: { onChange, value, disabled } }) => (
+      render={({ field }) => (
         <MultiSelect
           {...props}
-          onChange={onChange}
-          value={value}
-          disabled={props.disabled || disabled}
+          value={field.value ?? []}
+          disabled={props.disabled || field.disabled}
+          onChange={val => field.onChange([...val])}
         />
       )}
     />
