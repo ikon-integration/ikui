@@ -47,7 +47,7 @@ This editor behaves like **react-rte**.
 You can write markdown and it will be rendered visually.
 `,
   },
-  render: args => <ControlledMarkdownEditor value={args.value} />,
+  render: args => <ControlledMarkdownEditor value={args.value || ''} />,
 };
 
 export const ReadOnly: Story = {
@@ -66,7 +66,7 @@ You can write markdown and it will be rendered visually.
   },
   render: args => (
     <div className="ikui-w-[700px] ikui-rounded-md ikui-border ikui-p-4">
-      <MarkdownRenderer value={args.value} />
+      <MarkdownRenderer value={args.value || ''} />
     </div>
   ),
 };
