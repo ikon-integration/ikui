@@ -21,7 +21,7 @@ const turndownService = new TurndownService({
 
 turndownService.addRule('underline', {
   filter: ['u'],
-  replacement: content => `_${content}_`,
+  replacement: content => `<u>${content}</u>`,
 });
 
 turndownService.addRule('links', {
@@ -33,11 +33,16 @@ turndownService.addRule('links', {
 });
 
 interface IMarkdownEditorProps {
-  value: string;
+  value?: string;
   onChange: (markdown: string) => void;
+  disabled?: boolean;
 }
 
-export function MarkdownEditor({ value, onChange }: IMarkdownEditorProps) {
+export function MarkdownEditor({
+  value,
+  onChange,
+  disabled,
+}: IMarkdownEditorProps) {
   const editor = useEditor({
     extensions: [
       StarterKit.configure({
@@ -60,8 +65,9 @@ export function MarkdownEditor({ value, onChange }: IMarkdownEditorProps) {
     editorProps: {
       attributes: {
         class: cn(
-          'ikui-focus:outline-none ikui-min-h-[150px]',
+          'focus:outline-none ikui-min-h-[150px]',
           markdownContentClasses,
+          disabled && 'ikui-opacity-60 ikui-pointer-events-none',
         ),
       },
     },
@@ -70,7 +76,7 @@ export function MarkdownEditor({ value, onChange }: IMarkdownEditorProps) {
 
   return (
     <div className="ikui-overflow-hidden ikui-rounded-md ikui-border">
-      <Toolbar editor={editor} />
+      <Toolbar editor={editor} disabled={disabled} />
       <EditorContent editor={editor} className="ikui-p-4" />
     </div>
   );

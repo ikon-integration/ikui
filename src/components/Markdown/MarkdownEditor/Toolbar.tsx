@@ -10,7 +10,13 @@ import { LinkButton } from './buttons/LinkButton';
 import { OrderedListButton } from './buttons/OrderedListButton';
 import { UnderlineButton } from './buttons/UnderlineButton';
 
-export function Toolbar({ editor }: { editor: Editor }) {
+export function Toolbar({
+  editor,
+  disabled,
+}: {
+  editor: Editor;
+  disabled?: boolean;
+}) {
   return (
     <div
       className={cn(
@@ -18,20 +24,20 @@ export function Toolbar({ editor }: { editor: Editor }) {
       )}
     >
       <div className="ikui-flex ikui-items-center ikui-gap-1">
-        <HeadingButton editor={editor} />
-        <BoldButton editor={editor} />
-        <ItalicButton editor={editor} />
-        <UnderlineButton editor={editor} />
+        <HeadingButton editor={editor} disabled={disabled} />
+        <BoldButton editor={editor} disabled={disabled} />
+        <ItalicButton editor={editor} disabled={disabled} />
+        <UnderlineButton editor={editor} disabled={disabled} />
       </div>
 
       <div className="ikui-mx-2 ikui-h-5 ikui-w-px ikui-bg-border" />
       <div className="ikui-flex ikui-items-center ikui-gap-1">
-        <BulletListButton editor={editor} />
-        <OrderedListButton editor={editor} />
+        <BulletListButton editor={editor} disabled={disabled} />
+        <OrderedListButton editor={editor} disabled={disabled} />
       </div>
       <div className="ikui-mx-2 ikui-h-5 ikui-w-px ikui-bg-border" />
       <div className="ikui-flex ikui-items-center">
-        <LinkButton editor={editor} />
+        <LinkButton editor={editor} disabled={disabled} />
       </div>
     </div>
   );

@@ -133,7 +133,10 @@ function Template() {
         />
       </Form.Group>
       <Form.Group label="Bio" description="Tell us more about this guy...">
-        <Form.Markdown name="bio" />
+        <Form.Markdown
+          name="bio"
+          onChange={value => form.setValue('bio', value)}
+        />
       </Form.Group>
 
       <Button type="submit">Submit</Button>
