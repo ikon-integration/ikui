@@ -11,7 +11,13 @@ const OPTIONS = [
   { label: 'Heading small', level: 3 },
 ] as const;
 
-export function HeadingButton({ editor }: { editor: Editor }) {
+export function HeadingButton({
+  editor,
+  disabled,
+}: {
+  editor: Editor;
+  disabled?: boolean;
+}) {
   const getCurrentLabel = () => {
     if (editor.isActive('heading', { level: 1 })) return 'H1';
     if (editor.isActive('heading', { level: 2 })) return 'H2';
@@ -23,14 +29,14 @@ export function HeadingButton({ editor }: { editor: Editor }) {
     if (level === null) {
       editor.chain().focus().setParagraph().run();
     } else {
-      editor.chain().focus().toggleHeading({ level }).run();
+      editor.chain().focus().setHeading({ level }).run();
     }
   };
 
   return (
     <DropdownMenu.Root>
       <DropdownMenu.Trigger asChild>
-        <Button size="sm" variant="ghost">
+        <Button size="sm" variant="ghost" disabled={disabled}>
           {getCurrentLabel()}
         </Button>
       </DropdownMenu.Trigger>

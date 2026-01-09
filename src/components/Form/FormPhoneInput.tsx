@@ -2,8 +2,9 @@ import { Controller, useFormContext } from 'react-hook-form';
 
 import { PhoneInput } from '../PhoneInput';
 
-interface IPhoneInputProps
-  extends React.ComponentPropsWithoutRef<typeof PhoneInput> {
+interface IPhoneInputProps extends React.ComponentPropsWithoutRef<
+  typeof PhoneInput
+> {
   name: string;
 }
 

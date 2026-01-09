@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react';
 import { useState } from 'react';
 
 import { MarkdownEditor } from '@/components/Markdown/MarkdownEditor/MarkdownEditor';
-import { MarkdownRenderer } from '@/components/Markdown/MarkdownRenderer/MarkdownRendere';
+import { MarkdownRenderer } from '@/components/Markdown/MarkdownRenderer/MarkdownRenderer';
 
 const meta = {
   title: 'Components/MarkdownEditor',

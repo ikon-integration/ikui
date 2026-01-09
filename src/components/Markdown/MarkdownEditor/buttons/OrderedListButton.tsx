@@ -3,9 +3,16 @@ import { Editor } from '@tiptap/react';
 
 import { EditorButton } from './EditorButton';
 
-export function OrderedListButton({ editor }: { editor: Editor }) {
+export function OrderedListButton({
+  editor,
+  disabled,
+}: {
+  editor: Editor;
+  disabled?: boolean;
+}) {
   return (
     <EditorButton
+      disabled={disabled}
       tooltip="Ordered list"
       isActive={editor.isActive('orderedList')}
       onClick={() => editor.chain().focus().toggleOrderedList().run()}

@@ -3,7 +3,13 @@ import { Editor } from '@tiptap/react';
 
 import { EditorButton } from './EditorButton';
 
-export function LinkButton({ editor }: { editor: Editor }) {
+export function LinkButton({
+  editor,
+  disabled,
+}: {
+  editor: Editor;
+  disabled?: boolean;
+}) {
   const setLink = () => {
     if (editor.isActive('link')) {
       editor.chain().focus().unsetLink().run();
@@ -18,6 +24,7 @@ export function LinkButton({ editor }: { editor: Editor }) {
 
   return (
     <EditorButton
+      disabled={disabled}
       tooltip="Insert link"
       isActive={editor.isActive('link')}
       onClick={setLink}

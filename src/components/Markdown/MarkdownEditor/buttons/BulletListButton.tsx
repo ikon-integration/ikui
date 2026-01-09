@@ -3,9 +3,16 @@ import { Editor } from '@tiptap/react';
 
 import { EditorButton } from './EditorButton';
 
-export function BulletListButton({ editor }: { editor: Editor }) {
+export function BulletListButton({
+  editor,
+  disabled,
+}: {
+  editor: Editor;
+  disabled?: boolean;
+}) {
   return (
     <EditorButton
+      disabled={disabled}
       tooltip="Bullet list"
       isActive={editor.isActive('bulletList')}
       onClick={() => {

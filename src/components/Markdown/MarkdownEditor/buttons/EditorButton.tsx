@@ -6,6 +6,7 @@ interface IEditorButtonProps {
   onClick: () => void;
   tooltip: string;
   children: React.ReactNode;
+  disabled?: boolean;
 }
 
 export function EditorButton({
@@ -13,6 +14,7 @@ export function EditorButton({
   onClick,
   tooltip,
   children,
+  disabled,
 }: IEditorButtonProps) {
   return (
     <TooltipPrimitive.Provider delayDuration={0}>
@@ -23,7 +25,7 @@ export function EditorButton({
             size="sm"
             variant={isActive ? 'default' : 'ghost'}
             onClick={onClick}
-            asChild
+            disabled={disabled}
           >
             {children}
           </Button>
