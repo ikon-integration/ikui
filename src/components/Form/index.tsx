@@ -4,6 +4,7 @@ import { FormDateRangePicker } from './FormDateRangePicker';
 import { FormGroup } from './FormGroup';
 import { FormInput } from './FormInput';
 import { FormInputCurrency } from './FormInputCurrency';
+import { FormMarkdownEditor } from './FormMarkdownEditor';
 import { FormMultiSelect } from './FormMultiSelect';
 import { FormPhoneInput } from './FormPhoneInput';
 import { FormRadioGroup } from './FormRadioGroup';
@@ -29,4 +30,5 @@ export const Form = {
   TextArea: FormTextArea,
   PhoneInput: FormPhoneInput,
   RadioGroup: FormRadioGroup,
+  Markdown: FormMarkdownEditor,
 };
