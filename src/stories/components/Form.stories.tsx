@@ -28,8 +28,8 @@ function Template() {
       salary: z.any(),
       joiningDate: z.date(),
       dateRange: z.object({
-        from: z.date({ required_error: 'Select a From date' }),
-        to: z.date({ required_error: 'Select a To date' }),
+        from: z.date({ error: 'Select a From date' }),
+        to: z.date({ error: 'Select a To date' }),
       }),
       tags: z.array(z.string()).min(1, 'At least 1 tag'),
       phone: z.string(),
@@ -39,7 +39,7 @@ function Template() {
       active: true,
       unlimited: true,
       email: '',
-      bio: '',
+      bio: '## Example Bio\nThis is an example of a **Markdown** bio.\n- Item 1\n- Item 2\n- Item 3\n\n### More Information\nYou can include links like [this](https://example.com) or images like ![alt text](https://example.com/image.png).',
       phone: '',
       dateRange: {
         from: new Date(2023, 10, 10),
@@ -131,6 +131,9 @@ function Template() {
             { value: 'nestjs', label: 'NestJS' },
           ]}
         />
+      </Form.Group>
+      <Form.Group label="Bio" description="Tell us more about this guy...">
+        <Form.Markdown name="bio" />
       </Form.Group>
 
       <Button type="submit">Submit</Button>
