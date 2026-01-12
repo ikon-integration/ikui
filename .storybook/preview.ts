@@ -1,5 +1,5 @@
 import { withThemeByClassName } from '@storybook/addon-themes';
-import type { Preview, ReactRenderer } from '@storybook/react';
+import type { Preview, ReactRenderer } from '@storybook/react-vite';
 
 import '../src/styles/global.css';
 
@@ -13,19 +13,20 @@ const preview: Preview = {
       },
     },
     backgrounds: {
-      default: 'Light',
-      values: [
-        {
+      options: {
+        light: {
           name: 'Light',
           value: '#fff',
         },
-        {
+
+        dark: {
           name: 'Dark',
           value: '#09090b',
-        },
-      ],
+        }
+      }
     },
   },
+
   decorators: [
     withThemeByClassName<ReactRenderer>({
       themes: {
@@ -35,6 +36,12 @@ const preview: Preview = {
       defaultTheme: 'light',
     }),
   ],
+
+  initialGlobals: {
+    backgrounds: {
+      value: 'light'
+    }
+  }
 };
 
 export default preview;

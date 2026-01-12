@@ -1,5 +1,5 @@
 /* eslint-disable no-alert */
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react-vite';
 import { FolderArchiveIcon, ScanFaceIcon } from 'lucide-react';
 
 import { Button } from '@/components/Button';

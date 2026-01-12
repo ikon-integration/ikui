@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { CalendarDaysIcon } from 'lucide-react';
 
 import { Avatar } from '@/components/Avatar';

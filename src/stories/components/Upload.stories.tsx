@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 
 import { Upload } from '@/components/Upload';
 
@@ -8,6 +8,14 @@ const meta = {
 } satisfies Meta<typeof Upload>;
 
 export default meta;
-type Story = StoryObj<typeof meta>;
 
-export const Default: Story = {};
+export function Template() {
+  return (
+    <Upload
+      onUpload={files => console.log(files)}
+      onDelete={file => console.log(file)}
+    />
+  );
+}
+
+export const Default = Upload;

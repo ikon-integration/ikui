@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { useMemo, useState } from 'react';
 
 import { DataTable } from '@/components/DataTable';
