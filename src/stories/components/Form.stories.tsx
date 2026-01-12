@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 import { z } from 'zod';
 
 import { Button } from '@/components/Button';

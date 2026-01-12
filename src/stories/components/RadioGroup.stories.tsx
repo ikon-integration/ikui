@@ -1,4 +1,4 @@
-import type { Meta } from '@storybook/react';
+import type { Meta } from '@storybook/react-vite';
 
 import { Label } from '@/components/Label';
 import { RadioGroup } from '@/components/RadioGroup';
