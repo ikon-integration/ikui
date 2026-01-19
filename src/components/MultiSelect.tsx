@@ -52,17 +52,19 @@ export function MultiSelect({
   }, [options, value, alphabeticalSort]);
 
   const sortedSelectedOptions = useMemo(() => {
-    let selected = value
-      .map(selectedValue => options.find(opt => opt.value === selectedValue))
-      .filter(Boolean);
+    let selected = value.map(selectedValue => {
+      const option = options.find(opt => opt.value === selectedValue);
+
+      return (
+        option ?? {
+          value: selectedValue,
+          label: selectedValue,
+        }
+      );
+    });
 
     if (alphabeticalSort) {
-      selected = selected.sort((a, b) => {
-        if (a && b) {
-          return a.label.localeCompare(b.label);
-        }
-        return 0;
-      });
+      selected = selected.sort((a, b) => a.label.localeCompare(b.label));
     }
 
     return selected;
